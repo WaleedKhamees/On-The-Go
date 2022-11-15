@@ -16,7 +16,7 @@ function ProductInfo(props) {
 
   return (
     <div className="flex h-max-[250px]">
-      <img src={props.Img} className="max-h-[200px] "></img>
+      <img src={props.Img} className="max-h-[200px] bg-[#d1d5db]"></img>
 
       <div className="flex  bg-RedPrimary flex-grow w-3/4  max-h-[200px] justify-between">
         <div className=" flex-col flex gap-2 pl-16 py-16">
