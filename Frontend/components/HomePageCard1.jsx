@@ -9,9 +9,9 @@ function HomePageCard1(props) {
 
         <h3 className="h3 text-White text-center"> {props.Description} </h3>
 
-        <button className="border rounded-lg border-White   ">
+        <button className="border rounded-lg border-White  pr-2 pl-2    ">
           {" "}
-          <p className="text-White text-center p-2 ">Order Now</p>
+          <p className="text-White text-center p-2  ">Order Now</p>
         </button>
       </div>
     </div>

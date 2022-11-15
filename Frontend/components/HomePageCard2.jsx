@@ -9,7 +9,7 @@ function HomePageCard2() {
           Filling in summer, winter, fall and spring{" "}
         </h3>
 
-        <button className="border rounded-lg border-White   ">
+        <button className="border rounded-lg border-White  pr-2 pl-2   ">
           {" "}
           <p className="text-White text-center p-2 ">Order Now</p>
         </button>
