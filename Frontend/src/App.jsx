@@ -8,6 +8,7 @@ import SignUp from "../components/SignUp";
 import Profile from "../components/Profile";
 import CheckinDate from "../components/CheckinDate";
 import Comment from "../components/Comment";
+import How from "../components/Howmanyarecoming";
 function App() {
   return (
     <>
@@ -59,6 +60,8 @@ function App() {
         Review="Loved Every bite of it."
         Rating={5}
       />
+      <How />
+      <CheckinDate />
     </>
   );
 }
