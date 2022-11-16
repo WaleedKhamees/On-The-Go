@@ -6,6 +6,8 @@ import Footer from "../components/Footer";
 import ProductInfo from "../components/ProductInfo";
 import Login from "../components/Login";
 import SignUp from "../components/SignUp";
+import Profile from "../components/Profile";
+import CheckinDate from "../components/CheckinDate";
 function App() {
   return (
     <>
@@ -39,6 +41,18 @@ function App() {
         ProductPrice="30$"
       />
 
+      <ProductCard
+        ProductName="Shawrma"
+        ProductImage="https://s3-alpha-sig.figma.com/img/b99f/77ae/014d68dacd5d463de996eec8bfd086d9?Expires=1668988800&Signature=aN40adIjp8wtwItz21FqurRtGnKqs-RpXuRz4tu2MKXu69JHHTp8HdPQ-HPslTGP0t56AeiYzhCCrHSAT2LJJA-ZbaO~Jp3t9GGfgVF4DW0xFyDTkNBayxIs7AGzym8lRHo9-27avXLNpA590GM8U7VGW5viSmz2dmeo9jlmOcD-0gNSE11Omj9k01yi0YyoiPcEGB8oARtf1ZuHZe-pkMm9tUH5bvuwmYF8NRrBkJHA1gknshvqbvyiI9Zv2L9Nl6RWKzgGW4ItsFqxlESEX4mnqqYlD4U~TqTbPI9VLxD1kAU~udWobGg1BxRa8lYPrC8bcdNUqRnc1UVYI-AY7g__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
+        ProductDescription="Large Shwarma Sandwich With Fries and Moyonese"
+        ProductPrice="30$"
+      />
+
+      <Profile
+        Img="https://s3-alpha-sig.figma.com/img/4678/91cb/1ce1d049ca67dc27f3e146f4c96ee442?Expires=1669593600&Signature=OnSF0n2nppTiWGHZO23Y9gBOSA1K7CzgKvz8KS~bAgmBg8HuJCErLocbEsQcalknm-A5~3qZ9bF1qWuTfkTTaIlq~CdcyI1KRBHW81dS9G1NR~BAN5r0rA~TePhUc4xkyNGFBM68bypDO~WP1V1dd-bOHCZZ-jMhp46FDcFhE1zTottQ0o~PHVVOxRvsUR043WiBuLZA-QfNUyBh3C4hu5C6udy~K4JnOWlzkgdj3HEMRSN0k~ZS2J5vMuxirAQCTZT2VSJopKrBxDDOmFDNoQfkctBNIJiHWm825A~cAZP6rv-LdLQB-9rAEYLh9GNcvKf40~y8Tbi7zxuQDPGdgw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
+        Name="Youssef osama"
+      />
+      <CheckinDate />
       <ProductCard
         ProductName="Shawrma"
         ProductImage="https://s3-alpha-sig.figma.com/img/b99f/77ae/014d68dacd5d463de996eec8bfd086d9?Expires=1668988800&Signature=aN40adIjp8wtwItz21FqurRtGnKqs-RpXuRz4tu2MKXu69JHHTp8HdPQ-HPslTGP0t56AeiYzhCCrHSAT2LJJA-ZbaO~Jp3t9GGfgVF4DW0xFyDTkNBayxIs7AGzym8lRHo9-27avXLNpA590GM8U7VGW5viSmz2dmeo9jlmOcD-0gNSE11Omj9k01yi0YyoiPcEGB8oARtf1ZuHZe-pkMm9tUH5bvuwmYF8NRrBkJHA1gknshvqbvyiI9Zv2L9Nl6RWKzgGW4ItsFqxlESEX4mnqqYlD4U~TqTbPI9VLxD1kAU~udWobGg1BxRa8lYPrC8bcdNUqRnc1UVYI-AY7g__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
