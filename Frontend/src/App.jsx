@@ -1,28 +1,34 @@
 import NavBar from "../components/NavBar";
 import ProductCard from "../components/ProductCard";
-import HomePageCard1 from "../components/HomePageCard1";
-import HomePageCard2 from "../components/HomePageCard2";
+import HomePageCard from "../components/HomePageCard";
 import Footer from "../components/Footer";
 import ProductInfo from "../components/ProductInfo";
 import Login from "../components/Login";
 import SignUp from "../components/SignUp";
 import Profile from "../components/Profile";
 import CheckinDate from "../components/CheckinDate";
+import Comment from "../components/Comment";
 function App() {
   return (
     <>
       <NavBar />
-      <HomePageCard1
+      <HomePageCard
         Img="https://s3-alpha-sig.figma.com/img/3ace/154c/4d9e8937101671c15ad48799914bbc71?Expires=1669593600&Signature=QFD~Cu3bza2I-Nmix6e0sT~4M9mpCTqoF1Rn3vUJcoajbV38UNKJynfuF-yhqIJfqnBij1M9rHXQVj6Cq-kazi78T6CpJ0yqmlM5bzTJ8k57DfYFLQmGqSwuRexDAiAaog6nzeGwx~7RGrSTYDHsglP7GAKPOIIvV9HaaO7jyJ2Rmd1Nf4qLPuBaxlml-G--AeC60srjtdQ3ajtK3r7Lg9DNoEGT~NX-vRdU-dqDP2IXOh9ayMqzsURMn~5Umf6YawRlPJygZ09qcBVJje-v7lxxpQK74ek910gsKsXM3pFBJcRTZOX8M7uaTJTQQ1gvWKVigRzPMT7wYzjiatpBUg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
         Header="Eastern Dishes"
         Description="Rich in flavors and history "
-        pragrah
+        Reversed={true}
       />
-      <HomePageCard2 />
-      <HomePageCard1
+      <HomePageCard
         Img="https://s3-alpha-sig.figma.com/img/5967/a42b/951aca107210377cc974420266922a5f?Expires=1669593600&Signature=QIFj2sd7nvSweq31UeKEFYiFCLRYODTe4hCOZG5o4C~LhAVuyYRJtS7vL32xrH9TzqIRC1OlUs50l0kZSnK6-Qo72QCqQ1-~M9MGxAyx~4PNPERUKX6eyhOU3UB5eZCrtPCgXdftJX2xH9O0Eq-DKa3TbS2mptjFJ1pE5fYPKcDoMC01WKqMMNWrZEqoFkAY0vgGmnM3fYbBWAEsvNfS8r7~8bE-sOm3JLWrcJUO5E9LY1vm3o-GbJs1wA0cmKvCdntjPZN1O1cDPmSpoyXArKVwyp5YZs3i2vcZQ2hlkfKRTpoxMUAHJrlmdDWqm69tWEAOOWoG2tEscMFVhCH9Lw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
         Header="Drinks"
         Description="Wash down your meal with a cold drink"
+        Reversed={false}
+      />
+      <HomePageCard
+        Img="https://s3-alpha-sig.figma.com/img/5967/a42b/951aca107210377cc974420266922a5f?Expires=1669593600&Signature=QIFj2sd7nvSweq31UeKEFYiFCLRYODTe4hCOZG5o4C~LhAVuyYRJtS7vL32xrH9TzqIRC1OlUs50l0kZSnK6-Qo72QCqQ1-~M9MGxAyx~4PNPERUKX6eyhOU3UB5eZCrtPCgXdftJX2xH9O0Eq-DKa3TbS2mptjFJ1pE5fYPKcDoMC01WKqMMNWrZEqoFkAY0vgGmnM3fYbBWAEsvNfS8r7~8bE-sOm3JLWrcJUO5E9LY1vm3o-GbJs1wA0cmKvCdntjPZN1O1cDPmSpoyXArKVwyp5YZs3i2vcZQ2hlkfKRTpoxMUAHJrlmdDWqm69tWEAOOWoG2tEscMFVhCH9Lw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
+        Header="Drinks"
+        Description="Wash down your meal with a cold drink"
+        Reversed={true}
       />
       <Footer />
       <ProductInfo
@@ -47,27 +53,14 @@ function App() {
         ProductDescription="Large Shwarma Sandwich With Fries and Moyonese"
         ProductPrice="30$"
       />
-
-      <Profile
-        Img="https://s3-alpha-sig.figma.com/img/4678/91cb/1ce1d049ca67dc27f3e146f4c96ee442?Expires=1669593600&Signature=OnSF0n2nppTiWGHZO23Y9gBOSA1K7CzgKvz8KS~bAgmBg8HuJCErLocbEsQcalknm-A5~3qZ9bF1qWuTfkTTaIlq~CdcyI1KRBHW81dS9G1NR~BAN5r0rA~TePhUc4xkyNGFBM68bypDO~WP1V1dd-bOHCZZ-jMhp46FDcFhE1zTottQ0o~PHVVOxRvsUR043WiBuLZA-QfNUyBh3C4hu5C6udy~K4JnOWlzkgdj3HEMRSN0k~ZS2J5vMuxirAQCTZT2VSJopKrBxDDOmFDNoQfkctBNIJiHWm825A~cAZP6rv-LdLQB-9rAEYLh9GNcvKf40~y8Tbi7zxuQDPGdgw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
-        Name="Youssef osama"
-      />
-      <CheckinDate />
-      <ProductCard
-        ProductName="Shawrma"
-        ProductImage="https://s3-alpha-sig.figma.com/img/b99f/77ae/014d68dacd5d463de996eec8bfd086d9?Expires=1668988800&Signature=aN40adIjp8wtwItz21FqurRtGnKqs-RpXuRz4tu2MKXu69JHHTp8HdPQ-HPslTGP0t56AeiYzhCCrHSAT2LJJA-ZbaO~Jp3t9GGfgVF4DW0xFyDTkNBayxIs7AGzym8lRHo9-27avXLNpA590GM8U7VGW5viSmz2dmeo9jlmOcD-0gNSE11Omj9k01yi0YyoiPcEGB8oARtf1ZuHZe-pkMm9tUH5bvuwmYF8NRrBkJHA1gknshvqbvyiI9Zv2L9Nl6RWKzgGW4ItsFqxlESEX4mnqqYlD4U~TqTbPI9VLxD1kAU~udWobGg1BxRa8lYPrC8bcdNUqRnc1UVYI-AY7g__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
-        ProductDescription="Large Shwarma Sandwich With Fries and Moyonese"
-        ProductPrice="30$"
+      <Comment
+        UserName="Youssef Ousama"
+        Date="18th Aug 2021"
+        Review="Loved Every bite of it."
+        Rating={5}
       />
     </>
   );
 }
 
 export default App;
-
-<ProductCard
-  ProductName="Shawrma"
-  ProductImage="https://s3-alpha-sig.figma.com/img/b99f/77ae/014d68dacd5d463de996eec8bfd086d9?Expires=1668988800&Signature=aN40adIjp8wtwItz21FqurRtGnKqs-RpXuRz4tu2MKXu69JHHTp8HdPQ-HPslTGP0t56AeiYzhCCrHSAT2LJJA-ZbaO~Jp3t9GGfgVF4DW0xFyDTkNBayxIs7AGzym8lRHo9-27avXLNpA590GM8U7VGW5viSmz2dmeo9jlmOcD-0gNSE11Omj9k01yi0YyoiPcEGB8oARtf1ZuHZe-pkMm9tUH5bvuwmYF8NRrBkJHA1gknshvqbvyiI9Zv2L9Nl6RWKzgGW4ItsFqxlESEX4mnqqYlD4U~TqTbPI9VLxD1kAU~udWobGg1BxRa8lYPrC8bcdNUqRnc1UVYI-AY7g__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
-  ProductDescription="Large Shwarma Sandwich With Fries and Moyonese"
-  ProductPrice="30$"
-/>;

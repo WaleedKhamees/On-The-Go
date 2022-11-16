@@ -1,4 +1,4 @@
-function SignUp() {
+const SignUp = () => {
   return (
     <div className="flex justify-center pt-4">
       <div className="flex-col flex items-center gap-4 max-w-[527px] flex-grow">
@@ -30,6 +30,6 @@ function SignUp() {
       </div>
     </div>
   );
-}
+};
 
 export default SignUp;

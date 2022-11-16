@@ -1,6 +1,6 @@
 import React from "react";
 
-function ProductCard(props) {
+const ProductCard = (props) => {
   return (
     <div className="max-w-[312.5px] px-8 py-4 bg-White flex flex-col items-center gap-4">
       <div className="flex flex-col items-center">

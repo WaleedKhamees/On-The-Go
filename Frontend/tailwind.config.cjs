@@ -17,6 +17,7 @@ module.exports = {
       Body: "#333333",
       Small: "#989898",
       Link: "#0067C5",
+      Yellow: "#FFD800",
     },
     fontFamily: {
       Inter: ["Inter", "sans-serif"],
