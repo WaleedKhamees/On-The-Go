@@ -5,6 +5,8 @@ import Footer from "../components/Footer";
 import ProductInfo from "../components/ProductInfo";
 import Login from "../components/Login";
 import SignUp from "../components/SignUp";
+import Profile from "../components/Profile";
+import CheckinDate from "../components/CheckinDate";
 import Comment from "../components/Comment";
 function App() {
   return (
