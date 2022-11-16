@@ -1,17 +1,17 @@
 import React from "react";
 import { useState } from "react";
 
-const ProductInfo = (props) =>  {
-  const [num, setnum] = useState(3);
+const ProductInfo = (props) => {
+  const [num, setnum] = useState(1);
 
   function Decrease() {
     if (num - 1 > 0) {
-      setnum((prevNum) => prevNum - 1);
+      setnum(num - 1);
     }
   }
 
   function Increase() {
-    setnum((prevNum) => prevNum + 1);
+    setnum(num + 1);
   }
 
   return (
@@ -24,12 +24,12 @@ const ProductInfo = (props) =>  {
           <p className="p  text-White">{props.Description} </p>
         </div>
 
-        <div className="flex  flex-col gap-2 pr-16 py-10">
-          <p className="p text-White text-center">{props.Price}</p>
+        <div className="flex flex-col items-center gap-2 pr-16 py-10">
+          <p className="p text-White text-center">{props.Price * num} EGP</p>
           <div className="flex items-center justify-center">
             <button
               onClick={Decrease}
-              className="border rounded-l-lg border-White   "
+              className="border border-r-0 rounded-l-lg border-White   "
             >
               <p className="text-White text-center p-2 ">-</p>
             </button>
@@ -40,7 +40,7 @@ const ProductInfo = (props) =>  {
 
             <button
               onClick={Increase}
-              className="border rounded-r-lg border-White   "
+              className="border border-l-0 rounded-r-lg border-White   "
             >
               <p className="text-White text-center p-2 ">+</p>
             </button>
@@ -53,6 +53,6 @@ const ProductInfo = (props) =>  {
       </div>
     </div>
   );
-}
+};
 
 export default ProductInfo;
