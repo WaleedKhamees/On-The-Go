@@ -1,7 +1,11 @@
-function HomePageCard1(props) {
+const HomePageCard = (props) => {
   return (
-    <div className="flex  justify-between max-h-[400px]">
-      <div className="flex  w-1/2">
+    <div
+      className={`flex justify-between ${
+        props.Reversed ? "flex-row-reverse" : ""
+      } max-h-[400px]`}
+    >
+      <div className="flex w-1/2">
         <img src={props.Img} className="w-full"></img>
       </div>
       <div className="flex flex-col items-center  bg-RedPrimary text-center w-1/2 gap-4 py-28 ">
@@ -11,11 +15,11 @@ function HomePageCard1(props) {
 
         <button className="border rounded-lg border-White  pr-2 pl-2    ">
           {" "}
-          <p className="text-White text-center p-2  ">Order Now</p>
+          <p className="text-White text-center p-2 ">Order Now</p>
         </button>
       </div>
     </div>
   );
 }
 
-export default HomePageCard1;
+export default HomePageCard;

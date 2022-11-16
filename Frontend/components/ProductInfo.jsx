@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-function ProductInfo(props) {
+const ProductInfo = (props) =>  {
   const [num, setnum] = useState(3);
 
   function Decrease() {
