@@ -16,9 +16,9 @@ const ProductInfo = (props) => {
 
   return (
     <div className="flex h-max-[250px]">
-      <img src={props.Img} className="max-h-[200px] bg-[#d1d5db]"></img>
+      <img src={props.Img} className="max-h-[200px] bg-[#d1d5db] rounded-l-lg"></img>
 
-      <div className="flex  bg-RedPrimary flex-grow w-3/4  max-h-[200px] justify-between">
+      <div className="flex  bg-RedPrimary flex-grow w-3/4  max-h-[200px] justify-between rounded-r-lg">
         <div className=" flex-col flex gap-2 pl-16 py-16">
           <h1 className="h1 text-White">{props.Header}</h1>
           <p className="p  text-White">{props.Description} </p>
