@@ -3,32 +3,28 @@ import ProductCard from "./ProductCard";
 import Footer from "./Footer";
 import { useState } from "react";
 
-function Product_Page() {
+function Products_Page() {
     const [isEastern, setEastern] = useState(true);
     const [isWestern, setWestern] = useState(false);
     const [isDrinks, setDrinks] = useState(false);
 
     return (
         <>
-
             <div className="flex justify-center gap-8 py-8">
-                <button className="rounded-lg bg-white "
+                <button className="rounded-lg border w-[90px] h-[37px]"
                     style={{ backgroundColor: isEastern ? "#333333" : "white" }}
                     onClick={(e) => { setEastern(true); setWestern(false); setDrinks(false); }}>
-                    <p className="rounded-lg  border text-center p-2 w-[90px] h-[37px] "
-                        style={{ color: isEastern ? "white" : "#333333" }}>Eastern</p>
+                    <p style={{ color: isEastern ? "white" : "#333333" }}>Eastern</p>
                 </button>
-                <button className="rounded-lg bg-white  "
+                <button className="rounded-lg border w-[90px] h-[37px] "
                     style={{ backgroundColor: isWestern ? "#333333" : "white" }}
                     onClick={(e) => { setEastern(false); setWestern(true); setDrinks(false); }}>
-                    <p className="rounded-lg border text-center p-2 w-[90px] h-[37px] "
-                        style={{ color: isWestern ? "white" : "#333333" }}>Western</p>
+                    <p style={{ color: isWestern ? "white" : "#333333" }}>Western</p>
                 </button>
-                <button className="rounded-lg bg-white "
+                <button className="rounded-lg border w-[90px] h-[37px]"
                     style={{ backgroundColor: isDrinks ? "#333333" : "white" }}
                     onClick={(e) => { setEastern(false); setWestern(false); setDrinks(true); }}>
-                    <p className="rounded-lg border text-center p-2 w-[90px] h-[37px] "
-                        style={{ color: isDrinks ? "white" : "#333333" }}>Drinks</p>
+                    <p style={{ color: isDrinks ? "white" : "#333333" }}>Drinks</p>
                 </button>
             </div>
             {isEastern && (
@@ -109,10 +105,8 @@ function Product_Page() {
 
                 </div>
             )}
-
-
         </>
     );
 }
 
-export default Product_Page;
+export default Products_Page;
