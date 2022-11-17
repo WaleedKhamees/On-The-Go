@@ -1,14 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { BiChevronDown } from "react-icons/bi";
-import { BsPeopleFill } from "react-icons/bs";
+import { BsClockFill } from "react-icons/bs";
 
-const How = () => {
+const When = () => {
   const [isActive, setIsActive] = useState(false);
-  const [number, setnumber] = useState("How many are coming?");
-  const options = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const [clock, setclock] = useState("When?");
+  const options = [
+    "1 PM",
+    "2 PM",
+    "3 PM",
+    "4 PM",
+    "5 PM",
+    "6 PM",
+    "7 PM",
+    "8 PM",
+    "9 PM",
+    "10 PM",
+    "11 PM",
+  ];
 
   const handleClick = (event, key) => {
-    setnumber(key);
+    setclock(key);
   };
 
   return (
@@ -16,7 +28,7 @@ const How = () => {
       <div className="flex-col flex max-w-[364px] items-center flex-grow gap-4">
         <div className="w-full bg-White p-2 flex items-center justify-between rounded-lg border border-[#333333] ">
           <div className="flex gap-2 text-[#333333]">
-            <BsPeopleFill size={20} /> {number}
+            <BsClockFill size={20} /> {clock}
           </div>
           <BiChevronDown size={20} onClick={(e) => setIsActive(!isActive)} />
         </div>
@@ -25,20 +37,24 @@ const How = () => {
             {options?.map((key) => (
               <li
                 key={key}
-                className="p-2 hover:bg-[#64748b] hover:text-White w-full  text-[#333333]"
+                className="p-2 hover:bg-[#64748b] hover:text-White w-full text-[#333333] "
                 onClick={(event) => handleClick(event, key)}
               >
                 <div className="flex gap-2">
-                  <BsPeopleFill size={20} />
+                  <BsClockFill size={20} />
                   {key}
                 </div>
               </li>
             ))}
           </ul>
         )}
+
+        <button className="rounded-lg pr-2 pl-2 bg-RedPrimary w-full ">
+          <p className="text-White text-center p-2  ">RESERVE</p>
+        </button>
       </div>
     </div>
   );
 };
 
-export default How;
+export default When;

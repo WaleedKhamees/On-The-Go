@@ -9,10 +9,12 @@ import Profile from "../components/Profile";
 import CheckinDate from "../components/CheckinDate";
 import Comment from "../components/Comment";
 import How from "../components/Howmanyarecoming";
+import When from "../components/When";
 function App() {
   return (
     <>
       <NavBar />
+
       <HomePageCard
         Img="https://s3-alpha-sig.figma.com/img/3ace/154c/4d9e8937101671c15ad48799914bbc71?Expires=1669593600&Signature=QFD~Cu3bza2I-Nmix6e0sT~4M9mpCTqoF1Rn3vUJcoajbV38UNKJynfuF-yhqIJfqnBij1M9rHXQVj6Cq-kazi78T6CpJ0yqmlM5bzTJ8k57DfYFLQmGqSwuRexDAiAaog6nzeGwx~7RGrSTYDHsglP7GAKPOIIvV9HaaO7jyJ2Rmd1Nf4qLPuBaxlml-G--AeC60srjtdQ3ajtK3r7Lg9DNoEGT~NX-vRdU-dqDP2IXOh9ayMqzsURMn~5Umf6YawRlPJygZ09qcBVJje-v7lxxpQK74ek910gsKsXM3pFBJcRTZOX8M7uaTJTQQ1gvWKVigRzPMT7wYzjiatpBUg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
         Header="Eastern Dishes"
@@ -37,6 +39,7 @@ function App() {
         Price={30}
         Header="Shawarma"
         Description="Large Shwarma Sandwich with fries and mayonese"
+        Rating={4}
       />
       <Login />
       <SignUp />
@@ -60,8 +63,21 @@ function App() {
         Review="Loved Every bite of it."
         Rating={5}
       />
-      <How />
       <CheckinDate />
+      <How />
+      <When />
+
+      <Comment
+        UserName="Youssef Ousama"
+        Date="18th Aug 2021"
+        Review="Loved Every bite of it."
+        Rating={5}
+      />
+
+      <Profile
+        Img="https://s3-alpha-sig.figma.com/img/4678/91cb/1ce1d049ca67dc27f3e146f4c96ee442?Expires=1669593600&Signature=OnSF0n2nppTiWGHZO23Y9gBOSA1K7CzgKvz8KS~bAgmBg8HuJCErLocbEsQcalknm-A5~3qZ9bF1qWuTfkTTaIlq~CdcyI1KRBHW81dS9G1NR~BAN5r0rA~TePhUc4xkyNGFBM68bypDO~WP1V1dd-bOHCZZ-jMhp46FDcFhE1zTottQ0o~PHVVOxRvsUR043WiBuLZA-QfNUyBh3C4hu5C6udy~K4JnOWlzkgdj3HEMRSN0k~ZS2J5vMuxirAQCTZT2VSJopKrBxDDOmFDNoQfkctBNIJiHWm825A~cAZP6rv-LdLQB-9rAEYLh9GNcvKf40~y8Tbi7zxuQDPGdgw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
+        Name="Youssef osama"
+      />
     </>
   );
 }
