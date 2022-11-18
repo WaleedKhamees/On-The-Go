@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import StarsRating from "./atoms/StarsRating";
 
 const ProductInfo = (props) => {
   const [num, setnum] = useState(1);
@@ -22,6 +23,7 @@ const ProductInfo = (props) => {
         <div className=" flex-col flex gap-2 pl-16 py-16">
           <h1 className="h1 text-White">{props.Header}</h1>
           <p className="p  text-White">{props.Description} </p>
+          <StarsRating Rating={props.Rating} />
         </div>
 
         <div className="flex flex-col items-center gap-2 pr-16 py-10">
