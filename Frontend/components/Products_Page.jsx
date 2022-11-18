@@ -3,7 +3,7 @@ import ProductCard from "./ProductCard";
 import Footer from "./Footer";
 import { useState } from "react";
 
-function Products_Page() {
+function Products_Page(props) {
     const [isEastern, setEastern] = useState(true);
     const [isWestern, setWestern] = useState(false);
     const [isDrinks, setDrinks] = useState(false);
@@ -30,79 +30,30 @@ function Products_Page() {
             {isEastern && (
                 <div className="grid grid-cols-4 gap-4">
                     <ProductCard
-                        ProductName="Shawrma"
-                        ProductImage="https://s3-alpha-sig.figma.com/img/b99f/77ae/014d68dacd5d463de996eec8bfd086d9?Expires=1668988800&Signature=aN40adIjp8wtwItz21FqurRtGnKqs-RpXuRz4tu2MKXu69JHHTp8HdPQ-HPslTGP0t56AeiYzhCCrHSAT2LJJA-ZbaO~Jp3t9GGfgVF4DW0xFyDTkNBayxIs7AGzym8lRHo9-27avXLNpA590GM8U7VGW5viSmz2dmeo9jlmOcD-0gNSE11Omj9k01yi0YyoiPcEGB8oARtf1ZuHZe-pkMm9tUH5bvuwmYF8NRrBkJHA1gknshvqbvyiI9Zv2L9Nl6RWKzgGW4ItsFqxlESEX4mnqqYlD4U~TqTbPI9VLxD1kAU~udWobGg1BxRa8lYPrC8bcdNUqRnc1UVYI-AY7g__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
-                        ProductDescription="Large Shwarma Sandwich With Fries and Moyonese"
-                        ProductPrice="30$" />
-                    <ProductCard
-                        ProductName="Shawrma"
-                        ProductImage="https://s3-alpha-sig.figma.com/img/b99f/77ae/014d68dacd5d463de996eec8bfd086d9?Expires=1668988800&Signature=aN40adIjp8wtwItz21FqurRtGnKqs-RpXuRz4tu2MKXu69JHHTp8HdPQ-HPslTGP0t56AeiYzhCCrHSAT2LJJA-ZbaO~Jp3t9GGfgVF4DW0xFyDTkNBayxIs7AGzym8lRHo9-27avXLNpA590GM8U7VGW5viSmz2dmeo9jlmOcD-0gNSE11Omj9k01yi0YyoiPcEGB8oARtf1ZuHZe-pkMm9tUH5bvuwmYF8NRrBkJHA1gknshvqbvyiI9Zv2L9Nl6RWKzgGW4ItsFqxlESEX4mnqqYlD4U~TqTbPI9VLxD1kAU~udWobGg1BxRa8lYPrC8bcdNUqRnc1UVYI-AY7g__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
-                        ProductDescription="Large Shwarma Sandwich With Fries and Moyonese"
-                        ProductPrice="30$" />
-                    <ProductCard
-                        ProductName="Shawrma"
-                        ProductImage="https://s3-alpha-sig.figma.com/img/b99f/77ae/014d68dacd5d463de996eec8bfd086d9?Expires=1668988800&Signature=aN40adIjp8wtwItz21FqurRtGnKqs-RpXuRz4tu2MKXu69JHHTp8HdPQ-HPslTGP0t56AeiYzhCCrHSAT2LJJA-ZbaO~Jp3t9GGfgVF4DW0xFyDTkNBayxIs7AGzym8lRHo9-27avXLNpA590GM8U7VGW5viSmz2dmeo9jlmOcD-0gNSE11Omj9k01yi0YyoiPcEGB8oARtf1ZuHZe-pkMm9tUH5bvuwmYF8NRrBkJHA1gknshvqbvyiI9Zv2L9Nl6RWKzgGW4ItsFqxlESEX4mnqqYlD4U~TqTbPI9VLxD1kAU~udWobGg1BxRa8lYPrC8bcdNUqRnc1UVYI-AY7g__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
-                        ProductDescription="Large Shwarma Sandwich With Fries and Moyonese"
-                        ProductPrice="30$" />
-                    <ProductCard
-                        ProductName="Shawrma"
-                        ProductImage="https://s3-alpha-sig.figma.com/img/b99f/77ae/014d68dacd5d463de996eec8bfd086d9?Expires=1668988800&Signature=aN40adIjp8wtwItz21FqurRtGnKqs-RpXuRz4tu2MKXu69JHHTp8HdPQ-HPslTGP0t56AeiYzhCCrHSAT2LJJA-ZbaO~Jp3t9GGfgVF4DW0xFyDTkNBayxIs7AGzym8lRHo9-27avXLNpA590GM8U7VGW5viSmz2dmeo9jlmOcD-0gNSE11Omj9k01yi0YyoiPcEGB8oARtf1ZuHZe-pkMm9tUH5bvuwmYF8NRrBkJHA1gknshvqbvyiI9Zv2L9Nl6RWKzgGW4ItsFqxlESEX4mnqqYlD4U~TqTbPI9VLxD1kAU~udWobGg1BxRa8lYPrC8bcdNUqRnc1UVYI-AY7g__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
-                        ProductDescription="Large Shwarma Sandwich With Fries and Moyonese"
-                        ProductPrice="30$" />
-                    <ProductCard
-                        ProductName="Shawrma"
-                        ProductImage="https://s3-alpha-sig.figma.com/img/b99f/77ae/014d68dacd5d463de996eec8bfd086d9?Expires=1668988800&Signature=aN40adIjp8wtwItz21FqurRtGnKqs-RpXuRz4tu2MKXu69JHHTp8HdPQ-HPslTGP0t56AeiYzhCCrHSAT2LJJA-ZbaO~Jp3t9GGfgVF4DW0xFyDTkNBayxIs7AGzym8lRHo9-27avXLNpA590GM8U7VGW5viSmz2dmeo9jlmOcD-0gNSE11Omj9k01yi0YyoiPcEGB8oARtf1ZuHZe-pkMm9tUH5bvuwmYF8NRrBkJHA1gknshvqbvyiI9Zv2L9Nl6RWKzgGW4ItsFqxlESEX4mnqqYlD4U~TqTbPI9VLxD1kAU~udWobGg1BxRa8lYPrC8bcdNUqRnc1UVYI-AY7g__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
-                        ProductDescription="Large Shwarma Sandwich With Fries and Moyonese"
-                        ProductPrice="30$" />
-                    <ProductCard
-                        ProductName="Shawrma"
-                        ProductImage="https://s3-alpha-sig.figma.com/img/b99f/77ae/014d68dacd5d463de996eec8bfd086d9?Expires=1668988800&Signature=aN40adIjp8wtwItz21FqurRtGnKqs-RpXuRz4tu2MKXu69JHHTp8HdPQ-HPslTGP0t56AeiYzhCCrHSAT2LJJA-ZbaO~Jp3t9GGfgVF4DW0xFyDTkNBayxIs7AGzym8lRHo9-27avXLNpA590GM8U7VGW5viSmz2dmeo9jlmOcD-0gNSE11Omj9k01yi0YyoiPcEGB8oARtf1ZuHZe-pkMm9tUH5bvuwmYF8NRrBkJHA1gknshvqbvyiI9Zv2L9Nl6RWKzgGW4ItsFqxlESEX4mnqqYlD4U~TqTbPI9VLxD1kAU~udWobGg1BxRa8lYPrC8bcdNUqRnc1UVYI-AY7g__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
-                        ProductDescription="Large Shwarma Sandwich With Fries and Moyonese"
-                        ProductPrice="30$" />
+                        ProductName={props.Eatern_ProductName}
+                        ProductImage={props.Eatern_ProductImage}
+                        ProductDescription={props.Eatern_ProductDescription}
+                        ProductPrice={props.Eatern_ProductPrice} />
+
 
                 </div>
             )}
             {isWestern && (
                 <div className="grid grid-cols-4 gap-4">
                     <ProductCard
-                        ProductName="Burger"
-                        ProductImage="https://img.freepik.com/premium-photo/cheese-burger-with-onion-tomato-lettuce-bacon-white-background_499484-1161.jpg?w=1380"
-                        ProductDescription="Large Burger Sandwich With Cheese, Tomato, Lettuce and Moyonese"
-                        ProductPrice="35$" />
-                    <ProductCard
-                        ProductName="Burger"
-                        ProductImage="https://img.freepik.com/premium-photo/cheese-burger-with-onion-tomato-lettuce-bacon-white-background_499484-1161.jpg?w=1380"
-                        ProductDescription="Large Burger Sandwich With Cheese, Tomato, Lettuce and Moyonese"
-                        ProductPrice="35$" />
-                    <ProductCard
-                        ProductName="Burger"
-                        ProductImage="https://img.freepik.com/premium-photo/cheese-burger-with-onion-tomato-lettuce-bacon-white-background_499484-1161.jpg?w=1380"
-                        ProductDescription="Large Burger Sandwich With Cheese, Tomato, Lettuce and Moyonese"
-                        ProductPrice="35$" />
-
-
+                        ProductName={props.Western_ProductName}
+                        ProductImage={props.Western_ProductImage}
+                        ProductDescription={props.Western_ProductDescription}
+                        ProductPrice={props.Western_ProductPrice} />
                 </div>
             )}
             {isDrinks && (
                 <div className="grid grid-cols-4 gap-4">
                     <ProductCard
-                        ProductName="Orange Juice"
-                        ProductImage="https://img.freepik.com/premium-photo/glass-orange-juice-100-isolate-white-background_48237-606.jpg?w=2000"
-                        ProductDescription="Fresh Orange Juice"
-                        ProductPrice="10$" />
-                    <ProductCard
-                        ProductName="Orange Juice"
-                        ProductImage="https://img.freepik.com/premium-photo/glass-orange-juice-100-isolate-white-background_48237-606.jpg?w=2000"
-                        ProductDescription="Fresh Orange Juice"
-                        ProductPrice="10$" />
-                    <ProductCard
-                        ProductName="Orange Juice"
-                        ProductImage="https://img.freepik.com/premium-photo/glass-orange-juice-100-isolate-white-background_48237-606.jpg?w=2000"
-                        ProductDescription="Fresh Orange Juice"
-                        ProductPrice="10$" />
-
-
-
+                        ProductName={props.Drinks_ProductName}
+                        ProductImage={props.Drinks_ProductImage}
+                        ProductDescription={props.Drinks_ProductDescription}
+                        ProductPrice={props.Drinks_ProductPrice} />
                 </div>
             )}
         </>
