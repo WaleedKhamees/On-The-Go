@@ -48,10 +48,6 @@ const When = () => {
             ))}
           </ul>
         )}
-
-        <button className="rounded-lg pr-2 pl-2 bg-RedPrimary w-full ">
-          <p className="text-White text-center p-2  ">RESERVE</p>
-        </button>
       </div>
     </div>
   );

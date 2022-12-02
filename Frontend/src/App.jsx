@@ -10,6 +10,7 @@ import CheckinDate from "../components/CheckinDate";
 import Comment from "../components/Comment";
 import How from "../components/Howmanyarecoming";
 import When from "../components/When";
+import Admin_Page from "../components/Admin_Page";
 function App() {
   return (
     <>
@@ -78,6 +79,13 @@ function App() {
         Img="https://s3-alpha-sig.figma.com/img/4678/91cb/1ce1d049ca67dc27f3e146f4c96ee442?Expires=1669593600&Signature=OnSF0n2nppTiWGHZO23Y9gBOSA1K7CzgKvz8KS~bAgmBg8HuJCErLocbEsQcalknm-A5~3qZ9bF1qWuTfkTTaIlq~CdcyI1KRBHW81dS9G1NR~BAN5r0rA~TePhUc4xkyNGFBM68bypDO~WP1V1dd-bOHCZZ-jMhp46FDcFhE1zTottQ0o~PHVVOxRvsUR043WiBuLZA-QfNUyBh3C4hu5C6udy~K4JnOWlzkgdj3HEMRSN0k~ZS2J5vMuxirAQCTZT2VSJopKrBxDDOmFDNoQfkctBNIJiHWm825A~cAZP6rv-LdLQB-9rAEYLh9GNcvKf40~y8Tbi7zxuQDPGdgw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
         Name="Youssef osama"
       />
+      <Admin_Page
+        Eastern_Statistics={1000}
+        Eastern_percentage={-30}
+        Western_Statistics={1000}
+        Western_percentage={20}
+        Drinks_Statistics={1000}
+        Drinks_percentage={-20} />
     </>
   );
 }
