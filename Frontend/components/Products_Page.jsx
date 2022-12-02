@@ -21,7 +21,7 @@ function Products_Page(props) {
                     onClick={(e) => { setEastern(false); setWestern(true); setDrinks(false); }}>
                     <p style={{ color: isWestern ? "white" : "#333333" }}>Western</p>
                 </button>
-                <button className="rounded-lg border w-[90px] h-[37px]"
+                <button className="rounded-lg border w-[90px] h-[37px] "
                     style={{ backgroundColor: isDrinks ? "#333333" : "white" }}
                     onClick={(e) => { setEastern(false); setWestern(false); setDrinks(true); }}>
                     <p style={{ color: isDrinks ? "white" : "#333333" }}>Drinks</p>

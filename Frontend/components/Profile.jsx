@@ -11,61 +11,60 @@ function Profile(props) {
 
         <div className="flex flex-col w-full">
           <label
-            for="first_name"
-            class="block mb-2 text-sm font-medium text-[#989898] dark:text-white"
+            htmlFor="first_name"
+            class="block mb-2 small text-Small dark:text-white"
           >
             Email
           </label>
           <input
             type="email"
             id="Email"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="placeholder:text-Small text-body px-4 py-2 border border-Body rounded-lg outline-none"
             placeholder="Enter your Email Address"
           ></input>
         </div>
-
         <div className="flex flex-col w-full">
           <label
-            for="first_name"
-            class="block mb-2 text-sm font-medium text-[#989898] dark:text-white"
+            htmlFor="first_name"
+            class="block mb-2 small text-Small dark:text-white"
           >
             Old Password
           </label>
           <input
-            type="password"
-            id="OldPassword"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Enter your old password"
+            type="Password"
+            id="Password"
+            className="placeholder:text-Small text-body px-4 py-2 border border-Body rounded-lg outline-none"
+            placeholder="Enter your old Password"
           ></input>
         </div>
 
         <div className="flex flex-col w-full">
           <label
-            for="first_name"
-            class="block mb-2 text-sm font-medium text-[#989898] dark:text-white"
+            htmlFor="first_name"
+            class="block mb-2 small text-Small dark:text-white"
           >
-            New password
+            New Password
           </label>
           <input
-            type="password"
-            id="Newpassword"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Enter your new password"
+            type="Password"
+            id="Password"
+            className="placeholder:text-Small text-body px-4 py-2 border border-Body rounded-lg outline-none"
+            placeholder="Enter your New Password"
           ></input>
         </div>
 
         <div className="flex flex-col w-full">
           <label
-            for="first_name"
-            class="block mb-2 text-sm font-medium text-[#989898] dark:text-white"
+            htmlFor="first_name"
+            class="block mb-2 small text-Small dark:text-white"
           >
-            Confirm new password
+            Confirm New Password
           </label>
           <input
-            type="password"
-            id="Confirmnewpassword"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Enter your new password"
+            type="Password"
+            id="Password"
+            className="placeholder:text-Small text-body px-4 py-2 border border-Body rounded-lg outline-none"
+            placeholder="Enter you new password"
           ></input>
         </div>
 

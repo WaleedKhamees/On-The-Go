@@ -4,39 +4,47 @@ import { BsPeopleFill } from "react-icons/bs";
 
 const How = () => {
   const [isActive, setIsActive] = useState(false);
-  const [number, setnumber] = useState("How many are coming?");
+  const [hasChose, setHasChose] = useState(false);
+  const [number, setNumber] = useState();
   const options = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   const handleClick = (event, key) => {
-    setnumber(key);
+    setHasChose(true);
+    setNumber(key);
   };
 
   return (
-    <div className=" flex justify-center pt-4 ">
-      <div className="flex-col flex max-w-[364px] items-center flex-grow gap-4">
-        <div className="w-full bg-White p-2 flex items-center justify-between rounded-lg border border-[#333333] ">
-          <div className="flex gap-2 text-[#333333]">
-            <BsPeopleFill size={20} /> {number}
-          </div>
-          <BiChevronDown size={20} onClick={(e) => setIsActive(!isActive)} />
+    <div className="max-w-fit min-w-[300px] relative">
+      <div
+        className="flex cursor-pointer justify-between items-center px-4 py-2 border border-Body max-w-fit min-w-[300px] rounded-lg"
+        onClick={(e) => setIsActive(!isActive)}
+      >
+        <div className="flex gap-4 items-center">
+          <BsPeopleFill fill="#333333" size={24} />
+          <p className={`${!hasChose ? "text-Small" : "text-Body"}`}>
+            {!hasChose ? "How many are coming?" : number}
+          </p>
         </div>
-        {isActive && (
-          <ul className=" bg-White mt-2 overflow-y-auto max-h-60  w-full">
-            {options?.map((key) => (
-              <li
-                key={key}
-                className="p-2 hover:bg-[#64748b] hover:text-White w-full  text-[#333333]"
-                onClick={(event) => handleClick(event, key)}
-              >
-                <div className="flex gap-2">
-                  <BsPeopleFill size={20} />
-                  {key}
-                </div>
-              </li>
-            ))}
-          </ul>
-        )}
+        <BiChevronDown size={24} />
       </div>
+
+      {isActive && (
+        <ul
+          className=" bg-White overflow-y-auto max-h-[120px] absolute w-full cursor-pointer"
+          onMouseLeave={() => setIsActive(false)}
+        >
+          {options?.map((key) => (
+            <li
+              key={key}
+              className="flex items-center gap-4 px-4 py-2 hover:bg-Small hover:text-White w-full  fill-Body hover:fill-White text-Body"
+              onClick={(event) => handleClick(event, key)}
+            >
+              <BsPeopleFill className="" size={24} />
+              <p>{key}</p>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

@@ -6,11 +6,11 @@ import ProductInfo from "../components/ProductInfo";
 import Login from "../components/Login";
 import SignUp from "../components/SignUp";
 import Profile from "../components/Profile";
-import CheckinDate from "../components/CheckinDate";
 import Comment from "../components/Comment";
 import How from "../components/Howmanyarecoming";
 import When from "../components/When";
 import Admin_Page from "../components/Admin_Page";
+import Reservation from "../components/Reservation"
 function App() {
   return (
     <>
@@ -64,10 +64,6 @@ function App() {
         Review="Loved Every bite of it."
         Rating={5}
       />
-      <CheckinDate />
-      <How />
-      <When />
-
       <Comment
         UserName="Youssef Ousama"
         Date="18th Aug 2021"
@@ -86,6 +82,7 @@ function App() {
         Western_percentage={20}
         Drinks_Statistics={1000}
         Drinks_percentage={-20} />
+      <Reservation />
     </>
   );
 }

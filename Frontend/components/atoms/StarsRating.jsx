@@ -6,6 +6,7 @@ const StarsRating = (prop) => {
         {[...Array(5)].map((star, index) => {
           return (
             <span
+              key={index}
               className={`bg-clip-text text-transparent p ${
                 prop.Rating - index + 1 > 1 ? "bg-Yellow" : "bg-Small"
               }`}
