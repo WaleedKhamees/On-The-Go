@@ -1,35 +1,32 @@
+import { Link } from "react-router-dom";
 const NavBar = () => {
   return (
     <nav className="flex items-center justify-between px-8 py-4">
       <div className="flex items-center gap-8">
-        <h3 className="h3">عالطاير</h3>
+        <Link to="/">
+          <h3 className="h3">عالطاير</h3>
+        </Link>
         <ul className="flex items-center gap-4">
-          <li>
-            <a href="" className="outlinebody">
-              Menu
-            </a>
+          <li className="outlinebody">
+            <Link to="/menu">Menu</Link>
           </li>
-          <li>
-            <a href="" className="outlinebody">
-              Reservation
-            </a>
+          <li className="outlinebody">
+            <Link to="/reservations">Reservation</Link>
           </li>
-          <li>
-            <a href="" className="outlinebody">
-              Discounts
-            </a>
+          <li className="outlinebody">
+            <Link to="/discounts">Discounts</Link>
           </li>
         </ul>
       </div>
       <div className="flex items-center gap-4">
-        <a href="">
-          <p className="p">Login</p>
-        </a>
+        <p className="p">
+          <Link to="/login">Login</Link>
+        </p>
         <p className="p">|</p>
-        <a href="">
-          <p className="p">Sign in</p>
-        </a>
-        <a href="">
+        <p className="p">
+          <Link to="/signin">Sign in</Link>
+        </p>
+        <Link to="/cart">
           <svg
             width="21"
             height="21"
@@ -44,7 +41,7 @@ const NavBar = () => {
               fill="#333333"
             />
           </svg>
-        </a>
+        </Link>
       </div>
     </nav>
   );
