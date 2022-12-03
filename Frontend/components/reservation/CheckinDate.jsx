@@ -2,14 +2,18 @@ import React, { useState } from "react";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import { DayPicker } from "react-day-picker";
-import "react-day-picker/src/style.css";
+import "../../src/styles/react-date-picker.css";
 
 const CheckinDate = () => {
   const [selected, setSelected] = useState(new Date());
   dayjs.extend(advancedFormat);
-  let footer = <p>Please pick a day.</p>;
+  let footer = <p className="text-center">Please pick a day.</p>;
   if (selected) {
-    footer = <p>You picked {dayjs(selected).format("MMM Do, YYYY")}.</p>;
+    footer = (
+      <div className="flex justify-center mt-2">
+        <p>You've picked {dayjs(selected).format("MMM Do, YYYY")}.</p>
+      </div>
+    );
   }
   return (
     <DayPicker
@@ -17,8 +21,7 @@ const CheckinDate = () => {
       selected={selected}
       onSelect={setSelected}
       footer={footer}
-      
-      
+      disabled={true}
     />
   );
 };
