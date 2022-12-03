@@ -1,5 +1,5 @@
 import CheckinDate from "./CheckinDate";
-import How from "./Howmanyarecoming";
+import How from "./How";
 import When from "./When";
 const Reservation = () => {
   return (

@@ -15,7 +15,7 @@ const AdminController = () => {
   };
 
   return (
-    <div className="max-w-fit min-w-[360px] relative">
+    <div className="max-w-fit min-w-[350px] relative">
       <div
         className="flex justify-between items-center cursor-pointer px-4 py-2 border border-Body w-full rounded-lg"
         onClick={(e) => setIsActive(!isActive)}
