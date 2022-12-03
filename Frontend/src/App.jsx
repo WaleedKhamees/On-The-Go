@@ -7,14 +7,15 @@ import Login from "../components/Login";
 import SignUp from "../components/SignUp";
 import Profile from "../components/Profile";
 import Comment from "../components/Comment";
-import Admin_Page from "../components/Admin_Page";
-import Reservation from "../components/reservation/Reservation";
+import Admin_Page from "../components/AdminPage/AdminPage";
+import Reservation from "../components/ReservationPage/Reservation";
 import ProductsPage from "../components/ProductPage/ProductPage";
 function App() {
   return (
     <>
       <NavBar />
-      <ProductsPage />
+      <Admin_Page />
+      {/* <ProductsPage /> */}
       {/* <HomePageCard
         Img="https://s3-alpha-sig.figma.com/img/3ace/154c/4d9e8937101671c15ad48799914bbc71?Expires=1669593600&Signature=QFD~Cu3bza2I-Nmix6e0sT~4M9mpCTqoF1Rn3vUJcoajbV38UNKJynfuF-yhqIJfqnBij1M9rHXQVj6Cq-kazi78T6CpJ0yqmlM5bzTJ8k57DfYFLQmGqSwuRexDAiAaog6nzeGwx~7RGrSTYDHsglP7GAKPOIIvV9HaaO7jyJ2Rmd1Nf4qLPuBaxlml-G--AeC60srjtdQ3ajtK3r7Lg9DNoEGT~NX-vRdU-dqDP2IXOh9ayMqzsURMn~5Umf6YawRlPJygZ09qcBVJje-v7lxxpQK74ek910gsKsXM3pFBJcRTZOX8M7uaTJTQQ1gvWKVigRzPMT7wYzjiatpBUg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
         Header="Eastern Dishes"
@@ -71,14 +72,6 @@ function App() {
       /> */}
 
       {/* <Reservation /> */}
-      {/* <Admin_Page
-        Eastern_Statistics={1000}
-        Eastern_percentage={-30}
-        Western_Statistics={1000}
-        Western_percentage={20}
-        Drinks_Statistics={1000}
-        Drinks_percentage={-20}
-      /> */}
     </>
   );
 }
