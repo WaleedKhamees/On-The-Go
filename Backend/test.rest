@@ -5,3 +5,26 @@ GET http://localhost:3000/item HTTP/1.1
 ### 
 GET http://localhost:3000/item/1 HTTP/1.1
 
+### 
+
+POST http://localhost:3000/signup HTTP/1.1
+Content-Type: application/json
+
+{
+    "first_name": "", 
+    "last_name": "", 
+    "email": "",
+    "password": "", 
+    "wallet": 1000
+}
+
+
+### 
+
+POST http://localhost:3000/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "",
+    "password": "", 
+}

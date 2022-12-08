@@ -19,6 +19,8 @@ app.all('/', function (req, res, next) {
     next()
 });
 app.use("/", require("./routes/item"));
+app.use("/", require("./routes/signup"));
+app.use("/", require("./routes/login"));
 // get domain.com/posts => get all posts
 //  
 // get : put : update  delete : delete  post : create 
