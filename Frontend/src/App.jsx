@@ -5,7 +5,6 @@ import AdminPage from "../components/AdminPage/AdminPage";
 import LoginPage from "../components/Login/Login";
 import SignupPage from "../components/SignupPage/SignupPage";
 import Profile from "../components/Profile";
-import Comment from "../components/Comment";
 import Reservation from "../components/ReservationPage/ReservationPage";
 import ProductsPage from "../components/ProductPage/ProductPage";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";

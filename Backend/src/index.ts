@@ -1,6 +1,7 @@
 import express from "express";
 import { Client } from "pg";
 import * as dotenv from "dotenv";
+const cors = require('cors');
 dotenv.config();
 
 export const client = new Client(process.env.connectionString)
@@ -11,7 +12,12 @@ const app = express();
 // parse json
 
 app.use(express.json());
-
+app.use(cors());
+app.all('/', function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next()
+});
 app.use("/", require("./routes/item"));
 // get domain.com/posts => get all posts
 //  
