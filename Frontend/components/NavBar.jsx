@@ -8,7 +8,7 @@ const NavBar = () => {
         </Link>
         <ul className="flex items-center gap-4">
           <li className="outlinebody">
-            <Link to="/menu">Menu</Link>
+            <Link to="/menu/eastern">Menu</Link>
           </li>
           <li className="outlinebody">
             <Link to="/reservations">Reservation</Link>
