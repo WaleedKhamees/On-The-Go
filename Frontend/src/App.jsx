@@ -5,7 +5,6 @@ import AdminPage from "../components/AdminPage/AdminPage";
 import LoginPage from "../components/Login/Login";
 import SignupPage from "../components/SignupPage/SignupPage";
 import Profile from "../components/Profile";
-import Comment from "../components/Comment";
 import Reservation from "../components/ReservationPage/ReservationPage";
 import ProductsPage from "../components/ProductPage/ProductPage";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -18,7 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/admin" element={<AdminPage />} />
-          <Route path="/menu" element={<ProductsPage />} />
+          <Route path="/menu/:id" element={<ProductsPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signin" element={<SignupPage />} />
           <Route path="/cart" element={<Cart_Page />} />

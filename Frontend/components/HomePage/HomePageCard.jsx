@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 const HomePageCard = (props) => {
   return (
     <div
@@ -12,14 +13,14 @@ const HomePageCard = (props) => {
         <h1 className="h1 text-White text-center"> {props.Header} </h1>
 
         <h3 className="h3 text-White text-center"> {props.Description} </h3>
-
-        <button className="border rounded-lg border-White  pr-2 pl-2    ">
-          {" "}
-          <p className="text-White text-center p-2 ">Order Now</p>
-        </button>
+        <Link to={`/menu/${props.category}`}>
+          <button className="border rounded-lg border-White  pr-2 pl-2">
+            <p className="text-White text-center p-2 ">Order Now</p>
+          </button>
+        </Link>
       </div>
     </div>
   );
-}
+};
 
 export default HomePageCard;
