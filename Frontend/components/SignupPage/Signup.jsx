@@ -1,15 +1,19 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { validateSignup } from "../../util/validations";
-import { useEffect } from "react";
+import { userContext } from "../../src/App";
 
 const SignupPage = () => {
+  const { logUser } = useContext(userContext)
+
   const firstNameRef = useRef();
   const lastNameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const walletRef = useRef();
+
+
   const navigate = useNavigate();
   const [error, setError] = useState({
     nameError: "",
@@ -24,7 +28,7 @@ const SignupPage = () => {
   }, [])
 
 
-  const onSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const user = {
       first_name: firstNameRef.current.value,
@@ -32,9 +36,9 @@ const SignupPage = () => {
       email: emailRef.current.value,
       password: passwordRef.current.value,
       wallet: Number.parseFloat(walletRef.current.value),
+      img_url: null
     };
     const validation = validateSignup(user);
-    console.log(validation);
     if (validation.error === true) {
       setError(validation.res);
       return;
@@ -42,8 +46,9 @@ const SignupPage = () => {
     else {
       try {
         const res = await axios.post("http://localhost:3000/signup", user);
-        localStorage.setItem("user", JSON.stringify(user));
-        return navigate("/home");
+        console.log(res);
+        logUser(user);
+        navigate("/home")
       } catch (err) {
         setError({ ...error, emailError: "email already exists!" });
       }
@@ -54,7 +59,7 @@ const SignupPage = () => {
     <div className="flex justify-center pt-4">
       <form
         className="flex-col flex items-center gap-4 max-w-[350px] flex-grow"
-        onSubmit={(e) => onSubmit(e)}
+        onSubmit={(e) => handleSubmit(e)}
       >
         <h2 className="h2 text-Headings">Sign Up</h2>
 

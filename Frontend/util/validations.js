@@ -1,20 +1,28 @@
-export const validateWallet = (number) => {
+const validateWallet = (number) => {
     if (Number.isNaN(number)) return false;
     if (parseFloat(number) < 0) return false;
     else return true;
 };
 
-export const validateName = (Name) => {
+const validateName = (Name) => {
     if (Name === "") return false;
-    if (!Number.isNaN(Name)) return false;
+    if (!Number.isNaN(Number.parseInt(Name))) return false;
     else return true;
 };
-export const validateString = (string) => {
+
+const validateString = (string) => {
     if (string === "") return false;
     else return true;
 };
+
+const validateEmail = (email) => {
+    if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))) return false;
+    else return true;
+
+}
 export const validateSignup = (user) => {
-    let res = {
+    console.log(user);
+    const res = {
         nameError: "",
         emailError: "",
         passwordError: "",
@@ -29,7 +37,7 @@ export const validateSignup = (user) => {
         res.nameError = "please enter a valid name";
         error = true;
     }
-    if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(user.email))) {
+    if (!validateEmail(user.email)) {
         res.emailError = "please enter a valid e-mail";
         error = true;
     }
@@ -40,3 +48,20 @@ export const validateSignup = (user) => {
     return { error, res };
 
 };
+export const validateLogin = (user) => {
+    const res =
+    {
+        emailError: "",
+        passwordError: ""
+    }
+    let error = false;
+    if (!validateEmail(user.email)) {
+        error = true;
+        res.emailError = "please enter a valid email"
+    }
+    if (!validateString(user.password)) {
+        error = true;
+        res.passwordError = "please enter a valid password"
+    }
+    return { error, res };
+}
