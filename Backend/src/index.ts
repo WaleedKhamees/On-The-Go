@@ -23,11 +23,11 @@ app.use("/", require("./routes/signup"));
 app.use("/", require("./routes/login"));
 app.use("/", require("./routes/reserve"));
 app.use("/", require("./routes/customer"));
-
+app.use("/", require("./routes/employee"));
 
 // get domain.com/posts => get all posts
 //  
-// get : put : update  delete : delete  post : create 
+// get :  put : update  delete : delete  post : create 
 // routes
 
 
