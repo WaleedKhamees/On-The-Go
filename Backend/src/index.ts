@@ -21,6 +21,8 @@ app.all('/', function (req, res, next) {
 app.use("/", require("./routes/item"));
 app.use("/", require("./routes/signup"));
 app.use("/", require("./routes/login"));
+app.use("/", require("./routes/reserve"));
+
 // get domain.com/posts => get all posts
 //  
 // get : put : update  delete : delete  post : create 
