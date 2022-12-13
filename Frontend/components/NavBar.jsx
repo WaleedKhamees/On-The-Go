@@ -29,7 +29,7 @@ const NavBar = () => {
             </p>
             <p className="p">|</p>
             <p className="p">
-              <Link to="/signup">Sign in</Link>
+              <Link to="/signup">Sign up</Link>
             </p>
           </div>
         )}

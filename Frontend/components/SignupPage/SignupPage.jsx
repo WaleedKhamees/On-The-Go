@@ -1,7 +1,8 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import axios from "axios";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { validateSignup } from "../../util/validations";
+import { useEffect } from "react";
 
 const SignupPage = () => {
   const firstNameRef = useRef();
@@ -9,9 +10,20 @@ const SignupPage = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const walletRef = useRef();
-  const [emailError, setEmailError] = useState("");
-  const [walletError, setWalletError] = useState("");
   const navigate = useNavigate();
+  const [error, setError] = useState({
+    nameError: "",
+    emailError: "",
+    passwordError: "",
+    walletError: "",
+  });
+
+  useEffect(() => {
+    if (localStorage.getItem("user"))
+      navigate("/home");
+  }, [])
+
+
   const onSubmit = async (e) => {
     e.preventDefault();
     const user = {
@@ -21,18 +33,23 @@ const SignupPage = () => {
       password: passwordRef.current.value,
       wallet: Number.parseFloat(walletRef.current.value),
     };
-    if (Number.isNaN(user.wallet)) {
-      setWalletError("please enter a valid number");
+    const validation = validateSignup(user);
+    console.log(validation);
+    if (validation.error === true) {
+      setError(validation.res);
       return;
     }
-    try {
-      const res = await axios.post("http://localhost:3000/signup", user);
-      localStorage.setItem("user", JSON.stringify(user));
-      return navigate("/home");
-    } catch (err) {
-      setEmailError("Email already exists!");
+    else {
+      try {
+        const res = await axios.post("http://localhost:3000/signup", user);
+        localStorage.setItem("user", JSON.stringify(user));
+        return navigate("/home");
+      } catch (err) {
+        setError({ ...error, emailError: "email already exists!" });
+      }
     }
   };
+
   return (
     <div className="flex justify-center pt-4">
       <form
@@ -40,63 +57,59 @@ const SignupPage = () => {
         onSubmit={(e) => onSubmit(e)}
       >
         <h2 className="h2 text-Headings">Sign Up</h2>
-        <div className="flex gap-4">
-          <input
-            type="text"
-            id="Name"
-            className="w-full py-2 px-4 rounded-lg p text-Body border border-Body placeholder:text-Small outline-none"
-            placeholder="First Name"
-            ref={firstNameRef}
-            required
-          ></input>
-          <input
-            type="text"
-            id="Name"
-            className="w-full py-2 px-4 rounded-lg p text-Body border border-Body placeholder:text-Small outline-none"
-            placeholder="Last Name"
-            ref={lastNameRef}
-            required
-          ></input>
+
+        <div className="flex flex-col gap-1" id="name-group">
+          <div className="flex gap-4">
+            <input
+              type="text"
+              id="Name"
+              className="w-full py-2 px-4 rounded-lg p text-Body border border-Body placeholder:text-Small outline-none"
+              placeholder="First Name"
+              ref={firstNameRef}
+            ></input>
+            <input
+              type="text"
+              id="Name"
+              className="w-full py-2 px-4 rounded-lg p text-Body border border-Body placeholder:text-Small outline-none"
+              placeholder="Last Name"
+              ref={lastNameRef}
+            ></input>
+          </div>
+          <label htmlFor="name-group" className={`${error.nameError !== "" ? "visible" : "invisible"} small text-RedPrimary`}>{error.nameError}</label>
         </div>
 
-        <input
-          type="email"
-          id="Email"
-          className="w-full py-2 px-4 rounded-lg p text-Body border border-Body placeholder:text-Small outline-none"
-          placeholder="Enter your Email Address"
-          ref={emailRef}
-          required
-        ></input>
-        <span
-          className={`${
-            emailError !== "" ? "visible" : "invisible"
-          } small text-RedPrimary`}
-        >
-          {emailError}
-        </span>
-        <input
-          type="password"
-          id="Password"
-          className="w-full py-2 px-4 rounded-lg p text-Body border border-Body placeholder:text-Small outline-none"
-          placeholder="Enter your Password"
-          ref={passwordRef}
-          required
-        ></input>
-        <input
-          type="text"
-          id="wallet"
-          className="w-full py-2 px-4 rounded-lg p text-Body border border-Body placeholder:text-Small outline-none"
-          placeholder="How much money do you want?"
-          ref={walletRef}
-          required
-        ></input>
-        <span
-          className={`${
-            walletError !== "" ? "visible" : "invisible"
-          } small text-RedPrimary`}
-        >
-          {walletError}
-        </span>
+        <div className="flex flex-col gap-1 w-full">
+          <input
+            type="email"
+            id="Email"
+            className="w-full py-2 px-4 rounded-lg p text-Body border border-Body placeholder:text-Small outline-none"
+            placeholder="Enter your Email Address"
+            ref={emailRef}
+          ></input>
+          <label htmlFor="Email" className={`${error.emailError !== "" ? "visible" : "invisible"} small text-RedPrimary`}>{error.emailError}</label>
+        </div>
+
+        <div className="flex flex-col gap-1 w-full">
+          <input
+            type="password"
+            id="Password"
+            className="w-full py-2 px-4 rounded-lg p text-Body border border-Body placeholder:text-Small outline-none"
+            placeholder="Enter your Password"
+            ref={passwordRef}
+          ></input>
+          <label htmlFor="Password" className={`${error.passwordError !== "" ? "visible" : "invisible"} small text-RedPrimary`}>{error.passwordError}</label>
+        </div>
+
+        <div className="flex flex-col gap-1 w-full">
+          <input
+            type="text"
+            id="Wallet"
+            className="w-full py-2 px-4 rounded-lg p text-Body border border-Body placeholder:text-Small outline-none"
+            placeholder="How much money do you want?"
+            ref={walletRef}
+          ></input>
+          <label htmlFor="Wallet" className={`${error.walletError !== "" ? "visible" : "invisible"} small text-RedPrimary`}>{error.walletError}</label>
+        </div>
         <input
           type="submit"
           className="rounded-lg bg-RedPrimary w-full p-4 outlinebody text-White cursor-pointer"

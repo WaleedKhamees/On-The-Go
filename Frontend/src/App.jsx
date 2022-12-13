@@ -12,7 +12,9 @@ import Cart_Page from "../components/Cart_Page";
 import WelcomePage from "../components/WelecomePage/Welcome";
 import { createContext } from "react";
 import { useState } from "react";
+
 export const userContext = createContext({});
+
 function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   return (

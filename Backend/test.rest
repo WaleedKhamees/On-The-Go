@@ -13,9 +13,10 @@ Content-Type: application/json
 {
     "first_name": "walid", 
     "last_name": "walid", 
-    "email": "walid@gmail.com",
+    "email": "walid3mk@gmail.com",
     "password": "walid", 
-    "wallet": 0
+    "wallet": 0,
+    "kind" : "a"
 }
 
 
