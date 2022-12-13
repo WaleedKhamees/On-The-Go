@@ -28,3 +28,16 @@ Content-Type: application/json
     "email": "",
     "password": "", 
 }
+
+###
+POST http://localhost:3000/reserve HTTP/1.1
+
+Content-Type: application/json
+{
+    "Cardinality": 5,
+    "Reservation_Date": "2020-5-18",
+    "Reservation_Time": "10 PM",
+    "Customer_ID":1 ,
+    "Branch_ID":1 
+}
+
