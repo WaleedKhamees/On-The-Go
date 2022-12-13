@@ -9,22 +9,30 @@ import Reservation from "../components/ReservationPage/ReservationPage";
 import ProductsPage from "../components/ProductPage/ProductPage";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Cart_Page from "../components/Cart_Page";
+import WelcomePage from "../components/WelecomePage/Welcome";
+import { createContext } from "react";
+import { useState } from "react";
+export const userContext = createContext({});
 function App() {
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   return (
     <Router>
       <div className="flex flex-col justify-between min-h-screen">
-        <NavBar />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/admin" element={<AdminPage />} />
-          <Route path="/menu/:id" element={<ProductsPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signin" element={<SignupPage />} />
-          <Route path="/cart" element={<Cart_Page />} />
-          <Route path="/reservations" element={<Reservation />} />
-          <Route path="/profile" element={<Profile />} />
-        </Routes>
-        <Footer />
+        <userContext.Provider value={{ user, setUser }}>
+          <NavBar />
+          <Routes>
+            <Route path="/" element={<WelcomePage />} />
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/admin" element={<AdminPage />} />
+            <Route path="/menu/:id" element={<ProductsPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/cart" element={<Cart_Page />} />
+            <Route path="/reservations" element={<Reservation />} />
+            <Route path="/profile" element={<Profile />} />
+          </Routes>
+          <Footer />
+        </userContext.Provider>
       </div>
     </Router>
   );

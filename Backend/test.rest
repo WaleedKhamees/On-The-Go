@@ -11,11 +11,11 @@ POST http://localhost:3000/signup HTTP/1.1
 Content-Type: application/json
 
 {
-    "first_name": "", 
-    "last_name": "", 
-    "email": "",
-    "password": "", 
-    "wallet": 1000
+    "first_name": "walid", 
+    "last_name": "walid", 
+    "email": "walid@gmail.com",
+    "password": "walid", 
+    "wallet": 0
 }
 
 
@@ -25,6 +25,6 @@ POST http://localhost:3000/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "email": "",
-    "password": "", 
+    "email": "walid@gmail.com",
+    "password": "walid", 
 }
