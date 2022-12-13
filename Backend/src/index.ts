@@ -22,6 +22,8 @@ app.use("/", require("./routes/item"));
 app.use("/", require("./routes/signup"));
 app.use("/", require("./routes/login"));
 app.use("/", require("./routes/reserve"));
+app.use("/", require("./routes/customer"));
+
 
 // get domain.com/posts => get all posts
 //  

@@ -13,10 +13,9 @@ Content-Type: application/json
 {
     "first_name": "walid", 
     "last_name": "walid", 
-    "email": "walid3mk@gmail.com",
+    "email": "walid@gmail.com",
     "password": "walid", 
-    "wallet": 0,
-    "kind" : "a"
+    "wallet": 0
 }
 
 
@@ -26,14 +25,14 @@ POST http://localhost:3000/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "email": "",
-    "password": "", 
+    "email": "walid3mk@gmail.com",
+    "password": "walid" 
 }
 
 ###
 POST http://localhost:3000/reserve HTTP/1.1
-
 Content-Type: application/json
+
 {
     "Cardinality": 5,
     "Reservation_Date": "2020-5-18",
@@ -41,4 +40,7 @@ Content-Type: application/json
     "Customer_ID":1 ,
     "Branch_ID":1 
 }
+###
+
+GET http://localhost:3000/customer/getcustomerfromemail/walid3mk@gmail.com HTTP/1.1
 
