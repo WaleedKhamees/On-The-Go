@@ -23,6 +23,7 @@ app.use("/", require("./routes/signup"));
 app.use("/", require("./routes/login"));
 app.use("/", require("./routes/reserve"));
 app.use("/",require("./routes/employee"));
+app.use("/",require("./routes/order"));
 
 // get domain.com/posts => get all posts
 //  
