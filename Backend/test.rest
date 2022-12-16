@@ -29,10 +29,54 @@ Content-Type: application/json
     "password": "walid" 
 }
 
+
+
+
+###
+<<<<<<< HEAD
+POST http://localhost:3000/order/insertorder HTTP/1.1
+Content-Type: application/json
+
+{
+  "Order_State":"cooking",
+  "Order_Price":90,
+  "Order_Date" :"2020-09-18",
+  "Employee_ID":61  
+}
+ 
+###
+
+PATCH  http://localhost:3000/order/updateorder HTTP/1.1
+Content-Type: application/json
+
+{
+  "Order_State":"loool",
+   "Order_ID":11
+}
+
+### 
+GET  http://localhost:3000/order/getAllOrders HTTP/1.1
+
+
+###
+
+GET   http://localhost:3000/order/getAllOrders/61 HTTP/1.1
+
+###
+
+GET   http://localhost:3000/order/getAllOrderforCustomer/'walid@gmail.com' HTTP/1.1
+
+
+
 ###
 POST http://localhost:3000/reserve HTTP/1.1
 Content-Type: application/json
 
+=======
+POST http://localhost:3000/reserve HTTP/1.1
+Content-Type: application/json
+
+>>>>>>> main
 {
     "Cardinality": 5,
     "Reservation_Date": "2020-5-18",
@@ -43,4 +87,5 @@ Content-Type: application/json
 ###
 
 GET http://localhost:3000/customer/getcustomerfromemail/walid3mk@gmail.com HTTP/1.1
+
 

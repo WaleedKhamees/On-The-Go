@@ -1,6 +1,7 @@
 import { client } from "../index"
 import { Request, Response } from 'express';
-import { compileFunction } from "vm";
+
+
 export const employeeController = {
     getEmployees: async (req: Request, res: Response) => {
         const Employees = await client.query(`select * from Employee`);
