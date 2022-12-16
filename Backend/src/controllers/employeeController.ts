@@ -13,12 +13,27 @@ export const employeeController = {
     },
     updateEmployee: async (req: Request, res: Response) => {
         const newEmployee = { Employee_id: req.body.Employee_id, first_name: req.body.first_name, last_name: req.body.last_name, StartTime: req.body.StartTime, EndTime: req.body.EndTime, TypeofEmployee: req.body.TypeofEmployee, Supervise_ID: req.body.Supervise_ID, Branch_ID: req.body.Branch_ID, salary: req.body.salary };
-        const Employee = await client.query(`update Employee set first_name='${newEmployee.first_name}', last_name = '${newEmployee.last_name}', StartTime = '${newEmployee.StartTime}',EndTime = '${newEmployee.EndTime}', TypeofEmployee = '${newEmployee.TypeofEmployee}', Supervise_ID = ${newEmployee.Supervise_ID}, Branch_ID = ${newEmployee.Branch_ID}, salary = ${newEmployee.salary} where employee_id = ${newEmployee.Employee_id}`);
-        res.status(201);
+        try {
+            const Employee = await client.query(`update Employee set first_name='${newEmployee.first_name}', last_name = '${newEmployee.last_name}', StartTime = '${newEmployee.StartTime}',EndTime = '${newEmployee.EndTime}', TypeofEmployee = '${newEmployee.TypeofEmployee}', Supervise_ID = ${newEmployee.Supervise_ID}, Branch_ID = ${newEmployee.Branch_ID}, salary = ${newEmployee.salary} where employee_id = ${newEmployee.Employee_id}`);
+            res.status(201).json({ message: "Updated successfully" });
+
+        }
+        catch (err) {
+            console.log(err);
+            res.status(400).json();
+        }
     },
     deleteEmployee: async (req: Request, res: Response) => {
-        const Employee = await client.query(`delete from Employee where Employee_id = ${req.params.id}`);
-        res.status(201);
+        try {
+            await client.query(`delete from Employee where Employee_id = ${req.params.id}`);
+            await client.query(`delete from userx where userx_id = ${req.params.id}`);
+            res.status(201).json({ message: "Deleted successfully" });
+
+        }
+        catch (err) {
+            console.log(err);
+            res.status(400).json();
+        }
     },
     insertEmployee: async (req: Request, res: Response) => {
         try {
