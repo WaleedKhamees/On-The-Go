@@ -2,8 +2,8 @@ import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import HomePage from "../components/HomePage/HomePage";
 import AdminPage from "../components/AdminPage/AdminPage";
-import LoginPage from "../components/Login/Login";
-import SignupPage from "../components/SignupPage/SignupPage";
+import LoginPage from "../components/LoginPage/Login";
+import SignupPage from "../components/SignupPage/Signup";
 import Profile from "../components/Profile";
 import Reservation from "../components/ReservationPage/ReservationPage";
 import ProductsPage from "../components/ProductPage/ProductPage";
@@ -12,13 +12,23 @@ import Cart_Page from "../components/Cart_Page";
 import WelcomePage from "../components/WelecomePage/Welcome";
 import { createContext } from "react";
 import { useState } from "react";
+
 export const userContext = createContext({});
-function App() {
+
+const App = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+  const clearUser = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+  };
+  const logUser = (user) => {
+    localStorage.setItem("user", JSON.stringify(user));
+    setUser(user);
+  };
   return (
     <Router>
       <div className="flex flex-col justify-between min-h-screen">
-        <userContext.Provider value={{ user, setUser }}>
+        <userContext.Provider value={{ user, clearUser, logUser }}>
           <NavBar />
           <Routes>
             <Route path="/" element={<WelcomePage />} />

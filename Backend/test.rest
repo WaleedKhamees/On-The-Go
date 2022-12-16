@@ -25,14 +25,15 @@ POST http://localhost:3000/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "email": "",
-    "password": "", 
+    "email": "walid3mk@gmail.com",
+    "password": "walid" 
 }
 
 
 
 
 ###
+<<<<<<< HEAD
 POST http://localhost:3000/order/insertorder HTTP/1.1
 Content-Type: application/json
 
@@ -71,6 +72,11 @@ GET   http://localhost:3000/order/getAllOrderforCustomer/'walid@gmail.com' HTTP/
 POST http://localhost:3000/reserve HTTP/1.1
 Content-Type: application/json
 
+=======
+POST http://localhost:3000/reserve HTTP/1.1
+Content-Type: application/json
+
+>>>>>>> main
 {
     "Cardinality": 5,
     "Reservation_Date": "2020-5-18",
@@ -78,5 +84,8 @@ Content-Type: application/json
     "Customer_ID":1 ,
     "Branch_ID":1 
 }
+###
+
+GET http://localhost:3000/customer/getcustomerfromemail/walid3mk@gmail.com HTTP/1.1
 
 

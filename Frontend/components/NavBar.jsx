@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { userContext } from "../src/App";
 const NavBar = () => {
-  const { user } = useContext(userContext);
+  const { user, clearUser } = useContext(userContext);
   return (
     <nav className="flex items-center justify-between px-8 py-4">
       <div className="flex items-center gap-8">
@@ -29,14 +29,14 @@ const NavBar = () => {
             </p>
             <p className="p">|</p>
             <p className="p">
-              <Link to="/signup">Sign in</Link>
+              <Link to="/signup">Sign up</Link>
             </p>
           </div>
         )}
         {user && (
           <div className="flex items-center gap-4">
             <img src="" alt="" />
-            <p className="p cursor-pointer">Logout</p>
+            <p className="p cursor-pointer" onClick={() => clearUser()}>Logout</p>
           </div>
         )}
         <Link to="/cart">
