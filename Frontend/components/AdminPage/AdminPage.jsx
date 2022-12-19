@@ -1,3 +1,6 @@
+import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { userContext } from "../../src/App";
 import AdminController from "./AdminController";
 const Stat = ({ category, earning, percentage }) => (
   <div className="flex flex-col gap-2">
@@ -6,11 +9,10 @@ const Stat = ({ category, earning, percentage }) => (
       <h2 className="h2">{earning}EGP</h2>
       <div
         className={`flex items-center gap-2 px-1 py-0.5 rounded-[0.25rem]
-      ${
-        percentage > 0
-          ? "fill-GreenPrimary text-GreenPrimary bg-GreenSecondary "
-          : "fill-RedPrimary text-RedPrimary bg-RedSecondary"
-      }`}
+      ${percentage > 0
+            ? "fill-GreenPrimary text-GreenPrimary bg-GreenSecondary "
+            : "fill-RedPrimary text-RedPrimary bg-RedSecondary"
+          }`}
       >
         <svg
           width="21"
@@ -31,6 +33,16 @@ const Stat = ({ category, earning, percentage }) => (
   </div>
 );
 const AdminPage = () => {
+  const { user } = useContext(userContext);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!user)
+      navigate("/login");
+    else if (user.kind === 'e')
+      navigate("/employee");
+    else if (user.kind === 'c')
+      navigate("/home");
+  }, [])
   return (
     <div className="flex flex-col gap-16">
       <div className="flex flex-col gap-4 items-center">
