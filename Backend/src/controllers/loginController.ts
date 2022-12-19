@@ -7,7 +7,7 @@ export const loginController = {
 
         const user = (await client.query(`select email,password,kind from userx where email = '${reqUser.email}'`)).rows;
         if (user.length === 0) {
-            res.status(400).send({ message: "user not found" });
+            res.status(404).send({ message: "User not found" });
             return
         }
         try {
@@ -15,11 +15,11 @@ export const loginController = {
                 res.status(200).json({ ...user[0] });
             }
             else
-                res.status(400).json({ message: "failed" });
+                res.status(400).json({ message: "Please enter the correct password" });
         }
         catch (err) {
             console.log(err)
-            res.status(400).send({});
+            res.status(500).send({ message: "backend error" });
         }
 
     }

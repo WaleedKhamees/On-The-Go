@@ -10,7 +10,7 @@ GET http://localhost:3000/item/1 HTTP/1.1
 POST http://localhost:3000/signup HTTP/1.1
 Content-Type: application/json
 
-{
+{س
     "first_name": "walid", 
     "last_name": "walid", 
     "email": "walid@gmail.com",
@@ -28,6 +28,8 @@ Content-Type: application/json
     "email": "walid3mk@gmail.com",
     "password": "walid" 
 }
+### 
+GET http://localhost:3000/employee HTTP/1.1
 
 ###
 
@@ -173,7 +175,7 @@ Content-Type: application/json
 
 
 
-GET http://localhost:3000/customer/getcustomerfromemail/walid3mk@gmail.com HTTP/1.1
+GET http://localhost:3000/customer/getcustomerfromemail/walid@gmail.com HTTP/1.1
 
 
 ###
