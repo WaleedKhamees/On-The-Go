@@ -55,18 +55,20 @@ export const orderController = {
         console.log(err);
         res.status(400).json();
     }
+    
+
+    
 }, 
 getAllOrderforCustomer: async (req: Request, res: Response) => {
-   
+    
      try {            
         const Customer_ID = await client.query(`select UserX_ID from UserX where Email= ${req.params.Email};`);
-        
         const order = await client.query(`select OrderX.Order_ID,Order_State,Order_Price,Order_Date,Employee_ID,contains.Item_iD,Quantity,Item_Name,Item_Desc,Item_Price,Img_url 
         from Orderx                                
         LEFT JOIN contains on OrderX.Order_ID=contains.Order_ID
         LEFT JOIN Item     on Item.Item_iD=contains.Item_iD
-        where Customer_ID=${Customer_ID};`);
-
+        where Customer_ID=${Customer_ID.rows[0].userx_id};`);
+          
         res.status(200).json(order.rows);
        }
     catch (err) {
