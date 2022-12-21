@@ -44,7 +44,7 @@ const AdminPage = () => {
       navigate("/home");
   }, [])
   return (
-    <div className="flex flex-col gap-16">
+    <div className="flex flex-col gap-16 py-16">
       <div className="flex flex-col gap-4 items-center">
         <h1 className="h1 ">Welcome</h1>
         <AdminController />

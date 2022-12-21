@@ -12,11 +12,10 @@ export const employeeController = {
         res.status(200).json(Employee.rows);
     },
     updateEmployee: async (req: Request, res: Response) => {
-        const newEmployee = { Employee_id: req.body.Employee_id, first_name: req.body.first_name, last_name: req.body.last_name, StartTime: req.body.StartTime, EndTime: req.body.EndTime, TypeofEmployee: req.body.TypeofEmployee, Supervise_ID: req.body.Supervise_ID, Branch_ID: req.body.Branch_ID, salary: req.body.salary };
+        const newEmployee = { Employee_id: req.body.employee_id, first_name: req.body.first_name, last_name: req.body.last_name, StartTime: req.body.starttime, EndTime: req.body.endtime, TypeofEmployee: req.body.typeofemployee, Supervise_ID: req.body.supervise_id, Branch_ID: req.body.branch_id, salary: req.body.salary };
         try {
             const Employee = await client.query(`update Employee set first_name='${newEmployee.first_name}', last_name = '${newEmployee.last_name}', StartTime = '${newEmployee.StartTime}',EndTime = '${newEmployee.EndTime}', TypeofEmployee = '${newEmployee.TypeofEmployee}', Supervise_ID = ${newEmployee.Supervise_ID}, Branch_ID = ${newEmployee.Branch_ID}, salary = ${newEmployee.salary} where employee_id = ${newEmployee.Employee_id}`);
             res.status(201).json({ message: "Updated successfully" });
-
         }
         catch (err) {
             console.log(err);
