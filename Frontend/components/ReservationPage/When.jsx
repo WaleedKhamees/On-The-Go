@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useContext } from "react";
 import { BiChevronDown } from "react-icons/bi";
 import { BsClockFill } from "react-icons/bs";
+import { ReserveContext } from "./ReservationPage";
 
 const When = () => {
+  const { reservation, setReservation } = useContext(ReserveContext);
   const [isActive, setIsActive] = useState(false);
   const [hasChose, setHasChose] = useState(false);
   const [clock, setclock] = useState("When?");
@@ -24,6 +26,8 @@ const When = () => {
     setHasChose(true);
     setIsActive(false);
     setclock(key);
+    setReservation({ ...reservation, When: key });
+    console.log(reservation);
   };
 
   return (

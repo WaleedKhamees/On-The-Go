@@ -1,31 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import { DayPicker } from "react-day-picker";
 import "../../src/styles/react-date-picker.css";
-
+import { ReserveContext } from "./ReservationPage";
 const CheckinDate = () => {
-  const [selected, setSelected] = useState(new Date());
+  const [selected, setSelected] = useState();
+  const { reservation, setReservation } = useContext(ReserveContext);
   dayjs.extend(advancedFormat);
   let footer = <p className="text-center">Please pick a day.</p>;
-  if (selected) {
+  useEffect(() => {
     footer = (
       <div className="flex justify-center mt-2">
         <p>You've picked {dayjs(selected).format("MMM Do, YYYY")}.</p>
       </div>
     );
-  }
+    setReservation({ ...reservation, CheckinDate: selected });
+    console.log(reservation);
+  }, [selected]);
   return (
     <DayPicker
       mode="single"
       selected={selected}
       onSelect={setSelected}
       footer={footer}
-      disabled={true}
+      defaultMonth={new Date("2022")}
     />
   );
 };
 export default CheckinDate;
+
 /* <div className="flex gap-4 items-center px-4 py-2 outline-none border border-Body max-w-[300px] h-[40px] rounded-lg">
       <svg
         width="24"

@@ -1,8 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useContext } from "react";
 import { BiChevronDown } from "react-icons/bi";
 import { BsPeopleFill } from "react-icons/bs";
 
+import { ReserveContext } from "./ReservationPage";
+
 const How = () => {
+  const { reservation, setReservation } = useContext(ReserveContext);
+
   const [isActive, setIsActive] = useState(false);
   const [hasChose, setHasChose] = useState(false);
   const [number, setNumber] = useState();
@@ -12,6 +16,9 @@ const How = () => {
     setHasChose(true);
     setIsActive(false);
     setNumber(key);
+
+    setReservation({ ...reservation, How: key });
+    console.log(reservation);
   };
 
   return (
