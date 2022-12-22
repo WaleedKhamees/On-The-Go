@@ -1,5 +1,9 @@
+import { useContext } from "react";
+import { BsGearFill, BsGearWide } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { userContext } from "../src/App";
 const NavBar = () => {
+  const { user, clearUser } = useContext(userContext);
   return (
     <nav className="flex items-center justify-between px-8 py-4">
       <div className="flex items-center gap-8">
@@ -18,14 +22,24 @@ const NavBar = () => {
           </li>
         </ul>
       </div>
-      <div className="flex items-center gap-4">
-        <p className="p">
-          <Link to="/login">Login</Link>
-        </p>
-        <p className="p">|</p>
-        <p className="p">
-          <Link to="/signin">Sign in</Link>
-        </p>
+      <div className="flex gap-4">
+        {!user && (
+          <div className="flex items-center gap-4">
+            <p className="p">
+              <Link to="/login">Login</Link>
+            </p>
+            <p className="p">|</p>
+            <p className="p">
+              <Link to="/signup">Sign up</Link>
+            </p>
+          </div>
+        )}
+        {user && (
+          <div className="flex items-center gap-4">
+            <img src="" alt="" />
+            <p className="p cursor-pointer" onClick={() => clearUser()}>Logout</p>
+          </div>
+        )}
         <Link to="/cart">
           <svg
             width="21"
@@ -42,6 +56,7 @@ const NavBar = () => {
             />
           </svg>
         </Link>
+        {user.kind === 'a' && <Link to="/admin"><BsGearWide size={21} /></Link>}
       </div>
     </nav>
   );

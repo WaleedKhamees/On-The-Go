@@ -11,11 +11,11 @@ POST http://localhost:3000/signup HTTP/1.1
 Content-Type: application/json
 
 {
-    "first_name": "", 
-    "last_name": "", 
-    "email": "",
-    "password": "", 
-    "wallet": 1000
+    "first_name": "walid", 
+    "last_name": "walid", 
+    "email": "walid3mk@gmail.com",
+    "password": "walid", 
+    "wallet": 0
 }
 
 
@@ -25,6 +25,169 @@ POST http://localhost:3000/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "email": "",
-    "password": "", 
+    "email": "walid3mk@gmail.com",
+    "password": "walid",
+}
+### 
+GET http://localhost:3000/employee HTTP/1.1
+
+###
+
+PATCH http://localhost:3000/employee/update HTTP/1.1
+Content-Type: application/json
+
+{
+    "Employee_id":61,
+    "first_name":"mostafa",
+    "last_name": "elsayed",
+    "StartTime": "10pm",
+    "EndTime":  "5pm",
+    "TypeofEmployee": "cheff",
+    "Supervise_ID": null, 
+    "Branch_ID": 1,
+    "salary":  10000
+}
+
+
+###
+
+POST  http://localhost:3000/employee/insert HTTP/1.1
+Content-Type: application/json
+
+{
+    "email":"yousef@gamil.com",
+    "password":"yousef",
+    "first_name":"yousef",
+    "last_name": "yousef",
+    "StartTime": "10pm",
+    "EndTime":  "5pm",
+    "TypeofEmployee": "delivery",
+    "Supervise_ID": null, 
+    "Branch_ID": 1,
+    "salary":  10000
+}
+
+###
+
+DELETE  http://localhost:3000/employee/delete/75 HTTP/1.1
+
+###
+
+POST http://localhost:3000/item/insert HTTP/1.1
+Content-Type: application/json
+
+{
+  "item_name":"Roasted Chicken",
+  "item_desc": "Well roasted in hell",
+  "item_price": 100,
+  "img_url": "https://png.pngtree.com/element_our/20190601/ourlarge/pngtree-a-pot-of-roast-chicken-image_1333241.jpg",
+  "discount_id": 1,
+  "category": "Eastern"
+}
+
+###
+
+PATCH http://localhost:3000/item/update HTTP/1.1
+Content-Type: application/json
+
+{
+  "item_id":5,
+  "item_name":"Roasted Chicken",
+  "item_desc": "Well roasted in hell",
+  "item_price": 90,
+  "img_url": "https://png.pngtree.com/element_our/20190601/ourlarge/pngtree-a-pot-of-roast-chicken-image_1333241.jpg",
+  "discount_id": 1,
+  "category": "Eastern"
+}
+
+###
+
+DELETE  http://localhost:3000/item/delete/5 HTTP/1.1
+
+
+
+
+
+
+
+
+
+###
+
+POST http://localhost:3000/order/insertorder HTTP/1.1
+Content-Type: application/json
+
+{
+  "Order_State":"cooking",
+  "Order_Price":90,
+  "Order_Date" :"2020-09-18",
+  "Employee_ID":61  
+}
+ 
+###
+
+PATCH  http://localhost:3000/order/updateorder HTTP/1.1
+Content-Type: application/json
+
+{
+  "Order_State":"delivered",
+   "Order_ID":12
+}
+
+### 
+GET  http://localhost:3000/order/getAllOrders HTTP/1.1
+
+
+###
+
+GET   http://localhost:3000/order/getAllOrders/61 HTTP/1.1
+
+###
+
+GET   http://localhost:3000/order/getAllOrderforCustomer/'walid@gmail.com' HTTP/1.1
+
+
+
+
+
+
+
+
+
+###
+POST http://localhost:3000/reserve HTTP/1.1
+Content-Type: application/json
+
+=======
+
+
+POST http://localhost:3000/reserve HTTP/1.1
+Content-Type: application/json
+
+{
+    "Cardinality": 5,
+    "Reservation_Date": "2020-5-18",
+    "Reservation_Time": "10 PM",
+    "Customer_ID":1 ,
+    "Branch_ID":1 
+}
+###
+
+
+
+GET http://localhost:3000/customer/getcustomerfromemail/walid@gmail.com HTTP/1.1
+
+
+###
+
+
+POST http://localhost:3000/reserve HTTP/1.1
+Content-Type: application/json
+
+{
+    "Cardinality": 5,
+    "Reservation_Date": "2020-5-18",
+    "Reservation_Time": "10 PM",
+    "Customer_ID":61,
+    "Branch_ID":1 
 }
