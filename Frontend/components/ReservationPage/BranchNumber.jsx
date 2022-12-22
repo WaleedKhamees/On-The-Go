@@ -1,8 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useContext } from "react";
 import { BiChevronDown } from "react-icons/bi";
 import { AiOutlineBranches } from "react-icons/ai";
 
+import { ReserveContext } from "./ReservationPage";
+
 const BranchNum = () => {
+  const { reservation, setReservation } = useContext(ReserveContext);
+
   const [isActive, setIsActive] = useState(false);
   const [hasChose, setHasChose] = useState(false);
   const [BranchNum, setBranchNum] = useState("Duration?");
@@ -12,6 +16,8 @@ const BranchNum = () => {
     setHasChose(true);
     setIsActive(false);
     setBranchNum(key);
+    setReservation({ ...reservation, BranchNumber: key });
+    console.log(reservation);
   };
 
   return (
