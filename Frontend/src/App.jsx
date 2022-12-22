@@ -64,7 +64,7 @@ const App = () => {
   };
   return (
     <Router>
-      <div className="flex flex-col justify-between min-h-screen">
+      <div className="flex flex-col justify-between min-h-screen relative">
         <cartContext.Provider value={{ cart, addItem }}>
           <userContext.Provider value={{ user, clearUser, logUser }}>
             <NavBar />

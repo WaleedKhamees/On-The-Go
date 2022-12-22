@@ -56,7 +56,7 @@ const NavBar = () => {
             />
           </svg>
         </Link>
-        {user.kind === 'a' && <Link to="/admin"><BsGearWide size={21} /></Link>}
+        {user && user.kind === 'a' && <Link to="/admin"><BsGearWide size={21} /></Link>}
       </div>
     </nav>
   );

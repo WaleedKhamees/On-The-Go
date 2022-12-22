@@ -32,19 +32,17 @@ const AdminController = () => {
   };
 
 
-
   const [employees, setEmployees] = useState([]);
-  const [employeeBeingEdited, setEmployeeBeingEdited] = useState({});
-  const [employeeBeingAdded, setEmployBeingAdded] = useState({
-    employee_id: null,
-    first_name: null,
-    last_name: null,
-    typeofemployee: null,
-    supervise_id: null,
-    branch_id: null,
-    starttime: null,
-    endtime: null,
-    salary: null,
+  const [employeeBeingEdited, setEmployeeBeingEdited] = useState({
+    employee_id: "",
+    first_name: "",
+    last_name: "",
+    typeofemployee: "",
+    supervise_id: "",
+    branch_id: "",
+    starttime: "",
+    endtime: "",
+    salary: "",
   });
   const [employeeInEditMode, setEmployeeInEditMode] = useState({
     status: false,
@@ -52,9 +50,8 @@ const AdminController = () => {
   });
 
   useEffect(() => {
-
-
-  }, [employeeBeingEdited, employeeInEditMode])
+    console.log(employeeBeingEdited)
+  }, [employeeBeingEdited])
 
   const getEmployees = async () => {
     const response = await axios.get("http://localhost:3000/employee");
@@ -78,7 +75,7 @@ const AdminController = () => {
 
 
   return (
-    <>
+    <div className="w-full flex flex-col items-center gap-4">
       <h3 className="h3">What do you want to do</h3>
 
       <select
@@ -94,7 +91,7 @@ const AdminController = () => {
       <div className={`${employees.length ? "" : "hidden"}`}>
         {
           initFunc === "Access Employees" && employees.length &&
-          <div className={`mt-4 border rounded-lg overflow-clip`}>
+          <div className={` border rounded-lg overflow-clip`}>
             <table className="w-full text-left">
               <thead className="border-b ">
                 <tr>
@@ -116,7 +113,7 @@ const AdminController = () => {
                         Object.values(employee).map((value, i) =>
                           <td
                             key={`${value}-${i}`}
-                            className="px-4 py-2 focus:outline-none"
+                            className="px-4 py-2 focus:outline-none text-center"
                             onInput={(e) => {
                               const tempEmployee = employeeBeingEdited;
                               tempEmployee[Object.keys(tempEmployee)[i]] = e.target.textContent;
@@ -124,7 +121,7 @@ const AdminController = () => {
                             }}
                             suppressContentEditableWarning
                             contentEditable={employeeInEditMode.rowKey === employeeIndex && EMPLOYEE_EDITABLE[Object.keys(employee)[i]]}>
-                            {value ?? "NONE"}
+                            {value ?? "-"}
                           </td>
                         )}
                       {/* edit delete  */}
@@ -161,12 +158,115 @@ const AdminController = () => {
         }
       </div>
 
+      {
+        initFunc === "Add Employee"
+        &&
+        <form className="z-50 absolute w-full bg-White flex flex-col items-center gap-4 -translate-y-32 py-16"
+          onSubmit={(e) => {
+            e.preventDefault();
+            const form = e.currentTarget;
+            const employeeUser = {
+              email: form.Email.value,
+              password: form.Password.value
+            }
+            const employee =
+            {
+              first_name: form.FName.value,
+              last_name: form.LName.value,
+              typeofemployee: form.Typeofemployee.value,
+              supervise_id: form.Supervisorid.value,
+              branch_id: form.Branchid.value,
+              starttime: form.Stime.value,
+              endtime: form.Etime.value,
+              salary: form.Salary.value,
+            }
+            console.log(employee, employeeUser);
+          }}
+
+        >
+          <span class="material-symbols-outlined ml-auto mr-4 cursor-pointer"
+            onClick={() => { setInitFunc("Access Employees") }}>
+            close
+          </span>
+          <h1 className="h1">Add Employee</h1>
+          <div className="flex gap-4">
+            <input
+              type="text"
+              required
+              id="FName"
+              className="w-full py-2 px-4 rounded-lg p text-Body border border-Body placeholder:text-Small outline-none "
+              placeholder="First Name"
+            ></input>
+            <input
+              type="text"
+              required
+              id="LName"
+              className="w-full py-2 px-4 rounded-lg p text-Body border border-Body placeholder:text-Small outline-none"
+              placeholder="Last Name"
+            ></input>
+          </div>
+          <input
+            id="Email"
+            required
+            autoComplete="off"
+            className="py-2 px-4 rounded-lg p text-Body border border-Body placeholder:text-Small outline-none w-[350px]"
+            placeholder="Enter Employee's Email Address"
+          ></input>
+          <input
+            type="password"
+            required
+            id="Password"
+            className="py-2 px-4 rounded-lg p text-Body border border-Body placeholder:text-Small outline-none w-[350px]"
+            placeholder="Enter Employee's Password"
+          ></input>
+          <input
+            type="text"
+            required
+            id="branchid"
+            className="py-2 px-4 rounded-lg p text-Body border border-Body placeholder:text-Small outline-none w-[350px]"
+            placeholder="Enter Branch's ID"
+          ></input>
+          <input
+            type="text"
+            required
+            id="Typeofemployee"
+            className="py-2 px-4 rounded-lg p text-Body border border-Body placeholder:text-Small outline-none w-[350px]"
+            placeholder="Enter your type of employee"
+          ></input>
+          <input
+            type="text"
+            id="Supervisorid"
+            required
+            className="py-2 px-4 rounded-lg p text-Body border border-Body placeholder:text-Small outline-none w-[350px]"
+            placeholder="Enter Employee's supervisor Id (optional)"
+          ></input>
+          <input
+            type="text"
+            id="Salary"
+            className="py-2 px-4 rounded-lg p text-Body border border-Body placeholder:text-Small outline-none w-[350px]"
+            placeholder="Enter Employee's salary"
+          ></input>
+          <div className="flex gap-4">
+            <input
+              type="text"
+              id="Stime"
+              className="py-2 px-4 rounded-lg p text-Body border border-Body placeholder:text-Small outline-none"
+              placeholder="Start Time"
+            ></input>
+            <input
+              type="text"
+              id="Etime"
+              className="py-2 px-4 rounded-lg p text-Body border border-Body placeholder:text-Small outline-none"
+              placeholder="End Time"
+            ></input>
+          </div>
+          <input type="submit" value="Add Employee" className="cursor-pointer btn max-w-[350px]" />
+        </form>
+      }
 
 
-
-
-
-    </>
+      {initFunc === "Access Employees" && <button className="btn max-w-[350px]" onClick={() => { setInitFunc("Add Employee") }}>Add Employee</button>}
+    </div >
   );
 };
 
