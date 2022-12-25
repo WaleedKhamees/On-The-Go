@@ -1,8 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useContext } from "react";
 import { BiChevronDown } from "react-icons/bi";
 import { BsPeopleFill } from "react-icons/bs";
 
+import { ReserveContext } from "./ReservationPage";
+
 const How = () => {
+  const { reservation, setReservation } = useContext(ReserveContext);
+
   const [isActive, setIsActive] = useState(false);
   const [hasChose, setHasChose] = useState(false);
   const [number, setNumber] = useState();
@@ -12,10 +16,13 @@ const How = () => {
     setHasChose(true);
     setIsActive(false);
     setNumber(key);
+
+    setReservation({ ...reservation, How: key });
+    console.log(reservation);
   };
 
   return (
-    <div className="max-w-fit min-w-[360px] relative">
+    <div className="max-w-fit min-w-[360px]">
       <div
         className="flex cursor-pointer justify-between items-center px-4 py-2 border border-Body w-full rounded-lg"
         onClick={(e) => setIsActive(!isActive)}
@@ -29,9 +36,8 @@ const How = () => {
         <BiChevronDown size={16} />
       </div>
       <ul
-        className={`overflow-y-auto max-h-[120px] absolute w-full cursor-pointer z-50 ${
-          isActive ? "block" : "hidden"
-        }`}
+        className={`overflow-y-auto max-h-[120px] absolute w-full cursor-pointer z-50 ${isActive ? "block" : "hidden"
+          }`}
         onMouseLeave={(e) => setIsActive(false)}
       >
         {options?.map((key) => (

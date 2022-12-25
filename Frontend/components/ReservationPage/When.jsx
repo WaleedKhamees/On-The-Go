@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useContext } from "react";
 import { BiChevronDown } from "react-icons/bi";
 import { BsClockFill } from "react-icons/bs";
+import { ReserveContext } from "./ReservationPage";
 
 const When = () => {
+  const { reservation, setReservation } = useContext(ReserveContext);
   const [isActive, setIsActive] = useState(false);
   const [hasChose, setHasChose] = useState(false);
   const [clock, setclock] = useState("When?");
@@ -24,10 +26,12 @@ const When = () => {
     setHasChose(true);
     setIsActive(false);
     setclock(key);
+    setReservation({ ...reservation, When: key });
+    console.log(reservation);
   };
 
   return (
-    <div className="max-w-fit min-w-[360px] relative">
+    <div className="max-w-fit min-w-[360px] ">
       <div
         className="flex justify-between items-center cursor-pointer px-4 py-2 border border-Body w-full rounded-lg"
         onClick={(e) => setIsActive(!isActive)}
@@ -42,9 +46,8 @@ const When = () => {
       </div>
 
       <ul
-        className={`overflow-y-auto max-h-[120px] absolute w-full cursor-pointer z-50 transition-all ease-linear duration-1000 ${
-          isActive ? "block" : "hidden"
-        }`}
+        className={`overflow-y-auto max-h-[120px] absolute w-full cursor-pointer z-50 transition-all ease-linear duration-1000 ${isActive ? "block" : "hidden"
+          }`}
         onMouseLeave={(e) => setIsActive(false)}
       >
         {options.map((option) => (

@@ -12,15 +12,15 @@ import Cart_Page from "../components/Cart_Page";
 import WelcomePage from "../components/WelecomePage/Welcome";
 import { createContext } from "react";
 import { useState } from "react";
-
+import Employee from "../components/Employees/Employee";
 export const userContext = createContext({});
 export const cartContext = createContext([]);
 
-
-
 const App = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
-  const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart")) ?? []);
+  const [cart, setCart] = useState(
+    JSON.parse(localStorage.getItem("cart")) ?? []
+  );
 
   const addItem = (item, qty = undefined) => {
     const cart = JSON.parse(localStorage.getItem("cart")) ?? [];
@@ -31,28 +31,23 @@ const App = () => {
           flag = 1;
           if (qty === 0) {
             cart.splice(i, 1);
-          }
-          else if (qty > 0) {
+          } else if (qty > 0) {
             cart[i].qty = qty;
-          }
-          else {
+          } else {
             cart[i].qty = cart[i].qty + 1;
           }
           break;
         }
       }
     }
-    if (!flag)
-      cart.push({ ...item, qty: 1 });
+    if (!flag) cart.push({ ...item, qty: 1 });
     storeCart(cart);
-  }
+  };
   const storeCart = (cart) => {
     const cartString = JSON.stringify(cart);
     localStorage.setItem("cart", cartString);
     setCart(cart);
-  }
-
-
+  };
 
   const clearUser = () => {
     localStorage.removeItem("user");
@@ -64,7 +59,7 @@ const App = () => {
   };
   return (
     <Router>
-      <div className="flex flex-col justify-between min-h-screen">
+      <div className="flex flex-col justify-between min-h-screen relative">
         <cartContext.Provider value={{ cart, addItem }}>
           <userContext.Provider value={{ user, clearUser, logUser }}>
             <NavBar />
@@ -78,6 +73,7 @@ const App = () => {
               <Route path="/cart" element={<Cart_Page />} />
               <Route path="/reservations" element={<Reservation />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/Employee" element={<Employee />} />
             </Routes>
             <Footer />
           </userContext.Provider>
@@ -85,6 +81,6 @@ const App = () => {
       </div>
     </Router>
   );
-}
+};
 
 export default App;

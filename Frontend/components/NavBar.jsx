@@ -37,7 +37,9 @@ const NavBar = () => {
         {user && (
           <div className="flex items-center gap-4">
             <img src="" alt="" />
-            <p className="p cursor-pointer" onClick={() => clearUser()}>Logout</p>
+            <p className="p cursor-pointer" onClick={() => clearUser()}>
+              Logout
+            </p>
           </div>
         )}
         <Link to="/cart">
@@ -56,7 +58,7 @@ const NavBar = () => {
             />
           </svg>
         </Link>
-        {user.kind === 'a' && <Link to="/admin"><BsGearWide size={21} /></Link>}
+        {user && user.kind === 'a' && <Link to="/admin"><BsGearWide size={21} /></Link>}
       </div>
     </nav>
   );
