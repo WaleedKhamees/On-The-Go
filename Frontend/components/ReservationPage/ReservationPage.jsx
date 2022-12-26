@@ -17,7 +17,7 @@ const Reservation = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const reservationobj = {
+    const reservationObj = {
       Cardinality: reservation.How,
       Reservation_Date: dayjs(reservation.CheckinDate).format("YYYY-MM-DD"),
       Reservation_Time: reservation.When,
@@ -26,10 +26,10 @@ const Reservation = () => {
     };
 
     try {
-      console.log(reservationobj);
+      console.log(reservationObj);
       const res = await axios.post(
         "http://localhost:3000/reserve",
-        reservationobj
+        reservationObj
       );
 
       setError(res.data.message);

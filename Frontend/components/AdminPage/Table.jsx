@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 
-const Table = ({ data, apiUpdate, apiDelete, itemEditable }) => {
+const Table = ({ data, apiUpdate, apiDelete, itemEditable, tableID }) => {
   const [items, setItems] = useState(data);
 
   console.log(items);
@@ -45,7 +45,7 @@ const Table = ({ data, apiUpdate, apiDelete, itemEditable }) => {
     <div className={` border rounded-lg overflow-clip`}>
       <table className="w-full text-left">
         <thead className="border-b ">
-          <tr>
+          <tr className="text-center">
             {Object.keys(items[0]).map(key =>
               <th className="px-4 py-2" key={key}>{key.toUpperCase()}</th>
             )}
@@ -57,7 +57,7 @@ const Table = ({ data, apiUpdate, apiDelete, itemEditable }) => {
           {items.map((item, itemIndex) =>
             <tr
               key={itemIndex}
-              className={`${itemIndex !== itemInEditMode.rowKey ? "even:bg-[#4b4b4b] even:text-White odd:bg-[#d9d9d9] odd:text-body" : ""} `}>
+              className={`${itemIndex !== itemInEditMode.rowKey ? "even:bg-Body even:text-White odd:bg-[#d4d4d4] odd:text-body" : ""} `}>
               <>
                 {/* Data  */}
                 {
@@ -85,7 +85,7 @@ const Table = ({ data, apiUpdate, apiDelete, itemEditable }) => {
                     }}>
                       edit
                     </span>
-                    <span className="material-symbols-outlined" onClick={() => deleteItem(item[Object.keys(item)[0]], itemIndex)}>
+                    <span className="material-symbols-outlined" onClick={() => deleteItem(item[tableID], itemIndex)}>
                       delete
                     </span>
                   </td>
