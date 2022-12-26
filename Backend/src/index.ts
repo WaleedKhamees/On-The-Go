@@ -25,6 +25,7 @@ app.use("/", require("./routes/reserve"));
 app.use("/", require("./routes/employee"));
 app.use("/", require("./routes/order"));
 app.use("/", require("./routes/customer"));
+app.use("/", require("./routes/review"));
 
 // get domain.com/posts => get all posts
 //  
