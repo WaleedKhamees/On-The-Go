@@ -64,7 +64,7 @@ Content-Type: application/json
     "TypeofEmployee": "delivery",
     "Supervise_ID": null, 
     "Branch_ID": 1,
-    "salary":  10000
+    "salary":  10
 }
 
 ###
@@ -195,3 +195,26 @@ GET http://localhost:3000/order/getAllPendingOrders HTTP/1.1
 
 ###
 GET http://localhost:3000/order/getAllCookedOrders HTTP/1.1
+
+
+###
+
+POST http://localhost:3000/review/insert HTTP/1.1
+Content-Type: application/json
+
+{
+  "email":"mostafa.elsayed.2002@gmail.com",
+  "item_id":1,
+  "review_date":"25/12/2022",
+  "rate":1,
+  "review_desc":"Super good but take one star"  
+}
+
+
+###
+GET http://localhost:3000/review HTTP/1.1
+
+
+###
+GET http://localhost:3000/review/1 HTTP/1.1
+

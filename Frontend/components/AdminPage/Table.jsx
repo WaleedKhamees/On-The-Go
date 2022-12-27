@@ -47,7 +47,7 @@ const Table = ({ data, apiUpdate, apiDelete, itemEditable, tableID }) => {
         <thead className="border-b ">
           <tr className="text-center">
             {Object.keys(items[0]).map(key =>
-              <th className="px-4 py-2" key={key}>{key.toUpperCase()}</th>
+              <th className="px-4 py-2 text-center " key={key}>{key.toUpperCase()}</th>
             )}
             <th className="px-4 py-2">Modify</th>
           </tr>

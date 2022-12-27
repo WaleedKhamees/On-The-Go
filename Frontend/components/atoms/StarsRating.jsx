@@ -7,9 +7,8 @@ const StarsRating = (prop) => {
           return (
             <span
               key={index}
-              className={`bg-clip-text text-transparent p ${
-                prop.Rating - index + 1 > 1 ? "bg-Yellow" : "bg-Small"
-              }`}
+              className={`bg-clip-text text-transparent p ${prop.Rating - index + 1 > 1 ? "bg-Yellow" : "bg-Small"
+                }`}
             >
               &#9733;
             </span>
