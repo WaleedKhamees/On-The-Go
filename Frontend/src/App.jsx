@@ -4,7 +4,7 @@ import HomePage from "../components/HomePage/HomePage";
 import AdminPage from "../components/AdminPage/AdminPage";
 import LoginPage from "../components/LoginPage/Login";
 import SignupPage from "../components/SignupPage/Signup";
-import Profile from "../components/Profile";
+import Profile from "../components/Profile"; 
 import Reservation from "../components/ReservationPage/ReservationPage";
 import ProductsPage from "../components/ProductPage/ProductPage";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -13,6 +13,7 @@ import WelcomePage from "../components/WelecomePage/Welcome";
 import { createContext } from "react";
 import { useState } from "react";
 import Employee from "../components/Employees/Employee";
+import Provider from "../components/ProviderPage/Provider";
 export const userContext = createContext({});
 export const cartContext = createContext([]);
 
@@ -74,6 +75,7 @@ const App = () => {
               <Route path="/reservations" element={<Reservation />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/Employee" element={<Employee />} />
+              <Route path="/Provider" element={<Provider />} />
             </Routes>
             <Footer />
           </userContext.Provider>

@@ -10,7 +10,7 @@ const WelcomePage = () => {
         <Link to="/admin">
           <button className="btn">Admin?</button>
         </Link>
-        <Link to="/provider">
+        <Link to="/signup">
           <button className="btn">Provider?</button>
         </Link>
         <Link to="/employee">

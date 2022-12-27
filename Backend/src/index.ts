@@ -25,12 +25,13 @@ app.use("/", require("./routes/reserve"));
 app.use("/", require("./routes/employee"));
 app.use("/", require("./routes/order"));
 app.use("/", require("./routes/customer"));
-
+app.use("/", require("./routes/branch"));
+app.use("/", require("./routes/provider"));
 // get domain.com/posts => get all posts
 //  
 // get :  put : update  delete : delete  post : create 
 // routes
+app.listen(3000, () => {
 
 
-
-app.listen(3000, () => { }); 
+}); 
