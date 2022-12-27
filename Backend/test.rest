@@ -203,10 +203,18 @@ POST http://localhost:3000/review/insert HTTP/1.1
 Content-Type: application/json
 
 {
-  "customer_id":4,
+  "email":"mostafa.elsayed.2002@gmail.com",
   "item_id":1,
-  "review_date":"26/12/2022",
-  "rate":5,
-  "review_desc":"Super bad but take five star"  
+  "review_date":"25/12/2022",
+  "rate":1,
+  "review_desc":"Super good but take one star"  
 }
+
+
+###
+GET http://localhost:3000/review HTTP/1.1
+
+
+###
+GET http://localhost:3000/review/1 HTTP/1.1
 
