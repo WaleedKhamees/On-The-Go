@@ -77,7 +77,7 @@ const History = () => {
                 <div className="flex items-center w-full justify-between gap-4">
                   <p className="small text-Small">Vat 14%:</p>
                   <p className="small text-Small">
-                    {Math.round(order.items.reduce((acc, item) => acc + (item.item_price * item.quantity), 0) * 0.14)} EGP
+                    {Math.floor(order.items.reduce((acc, item) => acc + (item.item_price * item.quantity), 0) * 0.14)} EGP
                   </p>
                 </div>
                 <div className="flex items-center w-full justify-between gap-4">

@@ -13,22 +13,20 @@ const ProductCard = ({ item }) => {
         <div className="flex-grow flex-1 flex justify-center items-center h-full border-2 border-RedPrimary rounded-lg rounded-r-none border-r-0">
           <h2 className="text-RedPrimary h2 ">
             <span
-              className={`  p-1 ${
-                item.discount_percent != 0
-                  ? " text-Small line-through"
-                  : " text-RedPrimary"
-              }`}
+              className={`  p-1 ${item.discount_percent != 0
+                ? " text-Small line-through"
+                : " text-RedPrimary"
+                }`}
             >
               {item.item_price}
             </span>
             <span
-              className={` h1 text-RedPrimary p-1 ${
-                item.discount_percent === 0 ? "hidden" : "visible"
-              }`}
+              className={` h1 text-RedPrimary p-1 ${item.discount_percent === 0 ? "hidden" : "visible"
+                }`}
             >
               {Math.floor(
                 item.item_price -
-                  item.item_price * (item.discount_percent / 100.0)
+                item.item_price * (item.discount_percent / 100.0)
               )}
             </span>
             EGP

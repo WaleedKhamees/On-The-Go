@@ -6,6 +6,7 @@ import StarsRating from "./StarsRating";
 
 const ProductInfo = ({ item, rating }) => {
   const { addItem } = useContext(cartContext);
+  console.log(item);
   const path = getPath();
   const decrease = () => {
     addItem(item, item.qty - 1);
@@ -25,7 +26,11 @@ const ProductInfo = ({ item, rating }) => {
         </div>
 
         <div className="flex flex-col items-center gap-2 pr-16 py-10">
-          <p className="p text-White text-center">{(parseFloat(item.item_price) * item.qty) || item.item_price} EGP</p>
+          <p className="p text-White text-center">{
+            Math.floor(
+              item.qty ? parseFloat(item.item_price) * item.qty - (parseFloat(item.item_price) * item.qty * (item.discount_percent / 100 ?? 0)) :
+                item.discount_percent ? item.item_price - item.item_price * (item.discount_percent / 100) : item.item_price)
+          } EGP</p>
           {path === "cart" &&
             <div className="flex items-center justify-center">
               <button

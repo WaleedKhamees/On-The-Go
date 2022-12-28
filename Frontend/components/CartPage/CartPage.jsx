@@ -11,9 +11,10 @@ function Cart_Page(props) {
   useEffect(() => {
     let res = 0;
     for (let i in cart) {
-      res += cart[i].qty * parseFloat(cart[i].item_price);
+      res += cart[i].qty * parseFloat(cart[i].item_price) - cart[i].qty * parseFloat(cart[i].item_price) * (cart[i].discount_percent / 100 ?? 0);
+      /* parseFloat(item.item_price) * item.qty - (parseFloat(item.item_price) * item.qty * (item.discount_percent / 100 ?? 0)) */
     }
-    setSubTotalPrice(res);
+    setSubTotalPrice(Math.floor(res));
   }, [cart])
 
   return (
@@ -38,7 +39,7 @@ function Cart_Page(props) {
             </div>
             <div className="flex justify-between small">
               <p>VAT 14%:</p>
-              <p>{Math.round(subTotalPrice * 0.14)} EGP</p>
+              <p>{Math.floor(subTotalPrice * 0.14)} EGP</p>
             </div>
           </div>
         </div>
@@ -46,7 +47,7 @@ function Cart_Page(props) {
           <div className="flex justify-between ">
             <h2 className="h2">Total:</h2>
             <h2 className="h2 text-RedPrimary" id="total">
-              {cart.length ? (subTotalPrice + Math.round(subTotalPrice * 0.14) + 30) : 0}{" "}
+              {cart.length ? (subTotalPrice + Math.floor(subTotalPrice * 0.14) + 30) : 0}{" "}
               EGP
             </h2>
           </div>
@@ -58,7 +59,7 @@ function Cart_Page(props) {
                   const order = {
                     order_id: JSON.stringify((new Date()).getTime()),
                     order_state: "pending",
-                    order_price: (subTotalPrice + Math.round(subTotalPrice * 0.14) + 30),
+                    order_price: (subTotalPrice + Math.floor(subTotalPrice * 0.14) + 30),
                     items: cart,
                     email: user.email
                   }
