@@ -26,8 +26,6 @@ const AddDiscountForm = ({ setInitFunc }) => {
                         end_date: dayjs(selectedEndDate).format("YYYY/MM/DD"),
                         discount_percent: Number.parseInt(form.Pecentage.value)
                     }
-
-
                     const validate = validateDiscountForm(Discount);
                     console.log(validate.res);
                     if (validate.error)
@@ -36,6 +34,7 @@ const AddDiscountForm = ({ setInitFunc }) => {
                         setError({ description: "", imgUrl: "", itemPrice: "", name: "" })
                         const req = await axios.post("http://localhost:3000/discount/insert", Discount);
                         console.log(req);
+                        location.reload();
                     }
                 }
                 else {

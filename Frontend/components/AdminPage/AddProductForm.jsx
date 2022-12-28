@@ -31,6 +31,7 @@ const AddProductForm = ({ setInitFunc }) => {
                     setError({ description: "", imgUrl: "", itemPrice: "", name: "" })
                     const req = await axios.post("http://localhost:3000/item/insert", product);
                     console.log(req);
+                    location.reload();
                 }
 
             }}

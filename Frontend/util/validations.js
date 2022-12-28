@@ -21,7 +21,7 @@ const validateEmail = (email) => {
 
 
 
-export const validateSignup = (user) => {
+export const validateSignup = (user, isProvider) => {
     console.log(user);
     const res = {
         nameError: "",
@@ -30,7 +30,7 @@ export const validateSignup = (user) => {
         walletError: "",
     };
     let error = false;
-    if (!validateNumber(user.wallet)) {
+    if (!validateNumber(user.wallet) && !isProvider) {
         res.walletError = "please enter a non-negative number";
         error = true;
     }
@@ -131,7 +131,7 @@ export const validateDiscountForm = (discount) => {
         discountPercent: ""
     }
     let error = false;
-    //const percentageValidation = !validatePercentage(discount.discount_percent);
+    const percentageValidation = !validateNumber(discount.discount_percent) || discount.discount_percent < 0 || discount.discount_percent >= 100;
     if (percentageValidation)
         error = true;
     if (percentageValidation)

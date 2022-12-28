@@ -9,7 +9,7 @@ router.get("/table/getTableforbranch/:branch_id", tableController.getTableforbra
 router.patch("/table/updatetable", tableController.updatetable);
 router.post("/table/inserttable", tableController.inserttable);
 
-router.delete("/table/deletetable", tableController.deletetable);
+router.post("/table/deletetable", tableController.deletetable);
 
 
 module.exports = router; 

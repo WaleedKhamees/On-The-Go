@@ -1,13 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
 
-const Table = ({ data, apiUpdate, apiDelete, itemEditable, tableID }) => {
-  const [items, setItems] = useState(data);
-
-  console.log(items);
-
-
-
+const Table = ({ data, apiUpdate, itemEditable, deleteItemFunc, apiDelete, tableID }) => {
+  const [items, setItems] = useState(data ?? []);
   const [itemBeingEdited, setItemBeingEdited] = useState({
     item_id: "",
     item_name: "",
@@ -28,17 +23,18 @@ const Table = ({ data, apiUpdate, apiDelete, itemEditable, tableID }) => {
     setItemBeingEdited(item);
   }
   const updateItem = async () => {
-    console.log(itemBeingEdited);
     await axios.patch(apiUpdate, itemBeingEdited);
     setItemBeingEdited({});
     setItemInEditMode({ rowKey: -1, status: false });
   }
   const deleteItem = async (item_id, itemIndex) => {
-    console.log(apiDelete, item_id);
     await axios.delete(`${apiDelete}/${item_id}`);
     setItems(items.filter((item, i) => i !== itemIndex));
   }
-
+  const deleteTable = async (branch_id, table_num, itemIndex) => {
+    await deleteItemFunc(branch_id, table_num);
+    setItems(items.filter((item, i) => i !== itemIndex));
+  }
 
   return (
     items &&
@@ -85,7 +81,13 @@ const Table = ({ data, apiUpdate, apiDelete, itemEditable, tableID }) => {
                     }}>
                       edit
                     </span>
-                    <span className="material-symbols-outlined" onClick={() => deleteItem(item[tableID], itemIndex)}>
+                    <span className="material-symbols-outlined" onClick={() => {
+                      if (deleteItemFunc) {
+                        deleteTable(item["branch_id"], item["table_num"], itemIndex);
+                      }
+                      else
+                        deleteItem(item[tableID], itemIndex)
+                    }}>
                       delete
                     </span>
                   </td>

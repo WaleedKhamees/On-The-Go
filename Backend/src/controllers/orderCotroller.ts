@@ -202,7 +202,7 @@ export const orderController = {
 
         try {
             const Customer_ID = await client.query(`select UserX_ID from UserX where Email='${req.params.email}';`);
-            const orders = (await client.query(`select distinct OrderX.Order_ID,Order_State,Order_Price from Orderx ,contains where contains.Order_ID=OrderX.Order_ID and  Customer_ID=${Customer_ID.rows[0].userx_id};`)).rows;
+            const orders = (await client.query(`select distinct OrderX.Order_ID,Order_State,Order_Price from Orderx ,contains where contains.Order_ID=OrderX.Order_ID and Customer_ID=${Customer_ID.rows[0].userx_id} ORDER BY OrderX.Order_ID desc;`)).rows;
             let items = [];
             for (let i in orders) {
                 items = [...items, { order_id: orders[i].order_id, order_state: orders[i].order_state, order_price: orders[i].order_price, items: await getitemsfororder(orders[i].order_id) }];

@@ -52,7 +52,8 @@ const AddEmployeeForm = ({ setInitFunc }) => {
                         password: ""
                     })
                     await axios.post("http://localhost:3000/employee/insert", employee);
-                    setInitFunc("Access Employees")
+                    setInitFunc("Access Employees");
+                    location.reload();
                 }
             }}
 
@@ -120,6 +121,7 @@ const AddEmployeeForm = ({ setInitFunc }) => {
             <select
                 className="flex max-w-[350px] justify-between items-center cursor-pointer px-4 py-2 border border-Body w-full rounded-lg appearance-none select"
                 ref={typeOfEmployeeRef}>
+                <option value="admin">admin</option>
                 <option value="chef">chef</option>
                 <option value="delivery">delivery</option>
                 <option value="waiter">waiter</option>

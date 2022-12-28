@@ -25,6 +25,9 @@ const LoginPage = () => {
         case 'e':
           navigate("/employee");
           break;
+        case 'p':
+          navigate("/provider");
+          break;
       };
   }, [])
   const handleSubmit = async (e) => {
@@ -52,6 +55,11 @@ const LoginPage = () => {
         const user = { ...loginInfo, kind: res.kind };
         logUser(user);
         navigate("/employee")
+      }
+      else if (res.kind === 'p') {
+        const user = { ...loginInfo, kind: res.kind };
+        logUser(user);
+        navigate("/provider")
       }
       else {
         customer = (await axios.get(`http://localhost:3000/customer/getcustomerfromemail/${res.email}`)).data;

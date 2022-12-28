@@ -37,7 +37,7 @@ const AddTableForm = ({ setInitFunc }) => {
             "http://localhost:3000/table/inserttable",
             table
           );
-          setInitFunc("Access Tables");
+          location.reload();
         } catch {
           setError({
             tablenum: "Table Number is already exist in This Branch",

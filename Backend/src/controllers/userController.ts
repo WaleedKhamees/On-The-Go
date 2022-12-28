@@ -6,7 +6,8 @@ export const userController = {
         const reqUser = { email: req.body.email, password: req.body.password };
 
         const user = (await client.query(`select email,password,kind from userx where email = '${reqUser.email}'`)).rows;
-        if (user.length === 0) {
+        console.log(user);
+        if (!user) {
             res.status(404).send({ message: "User not found" });
             return
         }
@@ -24,15 +25,20 @@ export const userController = {
 
     },
     signup: async (req: Request, res: Response) => {
-        let user;
+        const user = { first_name: req.body.first_name, last_name: req.body.last_name, email: req.body.email, password: req.body.password, wallet: req.body.wallet, kind: req.body.kind };
+        console.log(user);
         const hasedPassword = await bcrypt.hash(req.body.password, 10);
-        user = { first_name: req.body.first_name, last_name: req.body.last_name, email: req.body.email, password: hasedPassword, wallet: req.body.wallet, kind: req.body.kind };
         try {
             await client.query(`
-            insert into userx (email, password, kind) values ('${user.email}', '${user.password}', '${user.kind ? user.kind : 'c'}');`);
-            if (!user.kind || user.kind == 'c')
+            insert into userx (email, password, kind) values ('${user.email}', '${hasedPassword}', '${user.kind ? user.kind : 'c'}');`);
+            if (user.kind && user.kind == 'p') {
+                await client.query(`
+                insert into providerx (provider_id,first_name, last_name) values ((select userx_id from userx as u where u.email = '${user.email}'),'${user.first_name}', '${user.last_name}');`);
+            }
+            else if (!user.kind || user.kind == 'c')
                 await client.query(`
             insert into customer (customer_id,first_name, last_name, wallet) values ((select userx_id from userx as u where u.email = '${user.email}'),'${user.first_name}', '${user.last_name}', ${user.wallet});`);
+
             res.status(201).json({ message: "success" });
         }
         catch (err) {

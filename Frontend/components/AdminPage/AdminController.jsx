@@ -109,9 +109,11 @@ const AdminController = () => {
 
       <select
         className="flex max-w-[350px] justify-between items-center cursor-pointer px-4 py-2 border border-Body w-full rounded-lg appearance-none select"
+        defaultValue="Select an option"
         onChange={(e) => {
           selectInitFunc(e.target.value);
         }}>
+        <option disabled value="Select an option">Select an option</option>
         {initFuncOptions.map((func) => (
           <option key={func} value={func}>
             {func}
@@ -201,7 +203,10 @@ const AdminController = () => {
               data={Tables}
               itemEditable={TABLE_EDITABLE}
               apiUpdate="http://localhost:3000/table/updatetable"
-              apiDelete="http://localhost:3000/table/deletetable"
+              deleteItemFunc={async (branch_id, table_num) => {
+                const x = { table_num: table_num, branch_id: branch_id };
+                await axios.post("http://localhost:3000/table/deletetable", x);
+              }}
               tableID="branch_id"
             />
           )

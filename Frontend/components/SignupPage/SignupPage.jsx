@@ -5,13 +5,15 @@ import { validateSignup } from "../../util/validations";
 import { userContext } from "../../src/App";
 
 const SignupPage = () => {
-  const { logUser } = useContext(userContext)
+  const { user, logUser } = useContext(userContext)
+  const [isProvider, setIsProvider] = useState(false);
 
   const firstNameRef = useRef();
   const lastNameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const walletRef = useRef();
+
 
 
   const navigate = useNavigate();
@@ -21,13 +23,6 @@ const SignupPage = () => {
     passwordError: "",
     walletError: "",
   });
-
-  useEffect(() => {
-    if (localStorage.getItem("user"))
-      navigate("/home");
-  }, [])
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const user = {
@@ -36,9 +31,10 @@ const SignupPage = () => {
       email: emailRef.current.value,
       password: passwordRef.current.value,
       wallet: Number.parseFloat(walletRef.current.value),
-      img_url: null
+      kind: isProvider ? "p" : 'c',
+      img_url: null,
     };
-    const validation = validateSignup(user);
+    const validation = validateSignup(user, isProvider);
     if (validation.error === true) {
       setError(validation.res);
       return;
@@ -46,9 +42,11 @@ const SignupPage = () => {
     else {
       try {
         const res = await axios.post("http://localhost:3000/signup", user);
-        console.log(res);
         logUser(user);
-        navigate("/home")
+        if (isProvider)
+          navigate("/provider");
+        else
+          navigate("/")
       } catch (err) {
         setError({ ...error, emailError: "email already exists!" });
       }
@@ -56,7 +54,7 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="flex justify-center pt-4">
+    <div className="flex justify-center pt-4 m-auto">
       <form
         className="flex-col flex items-center gap-4 max-w-[350px] flex-grow"
         onSubmit={(e) => handleSubmit(e)}
@@ -112,9 +110,16 @@ const SignupPage = () => {
             className="w-full py-2 px-4 rounded-lg p text-Body border border-Body placeholder:text-Small outline-none"
             placeholder="How much money do you want?"
             ref={walletRef}
+            disabled={isProvider}
           />
           <label htmlFor="Wallet" className={`${error.walletError !== "" ? "visible" : "invisible"} small text-RedPrimary`}>{error.walletError}</label>
         </div>
+
+        <div className="flex items-center w-full justify-items-start gap-2" >
+          <input onClick={() => setIsProvider(!isProvider)} type="checkbox" id="isProvider" className="accent-RedPrimary" />
+          <label className="small text-RedPrimary" htmlFor="isProvider">Are you a Provider?</label>
+        </div>
+
         <input
           type="submit"
           className="rounded-lg bg-RedPrimary w-full p-4 outlinebody text-White cursor-pointer"

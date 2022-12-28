@@ -11,10 +11,10 @@ export const tableController = {
         res.status(200).json(Employee.rows);
     },
     updatetable: async (req: Request, res: Response) => {
-        const table = { table_num:req.body.table_num, branch_id: req.body.branch_id, cardinality:req.body.cardinality };
+        const table = { table_num: req.body.table_num, branch_id: req.body.branch_id, cardinality: req.body.cardinality };
         try {
-         
-           
+
+
 
             const tablee = await client.query(`update tablex set cardinality=${table.cardinality} where  branch_id=${table.branch_id} and table_num=${table.table_num} `);
             res.status(201).json({ message: "Updated successfully" });
@@ -27,9 +27,9 @@ export const tableController = {
 
     inserttable: async (req: Request, res: Response) => {
         try {
-            const newtable = {table_num: req.body.table_num, branch_id: req.body.branch_id, cardinality:req.body.cardinality};
+            const newtable = { table_num: req.body.table_num, branch_id: req.body.branch_id, cardinality: req.body.cardinality };
             await client.query(
-            `insert into tablex values (${newtable.table_num},${newtable.branch_id}, ${newtable.cardinality});`);
+                `insert into tablex values (${newtable.table_num},${newtable.branch_id}, ${newtable.cardinality});`);
             res.status(201).json({ message: "Inserterd successfully" });
         }
         catch (err) {
@@ -38,10 +38,11 @@ export const tableController = {
         }
     },
     deletetable: async (req: Request, res: Response) => {
-       
-        const table = {table_num: req.body.table_num, branch_id: req.body.branch_id};
+
+        const table = { table_num: req.body.table_num, branch_id: req.body.branch_id };
         try {
-            const tablex = await client.query(`delete from tablex where table_num = ${table.table_num} and branch_id=${table.branch_id} `);
+            console.log(table);
+            const tablex = await client.query(`delete from tablex where table_num = ${table.table_num} and branch_id = ${table.branch_id} `);
             res.status(201).json({ message: "Deleted successfully" });
         }
         catch (err) {
