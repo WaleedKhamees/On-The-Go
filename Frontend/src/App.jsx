@@ -7,12 +7,13 @@ import SignupPage from "../components/SignupPage/Signup";
 import Profile from "../components/Profile";
 import Reservation from "../components/ReservationPage/ReservationPage";
 import ProductsPage from "../components/ProductPage/ProductPage";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Cart_Page from "../components/Cart_Page";
-import WelcomePage from "../components/WelecomePage/Welcome";
+import ProductInfoPage from "../components/ProductInfoPage"
+import Employee from "../components/Employees/Employee";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { createContext } from "react";
 import { useState } from "react";
-import Employee from "../components/Employees/Employee";
+
 export const userContext = createContext({});
 export const cartContext = createContext([]);
 
@@ -59,21 +60,21 @@ const App = () => {
   };
   return (
     <Router>
-      <div className="flex flex-col justify-between min-h-screen">
+      <div className="min-h-screen relative flex flex-col">
         <cartContext.Provider value={{ cart, addItem }}>
           <userContext.Provider value={{ user, clearUser, logUser }}>
             <NavBar />
             <Routes>
-              <Route path="/" element={<WelcomePage />} />
-              <Route path="/home" element={<HomePage />} />
+              <Route path="/" element={<HomePage />} />
               <Route path="/admin" element={<AdminPage />} />
               <Route path="/menu/:id" element={<ProductsPage />} />
+              <Route path="/product/:id" element={<ProductInfoPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignupPage />} />
               <Route path="/cart" element={<Cart_Page />} />
               <Route path="/reservations" element={<Reservation />} />
               <Route path="/profile" element={<Profile />} />
-              <Route path="/Employee" element={<Employee />} />
+              <Route path="/employee" element={<Employee />} />
             </Routes>
             <Footer />
           </userContext.Provider>

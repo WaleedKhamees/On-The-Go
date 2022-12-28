@@ -9,7 +9,7 @@ function Cart_Page(props) {
     let res = 0;
     // get discount; 
     for (let i in cart) {
-      res += cart[i].qty * parseFloat(cart[i].item_price.slice(1));
+      res += cart[i].qty * parseFloat(cart[i].item_price);
     }
     setSubTotalPrice(res);
   }, [cart])

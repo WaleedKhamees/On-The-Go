@@ -74,7 +74,7 @@ const LoginPage = () => {
     }
   }
   return (
-    <div className="flex justify-center pt-4">
+    <div className="flex justify-center pt-4 my-auto">
       <form className="flex-col flex items-center gap-4 min-w-[350px]" onSubmit={(e) => handleSubmit(e)}>
         <h2 className="h2 text-Headings">Login</h2>
         <div className="flex flex-col gap-1 w-full">

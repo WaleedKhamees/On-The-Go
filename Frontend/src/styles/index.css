@@ -15,28 +15,31 @@
     font-weight: inherit;
   }
   .h1 {
-    @apply h-fit text-[1.8rem] leading-[2.125rem] font-bold tracking-[-0.005em];
+    @apply h-fit text-[1.8rem] leading-[2.125rem] font-bold tracking-[-0.005em] font-Inter;
   }
   .h2 {
-    @apply h-fit text-[1.5rem] leading-[1.875rem] font-semibold tracking-[0em];
+    @apply h-fit text-[1.5rem] leading-[1.875rem] font-semibold tracking-[0em] font-Inter;
   }
   .h3 {
-    @apply h-fit text-xl leading-[1.5rem] font-medium tracking-[0em];
+    @apply h-fit text-xl leading-[1.5rem] font-medium tracking-[0em] font-Inter;
   }
   .p {
-    @apply h-fit text-base leading-[21px] tracking-[0em];
+    @apply h-fit text-base leading-[21px] tracking-[0em] font-Inter;
   }
   .outlinebody {
-    @apply h-fit text-sm font-bold leading-[18px] tracking-[0.06em] uppercase;
+    @apply h-fit text-sm font-bold leading-[18px] tracking-[0.06em] uppercase font-Inter;
   }
   .small {
-    @apply h-fit text-[12px] leading-[12px] font-semibold tracking-[0em];
+    @apply h-fit text-[12px] leading-[12px] font-semibold tracking-[0em] font-Inter;
   }
   .a {
-    @apply h-fit text-base leading-[21px] font-normal tracking-[0em];
+    @apply h-fit text-base leading-[21px] font-normal tracking-[0em] font-Inter;
   }
   .btn {
-    @apply rounded-lg bg-RedPrimary w-full p-4 outlinebody text-White;
+    @apply rounded-lg bg-RedPrimary w-full p-4 outlinebody text-White font-Inter;
+  }
+  .input {
+    @apply w-full py-2 px-4 rounded-lg p text-Body border border-Body placeholder:text-Small outline-none font-Inter;
   }
   .select {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");

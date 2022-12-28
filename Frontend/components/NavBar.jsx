@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { BsGearFill, BsGearWide } from "react-icons/bs";
+import { BsGearWide } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { userContext } from "../src/App";
 const NavBar = () => {
@@ -8,7 +8,7 @@ const NavBar = () => {
     <nav className="flex items-center justify-between px-8 py-4">
       <div className="flex items-center gap-8">
         <Link to="/">
-          <h3 className="h3">عالطاير</h3>
+          <h3 className="h3">خلصنا معلم</h3>
         </Link>
         <ul className="flex items-center gap-4">
           <li className="outlinebody">
@@ -58,11 +58,7 @@ const NavBar = () => {
             />
           </svg>
         </Link>
-        {user && user.kind === "a" && (
-          <Link to="/admin">
-            <BsGearWide size={21} />
-          </Link>
-        )}
+        {user && user.kind === 'a' && <Link to="/admin"><BsGearWide size={21} /></Link>}
       </div>
     </nav>
   );

@@ -22,7 +22,7 @@ const How = () => {
   };
 
   return (
-    <div className="max-w-fit min-w-[360px] relative">
+    <div className="max-w-fit min-w-[360px]">
       <div
         className="flex cursor-pointer justify-between items-center px-4 py-2 border border-Body w-full rounded-lg"
         onClick={(e) => setIsActive(!isActive)}
@@ -36,9 +36,8 @@ const How = () => {
         <BiChevronDown size={16} />
       </div>
       <ul
-        className={`overflow-y-auto max-h-[120px] absolute w-full cursor-pointer z-50 ${
-          isActive ? "block" : "hidden"
-        }`}
+        className={`overflow-y-auto max-h-[120px] absolute w-full cursor-pointer z-50 ${isActive ? "block" : "hidden"
+          }`}
         onMouseLeave={(e) => setIsActive(false)}
       >
         {options?.map((key) => (

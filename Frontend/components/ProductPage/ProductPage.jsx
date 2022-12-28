@@ -5,7 +5,7 @@ import { useParams, Link } from "react-router-dom";
 const ProductsPage = (props) => {
   const category = useParams().id;
   const [Categories, setCategories] = useState({
-    Eastern: category === "eastern",
+    Eastern: category === "eastern" || 1,
     Western: category === "western",
     Drinks: category === "drinks",
   });
@@ -39,37 +39,37 @@ const ProductsPage = (props) => {
       </div>
 
       {data && Categories.Eastern && (
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-4 gap-4 px-4">
           {data
             .filter((item) => item.category === "Eastern")
             .map((item) => (
-              <ProductCard
-                item={item}
-              />
+              <Link to={`/product/${item.item_id}`}>
+                <ProductCard item={item} />
+              </Link>
             ))}
         </div>
       )}
 
       {data && Categories.Western && (
-        <div className="grid md:grid-cols-1 grid-cols-4 gap-4">
+        <div className="grid md:grid-cols-1 grid-cols-4 gap-4 px-4">
           {data
             .filter((item) => item.category === "Western")
             .map((item) => (
-              <ProductCard
-                item={item}
-              />
+              <Link to={`/product/${item.item_id}`}>
+                <ProductCard item={item} />
+              </Link>
             ))}
         </div>
       )}
 
       {data && Categories.Drinks && (
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-4 gap-4 px-4">
           {data
             .filter((item) => item.category === "Drinks")
             .map((item) => (
-              <ProductCard
-                item={item}
-              />
+              <Link to={`/product/${item.item_id}`}>
+                <ProductCard item={item} />
+              </Link>
             ))}
         </div>
       )}
