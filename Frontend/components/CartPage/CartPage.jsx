@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import { useEffect, useState, useContext } from "react";
-import { cartContext } from "../src/App";
-import ProductCart from "./ProductCart";
+import { cartContext } from "../../src/App";
+import ProductCart from "../atoms/ProductCart";
 
 function Cart_Page(props) {
   const { cart } = useContext(cartContext);
@@ -53,7 +53,7 @@ function Cart_Page(props) {
             <p
               onClick={async () => {
                 const order = {
-                  Order_State: "pending", 
+                  Order_State: "pending",
                   Order_Price: subTotalPrice + Math.round(subTotalPrice * 0.14),
                   Order_Date: dayjs(new Date()).format("YYYY/MM/DD"),
 

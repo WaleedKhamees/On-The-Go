@@ -1,8 +1,9 @@
 import axios from "axios";
+import dayjs from "dayjs";
 import { useContext } from "react";
 import { useState } from "react";
 // import ReactStarRating from "react-star-ratings-component";
-import { userContext } from "../src/App";
+import { userContext } from "../../src/App";
 
 
 const AddCommetForm = ({ id }) => {
@@ -13,18 +14,17 @@ const AddCommetForm = ({ id }) => {
             <form className="flex flex-col gap-2"
                 onSubmit={async (e) => {
                     e.preventDefault();
-                    let date = new Date();
                     const form = e.currentTarget;
                     const review =
                     {
-                        email: JSON.parse(localStorage.getItem("user")).email,
+                        email: user.email,
                         item_id: parseInt(id),
-                        review_date: date.toDateString(),
+                        review_date: dayjs(new Date()).format("YYYY/MM/DD"),
                         rate: rating,
                         review_desc: form.comm.value,
                     };
+                    console.log(review);
                     try {
-                        console.log(review);
                         const res = await axios.post(
                             "http://localhost:3000/review/insert", review
                         );
@@ -39,7 +39,6 @@ const AddCommetForm = ({ id }) => {
                         console.log("error");
                     }
                     comm.value = "";
-                    location.reload();
                 }}>
                 <h2 className="h2 mx-8">Your Opinion Matters</h2>
                 <textarea

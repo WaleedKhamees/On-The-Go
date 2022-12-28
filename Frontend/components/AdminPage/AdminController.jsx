@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import AddEmployeeForm from "./AddEmployeeForm"
 import AddProductForm from "./AddProductForm";
-import Table from "./Table";
+import Table from "../atoms/Table";
 
 const EMPLOYEE_EDITABLE = {
   employee_id: false,

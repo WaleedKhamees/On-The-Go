@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { BsGearWide } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import { userContext } from "../src/App";
+import { userContext } from "../../src/App";
 const NavBar = () => {
   const { user, clearUser } = useContext(userContext);
   return (

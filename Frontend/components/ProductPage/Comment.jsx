@@ -1,4 +1,4 @@
-import StarsRating from "./atoms/StarsRating";
+import StarsRating from "../atoms/StarsRating";
 const Comment = ({ review_date, rate, review_desc, first_name, last_name, img_url }) => {
   return (
     <div className="flex flex-col gap-4 px-8">

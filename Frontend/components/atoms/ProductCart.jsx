@@ -1,8 +1,8 @@
 import React from "react";
 import { useContext } from "react";
-import { cartContext } from "../src/App";
-import { getPath } from "../util/routerFunctions";
-import StarsRating from "./atoms/StarsRating";
+import { cartContext } from "../../src/App";
+import { getPath } from "../../util/routerFunctions";
+import StarsRating from "./StarsRating";
 
 const ProductInfo = ({ item, rating }) => {
   const { addItem } = useContext(cartContext);

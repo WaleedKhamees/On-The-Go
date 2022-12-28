@@ -1,20 +1,20 @@
-import NavBar from "../components/NavBar";
-import Footer from "../components/Footer";
+import NavBar from "../components/atoms/NavBar";
+import Footer from "../components/atoms/Footer";
 import HomePage from "../components/HomePage/HomePage";
 import AdminPage from "../components/AdminPage/AdminPage";
 import LoginPage from "../components/LoginPage/Login";
-import SignupPage from "../components/SignupPage/Signup";
-import Profile from "../components/Profile";
+import SignupPage from "../components/SignupPage/SignupPage";
+import Profile from "../components/WelecomePage/Profile";
 import Reservation from "../components/ReservationPage/ReservationPage";
-import ProductsPage from "../components/ProductPage/ProductPage";
-import Cart_Page from "../components/Cart_Page";
-import ProductInfoPage from "../components/ProductInfoPage"
+import Cart_Page from "../components/CartPage/CartPage";
 import Employee from "../components/Employees/Employee";
 import Provider from "../components/ProviderPage/Provider";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { createContext } from "react";
 import { useState } from "react";
+import ProductsPage from "../components/ProductsPage/ProductsPage";
+import ProductPage from "../components/ProductPage/ProductPage";
 export const userContext = createContext({});
 export const cartContext = createContext([]);
 
@@ -71,7 +71,7 @@ const App = () => {
               <Route path="/" element={<HomePage />} />
               <Route path="/admin" element={<AdminPage />} />
               <Route path="/menu/:id" element={<ProductsPage />} />
-              <Route path="/product/:id" element={<ProductInfoPage />} />
+              <Route path="/product/:id" element={<ProductPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignupPage />} />
               <Route path="/cart" element={<Cart_Page />} />

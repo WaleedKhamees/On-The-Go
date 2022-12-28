@@ -1,79 +1,47 @@
-import ProductCard from "./ProductCard";
-import { useState } from "react";
-import { useQuery } from "react-query";
-import { useParams, Link } from "react-router-dom";
-const ProductsPage = (props) => {
-  const category = useParams().id;
-  const [Categories, setCategories] = useState({
-    Eastern: category === "eastern",
-    Western: category === "western",
-    Drinks: category === "drinks",
-  });
-  const { isLoading, error, data } = useQuery("repoData", () =>
-    fetch("http://localhost:3000/item").then((res) => res.json())
-  );
-  const FilterBtn = ({ Category }) => (
-    <Link to={`/menu/${Category.toLowerCase()}`}>
-      <button
-        className={`rounded-lg border px-4 py-2 ${Categories[Category] ? "bg-Body text-White" : ""
-          }`}
-        onClick={(e) => {
-          setCategories({
-            Eastern: Category.toLowerCase() === "eastern",
-            Western: Category.toLowerCase() === "western",
-            Drinks: Category.toLowerCase() === "drinks",
-          });
-        }}
-      >
-        <p className="p">{Category}</p>
-      </button>
-    </Link>
-  );
+import ProductCart from "../atoms/ProductCart";
+import Comment from "./Comment";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import AddCommetForm from "./AddCommentForm";
 
-  return (
-    <div className="my-8">
-      <div className="flex justify-center gap-8 py-8">
-        <FilterBtn Category="Eastern" />
-        <FilterBtn Category="Western" />
-        <FilterBtn Category="Drinks" />
-      </div>
 
-      {data && Categories.Eastern && (
-        <div className="grid grid-cols-4 gap-y-8 px-4 justify-items-center">
-          {data
-            .filter((item) => item.category === "Eastern")
-            .map((item) => (
-              <Link key={item.item_id} to={`/product/${item.item_id}`}>
-                <ProductCard item={item} />
-              </Link>
-            ))}
-        </div>
-      )}
 
-      {data && Categories.Western && (
-        <div className="grid md:grid-cols-1 grid-cols-4 gap-y-8 px-4 justify-items-center">
-          {data
-            .filter((item) => item.category === "Western")
-            .map((item) => (
-              <Link key={item.item_id} to={`/product/${item.item_id}`}>
-                <ProductCard item={item} />
-              </Link>
-            ))}
-        </div>
-      )}
+const ProductPage = () => {
+    const id = useParams().id;
+    const [product, setProduct] = useState();
+    const [reviews, setReviews] = useState();
+    const getData = async () => {
+        const data = await axios.get(`http://localhost:3000/item/${id}`);
+        console.log(data.data[0]);
+        setProduct(data.data[0]);
+    };
+    const getReviews = async () => {
+        const data = await axios.get(`http://localhost:3000/review/${id}`);
+        setReviews(data.data);
+    };
+    useEffect(() => {
+        getData();
+        getReviews();
+    }, []);
+    return (
+        <>
+            <div className="py-2.5 px-4 ">
+                {product && <ProductCart item={product} rating={5} />}
+            </div>
+            <div className="flex flex-row px-16 py-8 justify-between">
+                <div className="flex-col space-y-8">
+                    {reviews && reviews.map((review) =>
+                        <Comment rate={review.rate} review_date={review.review_date} review_desc={review.review_desc} first_name={review.first_name} last_name={review.last_name} img_url={review.img_url} />
+                    )}
+                </div>
+                <div className="flex-col ">
+                    <AddCommetForm id={id} />
+                </div>
+            </div>
 
-      {data && Categories.Drinks && (
-        <div className="grid grid-cols-4 gap-y-8 px-4 justify-items-center">
-          {data
-            .filter((item) => item.category === "Drinks")
-            .map((item) => (
-              <Link key={item.item_id} to={`/product/${item.item_id}`}>
-                <ProductCard item={item} />
-              </Link>
-            ))}
-        </div>
-      )}
-    </div>
-  );
-};
-export default ProductsPage;
+        </>
+    );
+}
+
+export default ProductPage;
