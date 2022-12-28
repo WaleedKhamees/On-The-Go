@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import AddEmployeeForm from "./AddEmployeeForm"
 import AddProductForm from "./AddProductForm";
+import AddDiscountForm from "./AddDiscountForm";
 import Table from "../atoms/Table";
 
 const EMPLOYEE_EDITABLE = {
@@ -24,12 +25,18 @@ const ITEM_EDITABLE = {
   discount_id: true,
   category: true,
 }
+const DISCOUNT_EDITABLE = {
+  discount_id: false,
+  start_date: true,
+  end_date: true,
+  discount_percent: true,
+}
 
 const AdminController = () => {
   // const [funcActive, setFuncActive] = useState(false);
   // const [funcHasChose, setFuncHasChose] = useState(false);
   // const [func, setfunc] = useState("What do you want to do?");
-  const initFuncOptions = ["Access Employees", "Access Products"];
+  const initFuncOptions = ["Access Employees", "Access Products", "Access Discounts"];
 
   const [initFunc, setInitFunc] = useState("");
   const selectInitFunc = async (func) => {
@@ -40,6 +47,8 @@ const AdminController = () => {
       case "Access Products":
         getItem();
         break;
+      case "Access Discounts":
+        getDiscounts();
     }
     setInitFunc(func);
   };
@@ -47,6 +56,7 @@ const AdminController = () => {
 
   const [employees, setEmployees] = useState([]);
   const [items, setItems] = useState([]);
+  const [discounts, setDiscounts] = useState([]);
 
 
 
@@ -62,6 +72,14 @@ const AdminController = () => {
     const response = await axios.get("http://localhost:3000/item");
     const items = await response.data;
     setItems(items);
+  };
+
+  /////////////////////////////////////////////////////////////////////////////////////////
+
+  const getDiscounts = async () => {
+    const response = await axios.get("http://localhost:3000/discount");
+    const discounts = await response.data;
+    setDiscounts(discounts);
   };
 
 
@@ -102,6 +120,17 @@ const AdminController = () => {
             tableID="item_id"
           />
         }
+
+        {
+          discounts && initFunc === "Access Discounts" && discounts.length &&
+          <Table
+            data={discounts}
+            itemEditable={DISCOUNT_EDITABLE}
+            apiUpdate="http://localhost:3000/discount/update"
+            apiDelete="http://localhost:3000/discount/delete"
+            tableID="discount_id"
+          />
+        }
       </div>
 
       {
@@ -115,6 +144,11 @@ const AdminController = () => {
         <AddProductForm setInitFunc={setInitFunc} />
       }
       {
+        initFunc === "Add Discount"
+        &&
+        <AddDiscountForm setInitFunc={setInitFunc} />
+      }
+      {
         initFunc === "Access Employees"
         &&
         <button hidden={initFunc !== "Access Employees"} className="btn max-w-[350px]" onClick={() => { setInitFunc("Add Employee") }}>
@@ -125,6 +159,12 @@ const AdminController = () => {
         initFunc === "Access Products" &&
         <button className="btn max-w-[350px]" hidden={initFunc !== "Access Products"} onClick={() => { setInitFunc("Add Product") }}>
           Add Product
+        </button>
+      }
+      {
+        initFunc === "Access Discounts" &&
+        <button className="btn max-w-[350px]" hidden={initFunc !== "Access Discounts"} onClick={() => { setInitFunc("Add Discount") }}>
+          Add Discount
         </button>
       }
     </div >
