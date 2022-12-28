@@ -1,4 +1,4 @@
-const ForproductHitsory = (props) => {
+const HistoryProductCard = (props) => {
   return (
     <div className="flex h-max-[250px] mt-4">
       <img src={props.Img} className="max-h-[200px] rounded-l-lg"></img>
@@ -19,4 +19,4 @@ const ForproductHitsory = (props) => {
   );
 };
 
-export default ForproductHitsory;
+export default HistoryProductCard;

@@ -4,7 +4,7 @@ import HomePage from "../components/HomePage/HomePage";
 import AdminPage from "../components/AdminPage/AdminPage";
 import LoginPage from "../components/LoginPage/Login";
 import SignupPage from "../components/SignupPage/SignupPage";
-import Profile from "../components/WelecomePage/Profile";
+import Profile from "../components/ProfilePage/Profile";
 import Reservation from "../components/ReservationPage/ReservationPage";
 import Cart_Page from "../components/CartPage/CartPage";
 import Employee from "../components/Employees/Employee";

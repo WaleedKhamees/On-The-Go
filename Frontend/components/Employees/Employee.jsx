@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import dayjs from "dayjs";
+import { useContext } from "react";
+import { userContext } from "../../src/App";
 const Employee = () => {
+  const { user } = useContext(userContext);
+  console.log(user);
   const [arr, setarr] = useState([]);
   const [cookedOrders, setcookedOrders] = useState([]);
   const [type, settype] = useState("");
@@ -47,8 +51,7 @@ const Employee = () => {
   const gettype = async (e) => {
     try {
       const res = await axios.get(
-        `http://localhost:3000/employee/getTypeByEmail/${
-          JSON.parse(localStorage.getItem("user")).email
+        `http://localhost:3000/employee/getTypeByEmail/${JSON.parse(localStorage.getItem("user")).email
         }`
       );
 
@@ -68,8 +71,8 @@ const Employee = () => {
 
   return (
     <>
-      {type == "chief" && (
-        <table className=" table-auto text-center h3  ">
+      {type == "chef" && (
+        <table className=" table-auto text-center h3">
           <thead className="border rounded border-spacing-3">
             <tr>
               <th>Order_ID</th>
@@ -91,8 +94,7 @@ const Employee = () => {
                   <button
                     onClick={async () => {
                       const id = await axios.get(
-                        `http://localhost:3000/employee/getEmployeeByEmail/${
-                          JSON.parse(localStorage.getItem("user")).email
+                        `http://localhost:3000/employee/getEmployeeByEmail/${JSON.parse(localStorage.getItem("user")).email
                         }`
                       );
 
@@ -154,8 +156,7 @@ const Employee = () => {
                   <button
                     onClick={async () => {
                       const id = await axios.get(
-                        `http://localhost:3000/employee/getEmployeeByEmail/${
-                          JSON.parse(localStorage.getItem("user")).email
+                        `http://localhost:3000/employee/getEmployeeByEmail/${JSON.parse(localStorage.getItem("user")).email
                         }`
                       );
 
@@ -218,8 +219,7 @@ const Employee = () => {
                   <button
                     onClick={async () => {
                       const id = await axios.get(
-                        `http://localhost:3000/employee/getEmployeeByEmail/${
-                          JSON.parse(localStorage.getItem("user")).email
+                        `http://localhost:3000/employee/getEmployeeByEmail/${JSON.parse(localStorage.getItem("user")).email
                         }`
                       );
 

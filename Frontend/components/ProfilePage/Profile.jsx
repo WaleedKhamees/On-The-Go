@@ -1,7 +1,7 @@
 function Profile(props) {
   return (
     <div className="flex justify-center">
-      <div className="flex flex-col max-w-[364px] flex-grow items-center gap-4">
+      <div className="flex flex-col max-w-[350px] flex-grow items-center gap-4">
         <img
           src={props.Img}
           className="rounded-full  max-w-[150px]   max-h-[150px]"
