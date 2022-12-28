@@ -43,7 +43,6 @@ const Reservation = () => {
       }
     } catch (err) {
       console.log(err);
-      console.log("error yastaaaaa");
     }
   };
 

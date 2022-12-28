@@ -1,17 +1,16 @@
 const HistoryProductCard = (props) => {
   return (
-    <div className="flex h-max-[250px] mt-4">
-      <img src={props.Img} className="max-h-[200px] rounded-l-lg"></img>
+    <div className="flex h-max-[250px] items-center justify-center gap-4 px-4">
+      <img src={props.Img} className="max-h-[100px] rounded-lg"></img>
 
-      <div className="flex  flex-grow w-3/4  max-h-[200px] justify-between rounded-r-lg">
-        <div className=" flex-col flex gap-2 pl-16 py-12">
+      <div className="flex w-full items-center justify-between max-h-[200px]">
+        <div className="flex flex-col justify-center">
           <h1 className="h1 text-Headings">{props.nameitem}</h1>
           <p className="p   text-Small">{props.descitem} </p>
         </div>
 
-        <div className="flex flex-col items-center gap-2 pr-16 py-12">
-          <p className="p text-Headings text-center">{props.Price} EGP</p>
-          <div className="flex items-center justify-center"></div>
+        <div className="flex flex-col items-end gap-2">
+          <h3 className="h3 text-Headings text-center">{props.Price} EGP</h3>
           <p className="p text-Small text-center  ">Qty: {props.Qty}</p>
         </div>
       </div>

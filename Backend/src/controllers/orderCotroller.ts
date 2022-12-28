@@ -1,5 +1,20 @@
 import { client } from "../index"
 import { Request, Response } from 'express';
+/* select item_id ,item_name, item_desc,item_price, img_url,category,discount_percent from item,discount
+        where item.discount_id = discount.discount_id and item_id = ${req.params.id} */
+const getitemsfororder = async (order_id) => {
+
+    try {
+        const items = await client.query(`select item.Item_iD,Quantity,Item_Name,Item_Desc,Item_Price,Img_url,discount_percent from 
+    item ,contains, discount
+    where order_id='${order_id}' and item.Item_iD=contains.Item_iD and item.discount_id = discount.discount_id ;`);
+        return items.rows;
+    }
+    catch (err) {
+        console.log(err);
+    }
+
+};
 export const orderController = {
 
     insertOrder: async (req: Request, res: Response) => {
@@ -183,55 +198,23 @@ export const orderController = {
     },
 
 
-
-
-
-
-
-
     getordersforcutomer: async (req: Request, res: Response) => {
 
         try {
             const Customer_ID = await client.query(`select UserX_ID from UserX where Email='${req.params.email}';`);
-            const order = await client.query(`select distinct OrderX.Order_ID,Order_State,Order_Price from Orderx ,contains where contains.Order_ID=OrderX.Order_ID and  Customer_ID=${Customer_ID.rows[0].userx_id};`);
+            const orders = (await client.query(`select distinct OrderX.Order_ID,Order_State,Order_Price from Orderx ,contains where contains.Order_ID=OrderX.Order_ID and  Customer_ID=${Customer_ID.rows[0].userx_id};`)).rows;
+            let items = [];
+            for (let i in orders) {
+                items = [...items, { order_id: orders[i].order_id, order_state: orders[i].order_state, order_price: orders[i].order_price, items: await getitemsfororder(orders[i].order_id) }];
+            }
 
-            res.status(200).json(order.rows);
+            res.status(200).json({ orders: items });
         }
         catch (err) {
             console.log(err);
             res.status(400).json();
         }
-    },
-
-
-
-
-
-    getitemsfororder: async (req: Request, res: Response) => {
-
-        try {
-            const items = await client.query(`select item.Item_iD,Quantity,Item_Name,Item_Desc,Item_Price,Img_url from 
-        item ,contains 
-        where order_id='${req.params.order_id}' and item.Item_iD=contains.Item_iD ;`);
-            res.status(200).json(items.rows);
-        }
-        catch (err) {
-            console.log(err);
-            res.status(400).json();
-        }
-
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

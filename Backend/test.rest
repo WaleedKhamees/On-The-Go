@@ -266,7 +266,7 @@ Content-Type: application/json
 
 
 ###
-GET http://localhost:3000/order/getordersforcutomer/mostafa.elsayed.2002@gmail.com HTTP/1.1
+GET http://localhost:3000/order/getordersforcutomer/walid@gmail.com HTTP/1.1
 
 ###
 GET http://localhost:3000/order/getitemsfororder/2 HTTP/1.1

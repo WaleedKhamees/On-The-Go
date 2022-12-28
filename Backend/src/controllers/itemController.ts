@@ -1,7 +1,7 @@
 import { client } from "../index"
 import { Request, Response } from 'express';
 export const itemController = {
-  
+
     getItems: async (req: Request, res: Response) => {
         const items = await client.query(`select item_id ,item_name, item_desc,item_price, img_url,category,discount_percent 
          from item,discount
@@ -10,7 +10,9 @@ export const itemController = {
         res.status(200).json(items.rows);
     },
     getItem: async (req: Request, res: Response) => {
-        const item = await client.query(`select * from item where item_id = ${req.params.id}`);
+        const item = await client.query(
+            `select item_id ,item_name, item_desc,item_price, img_url,category,discount_percent from item,discount
+        where item.discount_id = discount.discount_id and item_id = ${req.params.id}`);
         res.status(200).json(item.rows);
     },
     updateItem: async (req: Request, res: Response) => {
@@ -38,7 +40,7 @@ export const itemController = {
         try {
             const newitem = { item_name: req.body.item_name, item_desc: req.body.item_desc, item_price: req.body.item_price, img_url: req.body.img_url, discount_id: req.body.discount_id, category: req.body.category };
             await client.query(
-            `insert into item (item_name,item_desc,item_price,img_url,discount_id,category) values ('${newitem.item_name}','${newitem.item_desc}', ${newitem.item_price}, '${newitem.img_url}', ${newitem.discount_id}, '${newitem.category}');`);
+                `insert into item (item_name,item_desc,item_price,img_url,discount_id,category) values ('${newitem.item_name}','${newitem.item_desc}', ${newitem.item_price}, '${newitem.img_url}', ${newitem.discount_id}, '${newitem.category}');`);
             res.status(201).json({ message: "Inserterd successfully" });
         }
         catch (err) {

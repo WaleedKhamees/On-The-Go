@@ -15,8 +15,8 @@ router.patch("/order/updateidofcheif", orderController.updateidofcheif);
 
 router.patch("/order/updateidofwaiter", orderController.updateidofwaiter);
 router.patch("/order/updateidofdeliveryman", orderController.updateidofdeliveryman);
+
 router.get("/order/getordersforcutomer/:email", orderController.getordersforcutomer);
-router.get("/order/getitemsfororder/:order_id", orderController.getitemsfororder);
 
 
 

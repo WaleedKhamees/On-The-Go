@@ -1,108 +1,98 @@
-import ForproductHitsory from "./ForproductHistory";
-import { useEffect, useState } from "react";
+import HistoryProductCard from "./HistoryProductCard";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { userContext } from "../../src/App";
+import dayjs from "dayjs";
 const History = () => {
-  const [arrorders, setarrorders] = useState([]);
-  const [arritems, setarritems] = useState([]);
-
-  const getorders = async (e) => {
+  const [orders, setOrders] = useState([]);
+  const { user } = useContext(userContext);
+  console.log(user);
+  const getOrders = async (e) => {
     try {
       const res = await axios.get(
-        `http://localhost:3000/order/getordersforcutomer/${
-          JSON.parse(localStorage.getItem("user")).email
-        }`
+        `http://localhost:3000/order/getordersforcutomer/${user.email}`
       );
-      setarrorders(res.data);
+      setOrders(res.data.orders);
     } catch (err) {
       console.log(err);
-      console.log("error yastaaaaa");
     }
   };
 
-  const getItems = async (id) => {
-    try {
-      const res = await axios.get(
-        `http://localhost:3000/order/getitemsfororder/${id}`
-      );
-
-      setarritems(res.data);
-    } catch (err) {
-      console.log(err);
-      console.log("error yastaaaaa");
-    }
-  };
 
   useEffect(() => {
-    getorders();
+    getOrders();
   }, []);
 
   return (
-    <>
-      {arrorders.map((keyy) => {
-        getItems(keyy.order_id);
-        return (
-          arritems && (
-            <div className="flex flex-col pl-8 mt-4">
-              <div>
-                <div>Order: {keyy.order_id} </div>
-                <div className="flex gap-2">
-                  <p className="p text-Small">Order date: </p>
-                  <p className=" text-Body"> {keyy.order_id} </p>
-                  <div className="bg-Small w-1 h-fill "></div>
-                  <p className="p text-Small"> Status: </p>
-                  <p className=" text-Body"> {keyy.order_state} </p>
-                </div>
-                <div className="bg-Small h-1 w-fill mt-6 mr-8 "> </div>
-              </div>
-
-              {arritems.map((key, i) => (
-                <ForproductHitsory
-                  Img={key.img_url}
-                  nameitem={key.item_name}
-                  descitem={key.item_desc}
-                  Price={key.item_price}
-                  Qty={key.quantity}
-                />
-              ))}
-
-              <div className="flex py-8 px-16 justify-between">
-                <div className="space-y-8 ">
-                  <div className="flex  ">
-                    <h2 className="h2 mr-8">Order Summary:</h2>
-                  </div>
-                </div>
-
-                <div className="flex gap-[182px] text-xs font-semibold">
-                  <div className="flex-col space-y-2 text-Small">
-                    <p className="p text-Body">Sub Total:</p>
-                    {/* <p className="p text-Small">Discount: </p> */}
-                    <p className="p text-Small">Delivery Charge: </p>
-                    <p className="p text-Small">VAT 14%:</p>
-                    <p className="p text-Body">Total:</p>
-                  </div>
-
-                  <div className="flex-col space-y-2">
-                    <p className="p text-Body">{keyy.order_price} EGP</p>
-                    {/* <p className="p text-Small">{keyy.order_price} EGP</p> */}
-                    <p className="p text-Small">15 EGP</p>
-                    <p className="p text-Small">
-                      {Math.floor(keyy.order_price * 0.14)} EGP
-                    </p>
-                    <p className="p text-Body">
-                      {keyy.order_price +
-                        15 +
-                        Math.floor(keyy.order_price * 0.14)}{" "}
-                      EGP
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-Small h-1 w-fill mt-6 mr-8 "> </div>
+    <div className="flex flex-col w-full px-8 gap-8 ">
+      {orders && orders.map(order => (
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-2 py-2 justify-center">
+            <h2 className="h2">Order: {order.order_id} </h2>
+            <div className="flex gap-2 items-center">
+              <p className="p text-Small">Order date: </p>
+              <p className=" text-Body"> {dayjs(Number.parseInt(order.order_id)).format("YYYY/MM/DD")} </p>
+              <div className="bg-Small w-1 h-fill "></div>
+              <p className="p text-Small"> Status: </p>
+              <p className={`${order.order_state === "pending" ?
+                "text-RedPrimary" :
+                order.order_state === "cooked" ?
+                  "text-Yellow" :
+                  order.order_state === "being_delivered" ?
+                    "text-GreenPrimary" : "text-Body"}`}> {order.order_state} </p>
             </div>
-          )
-        );
-      })}
-    </>
+            <div className="bg-Small h-1 w-full" />
+          </div>
+          <div className="flex flex-col gap-4">
+            {order.items.map((item, i) => (
+              <HistoryProductCard
+                Img={item.img_url}
+                nameitem={item.item_name}
+                descitem={item.item_desc}
+                Price={item.item_price}
+                Qty={item.quantity}
+              />
+            ))}
+            <div className="flex px-4 items-center justify-between">
+              <h2 className="h2 mr-8">Order Summary:</h2>
+              <div className="flex flex-col gap-2">
+                <div className="flex items-center w-full justify-between gap-4">
+                  <p className="p text-Body">Sub Total:</p>
+                  <p className="small text-Body">
+                    {order.items.reduce((acc, item) => acc + (item.item_price * item.quantity), 0)} EGP
+                  </p>
+                </div>
+                <div className="flex items-center w-full justify-between gap-4">
+                  <p className="small text-Small">Discount</p>
+                  <p className="small text-Small">
+                    {order.items.reduce((acc, item) => acc + (item.item_price * item.quantity * item.discount_percent), 0)} EGP
+                  </p>
+                </div>
+                <div className="flex items-center w-full justify-between gap-4">
+                  <p className="small text-Small">Delivery:</p>
+                  <p className="small text-Small">
+                    {30} EGP
+                  </p>
+                </div>
+                <div className="flex items-center w-full justify-between gap-4">
+                  <p className="small text-Small">Vat 14%:</p>
+                  <p className="small text-Small">
+                    {Math.round(order.items.reduce((acc, item) => acc + (item.item_price * item.quantity), 0) * 0.14)} EGP
+                  </p>
+                </div>
+                <div className="flex items-center w-full justify-between gap-4">
+                  <p className="p text-Body">Total:</p>
+                  <p className="small text-Body">
+                    {order.order_price} EGP
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      ))}
+    </div>
   );
 };
 

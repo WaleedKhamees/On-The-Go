@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { BsGearWide } from "react-icons/bs";
+import { BsGearWide, BsPersonCircle } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { userContext } from "../../src/App";
 const NavBar = () => {
@@ -59,6 +59,7 @@ const NavBar = () => {
           </svg>
         </Link>
         {user && user.kind === 'a' && <Link to="/admin"><BsGearWide size={21} /></Link>}
+        {user && user.kind === 'c' && <Link to="/profile"><BsPersonCircle size={21} /></Link>}
       </div>
     </nav>
   );

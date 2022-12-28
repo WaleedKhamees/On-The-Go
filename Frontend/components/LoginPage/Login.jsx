@@ -20,7 +20,7 @@ const LoginPage = () => {
           navigate("/admin");
           break;
         case 'c':
-          navigate("/home");
+          navigate("/");
           break;
         case 'e':
           navigate("/employee");
@@ -62,7 +62,7 @@ const LoginPage = () => {
       return;
     }
     catch (err) {
-      console.log(err.response);
+      console.log(err);
       switch (err.response.status) {
         case 404:
           setError({ ...error, emailError: err.response.data.message })
