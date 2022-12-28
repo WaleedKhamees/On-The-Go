@@ -38,8 +38,9 @@ const Reservation = () => {
       setError(res.data.message);
       console.log(res.data.message);
 
-      if (res.data.message == "Reservation Has been reserved")
-        navigate("/home");
+      if (res.data.message == "Reservation Has been reserved") {
+        setError(res.data.message);
+      }
     } catch (err) {
       console.log(err);
       console.log("error yastaaaaa");
