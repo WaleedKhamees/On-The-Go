@@ -223,7 +223,7 @@ Content-Type: application/json
 {
     "email": "yousefosama@gmail.com",
     "branchlocation": "zayed",
-    "amount": 1001
+    "amount": 200
 }
 
 ###
