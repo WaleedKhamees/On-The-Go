@@ -11,5 +11,11 @@ router.delete("/employee/delete/:id", employeeController.deleteEmployee);
 
 router.post("/employee/insert", employeeController.insertEmployee);
 
+router.get("/employee/getTypeByEmail/:email", employeeController.getTypeByEmail);
+
+router.get("/employee/getEmployeeByEmail/:email", employeeController.getEmployeeByEmail);
+
+
+
 
 module.exports = router; 

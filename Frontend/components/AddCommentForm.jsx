@@ -1,9 +1,16 @@
-import StarsRating from "./atoms/StarsRating";
 import axios from "axios";
+import { useContext } from "react";
+import { useState } from "react";
+import ReactStarRating from "react-star-ratings-component";
+import { userContext } from "../src/App";
+
+
 const AddCommetForm = ({ id }) => {
+    const [rating, setRating] = useState(5);
+    const { user } = useContext(userContext);
     return (
         <>
-            <form className="flex flex-col space-y-2"
+            <form className="flex flex-col gap-2"
                 onSubmit={async (e) => {
                     e.preventDefault();
                     let date = new Date();
@@ -13,7 +20,7 @@ const AddCommetForm = ({ id }) => {
                         email: JSON.parse(localStorage.getItem("user")).email,
                         item_id: parseInt(id),
                         review_date: date.toDateString(),
-                        rate: 5,
+                        rate: rating,
                         review_desc: form.comm.value,
                     };
                     try {
@@ -40,10 +47,24 @@ const AddCommetForm = ({ id }) => {
                     rows="4"
                     type="text"
                     required
-                    className="w-full py-2 px-4 rounded-lg p text-Body border border-Body placeholder:text-Small outline-none "
+                    className="w-full py-2 px-4 rounded-lg p text-Body border border-Body placeholder:text-Small outline-none resize-none "
                     placeholder="Type Your Review"
                 ></textarea>
-                <StarsRating />
+                <div className="flex ml-1">
+                    <ReactStarRating
+                        numberOfStar={5}
+                        numberOfSelectedStar={5}
+                        colorFilledStar="#FFD800"
+                        colorEmptyStar="#989898"
+                        starSize="30px"
+                        spaceBetweenStar="30px"
+                        disableOnSelect={false}
+                        onSelectStar={val => {
+                            setRating(val);
+                            console.log(val);
+                        }}
+                    />
+                </div>
                 <button className="rounded-lg bg-RedPrimary w-full p-4"
                     type="submit">
                     <p className="outlinebody text-White">Send Review</p>
