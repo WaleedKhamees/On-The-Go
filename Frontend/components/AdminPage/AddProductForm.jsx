@@ -99,7 +99,7 @@ const AddProductForm = ({ setInitFunc }) => {
                 <option value="Western">Western</option>
                 <option value="Drinks">Drinks</option>
             </select>
-            <input type="submit" value="Add Employee" className="cursor-pointer btn max-w-[350px]" />
+            <input type="submit" value="Add Product" className="cursor-pointer btn max-w-[350px]" />
         </form>
     )
 }

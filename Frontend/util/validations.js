@@ -18,6 +18,9 @@ const validateString = (string) => {
 const validateEmail = (email) => {
     return (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))
 }
+
+
+
 export const validateSignup = (user) => {
     console.log(user);
     const res = {
@@ -117,6 +120,22 @@ export const validateEmployeeForm = (employee) => {
         res.salary = "Please enter a valid salary (non negative number)";
     if (passwordValidation)
         res.password = "Please enter a valid password";
+
+    return { error, res };
+}
+
+
+export const validateDiscountForm = (discount) => {
+    const res = {
+        endDate: "",
+        discountPercent: ""
+    }
+    let error = false;
+    //const percentageValidation = !validatePercentage(discount.discount_percent);
+    if (percentageValidation)
+        error = true;
+    if (percentageValidation)
+        res.discountPercent = "Please enter a valid Precentage";
 
     return { error, res };
 }

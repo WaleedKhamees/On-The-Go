@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import AddEmployeeForm from "./AddEmployeeForm";
 import AddProductForm from "./AddProductForm";
+import AddDiscountForm from "./AddDiscountForm";
 import AddTableForm from "./AddTableForm";
 import Table from "../atoms/Table";
 
@@ -24,7 +25,13 @@ const ITEM_EDITABLE = {
   img_url: true,
   discount_id: true,
   category: true,
-};
+}
+const DISCOUNT_EDITABLE = {
+  discount_id: false,
+  start_date: true,
+  end_date: true,
+  discount_percent: true,
+}
 
 const TABLE_EDITABLE = {
   table_num: false,
@@ -36,11 +43,7 @@ const AdminController = () => {
   // const [funcActive, setFuncActive] = useState(false);
   // const [funcHasChose, setFuncHasChose] = useState(false);
   // const [func, setfunc] = useState("What do you want to do?");
-  const initFuncOptions = [
-    "Access Employees",
-    "Access Products",
-    "Access Tables",
-  ];
+  const initFuncOptions = ["Access Employees", "Access Items", "Access Discounts", "Access Tables"];
 
   const [initFunc, setInitFunc] = useState("");
   const selectInitFunc = async (func) => {
@@ -48,8 +51,11 @@ const AdminController = () => {
       case "Access Employees":
         getEmployees();
         break;
-      case "Access Products":
+      case "Access Items":
         getItem();
+        break;
+      case "Access Discounts":
+        getDiscounts();
         break;
       case "Access Tables":
         getTables();
@@ -60,6 +66,9 @@ const AdminController = () => {
 
   const [employees, setEmployees] = useState([]);
   const [items, setItems] = useState([]);
+  const [discounts, setDiscounts] = useState([]);
+
+
   const [Tables, setTables] = useState([]);
 
   const getEmployees = async () => {
@@ -74,6 +83,14 @@ const AdminController = () => {
     const response = await axios.get("http://localhost:3000/item");
     const items = await response.data;
     setItems(items);
+  };
+
+  /////////////////////////////////////////////////////////////////////////////////////////
+
+  const getDiscounts = async () => {
+    const response = await axios.get("http://localhost:3000/discount");
+    const discounts = await response.data;
+    setDiscounts(discounts);
   };
 
   //////////////////////////////////getTabeles/////////////////////////////////////////////
@@ -107,7 +124,7 @@ const AdminController = () => {
         ))}
       </select>
 
-      <div className={`${employees.length ? "" : "hidden"} px-8`}>
+      <div className="px-8" hidden={initFunc !== "Access Employees"}>
         {employees && initFunc === "Access Employees" && employees.length && (
           <Table
             data={employees}
@@ -117,37 +134,7 @@ const AdminController = () => {
             tableID="employee_id"
           />
         )}
-
-        {items && initFunc === "Access Products" && items.length && (
-          <Table
-            data={items}
-            itemEditable={ITEM_EDITABLE}
-            apiUpdate="http://localhost:3000/item/update"
-            apiDelete="http://localhost:3000/item/delete"
-            tableID="item_id"
-          />
-        )}
       </div>
-
-      {Tables && initFunc === "Access Tables" && Tables.length && (
-        <Table
-          data={Tables}
-          itemEditable={TABLE_EDITABLE}
-          apiUpdate="http://localhost:3000/table/updatetable"
-          apiDelete="http://localhost:3000/table/deletetable"
-          tableID="branch_id"
-        />
-      )}
-
-      {initFunc === "Add Employee" && (
-        <AddEmployeeForm setInitFunc={setInitFunc} />
-      )}
-      {initFunc === "Add Product" && (
-        <AddProductForm setInitFunc={setInitFunc} />
-      )}
-
-      {initFunc === "Add Table" && <AddTableForm setInitFunc={setInitFunc} />}
-
       {initFunc === "Access Employees" && (
         <button
           hidden={initFunc !== "Access Employees"}
@@ -159,18 +146,72 @@ const AdminController = () => {
           Add Employee
         </button>
       )}
-      {initFunc === "Access Products" && (
-        <button
-          className="btn max-w-[350px]"
-          hidden={initFunc !== "Access Products"}
-          onClick={() => {
-            setInitFunc("Add Product");
-          }}
-        >
-          Add Product
-        </button>
+      {initFunc === "Add Employee" && (
+        <AddEmployeeForm setInitFunc={setInitFunc} />
       )}
 
+      <div className="px-8" hidden={initFunc !== "Access Items"}>
+        {items && initFunc === "Access Items" && items.length && (
+          <Table
+            data={items}
+            itemEditable={ITEM_EDITABLE}
+            apiUpdate="http://localhost:3000/item/update"
+            apiDelete="http://localhost:3000/item/delete"
+            tableID="item_id"
+          />)
+        }
+      </div>
+      {initFunc === "Access Items" && (
+        <button
+          className="btn max-w-[350px]"
+          hidden={initFunc !== "Access Items"}
+          onClick={() => {
+            setInitFunc("Add Item");
+          }}
+        >
+          Add Item
+        </button>
+      )}
+      {initFunc === "Add Item" && (
+        <AddProductForm setInitFunc={setInitFunc} />
+      )}
+
+
+      <div hidden={initFunc !== "Access Discounts"} className="px-8">
+        {
+          discounts && initFunc === "Access Discounts" && discounts.length &&
+          <Table
+            data={discounts}
+            itemEditable={DISCOUNT_EDITABLE}
+            apiUpdate="http://localhost:3000/discount/update"
+            apiDelete="http://localhost:3000/discount/delete"
+            tableID="discount_id"
+          />
+        }
+      </div>
+      {initFunc === "Access Discounts" && (
+
+        <button className="btn max-w-[350px]" hidden={initFunc !== "Access Discounts"} onClick={() => { setInitFunc("Add Discount") }}>
+          Add Discount
+        </button>
+      )}
+      {initFunc === "Add Discount" && (
+        <AddDiscountForm setInitFunc={setInitFunc} />
+      )}
+
+      <div hidden={initFunc !== "Access Tables"} className="px-8">
+        {
+          Tables && initFunc === "Access Tables" && Tables.length && (
+            <Table
+              data={Tables}
+              itemEditable={TABLE_EDITABLE}
+              apiUpdate="http://localhost:3000/table/updatetable"
+              apiDelete="http://localhost:3000/table/deletetable"
+              tableID="branch_id"
+            />
+          )
+        }
+      </div>
       {initFunc === "Access Tables" && (
         <button
           className="btn max-w-[350px]"
@@ -182,6 +223,9 @@ const AdminController = () => {
           Add Table
         </button>
       )}
+      {initFunc === "Add Table" && <AddTableForm setInitFunc={setInitFunc} />}
+
+
     </div>
   );
 };

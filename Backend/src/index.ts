@@ -28,6 +28,8 @@ app.use("/", require("./routes/customer"));
 app.use("/", require("./routes/branch"));
 app.use("/", require("./routes/provider"));
 app.use("/", require("./routes/review"));
+app.use("/", require("./routes/discount"));
+
 app.use("/", require("./routes/table"));
 // get domain.com/posts => get all posts
 //  
