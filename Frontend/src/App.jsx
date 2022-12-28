@@ -13,7 +13,8 @@ import Employee from "../components/Employees/Employee";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { createContext } from "react";
 import { useState } from "react";
-
+import Employee from "../components/Employees/Employee";
+import Provider from "../components/ProviderPage/Provider";
 export const userContext = createContext({});
 export const cartContext = createContext([]);
 

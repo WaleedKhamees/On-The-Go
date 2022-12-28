@@ -198,6 +198,23 @@ GET http://localhost:3000/order/getAllCookedOrders HTTP/1.1
 
 
 ###
+GET http://localhost:3000/branch/GetBranches HTTP/1.1
+
+###
+GET http://localhost:3000/provider/GetBranchIdByName/foo HTTP/1.1
+
+
+###
+POST http://localhost:3000/provider/AddDonations HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "yousefosama@gmail.com",
+    "branchlocation": "zayed",
+    "amount": 1001
+}
+
+###
 
 GET http://localhost:3000/employee/getTypeByEmail/mostafa.elsayed.2002@gmail.com HTTP/1.1
 
