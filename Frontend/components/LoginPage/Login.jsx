@@ -57,7 +57,7 @@ const LoginPage = () => {
         customer = (await axios.get(`http://localhost:3000/customer/getcustomerfromemail/${res.email}`)).data;
         const user = { ...loginInfo, ...customer, kind: res.kind };
         logUser(user);
-        navigate("/home")
+        navigate("/")
       }
       return;
     }
@@ -74,7 +74,7 @@ const LoginPage = () => {
     }
   }
   return (
-    <div className="flex justify-center pt-4">
+    <div className="flex justify-center pt-4 my-auto">
       <form className="flex-col flex items-center gap-4 min-w-[350px]" onSubmit={(e) => handleSubmit(e)}>
         <h2 className="h2 text-Headings">Login</h2>
         <div className="flex flex-col gap-1 w-full">
@@ -84,7 +84,7 @@ const LoginPage = () => {
             className="w-full py-2 px-4 rounded-lg p text-Body border border-Body placeholder:text-Small outline-none "
             placeholder="Enter your Email Address"
             ref={emailRef}
-          ></input>
+          />
           <label htmlFor="Email" className={`${error.emailError !== "" ? "visible" : "invisible"} small text-RedPrimary`}>{error.emailError}</label>
         </div>
 
@@ -95,7 +95,7 @@ const LoginPage = () => {
             className="w-full py-2 px-4 rounded-lg p text-Body border border-Body placeholder:text-Small outline-none "
             placeholder="Enter your Password"
             ref={passwordRef}
-          ></input>
+          />
           <label htmlFor="Email" className={`${error.passwordError !== "" ? "visible" : "invisible"} small text-RedPrimary`}>{error.passwordError}</label>
         </div>
 

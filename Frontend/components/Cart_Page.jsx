@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { useEffect, useState, useContext } from "react";
 import { cartContext } from "../src/App";
 import ProductCart from "./ProductCart";
@@ -9,7 +10,7 @@ function Cart_Page(props) {
     let res = 0;
     // get discount; 
     for (let i in cart) {
-      res += cart[i].qty * parseFloat(cart[i].item_price.slice(1));
+      res += cart[i].qty * parseFloat(cart[i].item_price);
     }
     setSubTotalPrice(res);
   }, [cart])
@@ -49,7 +50,16 @@ function Cart_Page(props) {
             </h2>
           </div>
           <button className="rounded-lg pr-2 pl-2 bg-RedPrimary w-full h-[50px]">
-            <p className="text-White text-center p-2 outlinebody">
+            <p
+              onClick={async () => {
+                const order = {
+                  Order_State: "pending", 
+                  Order_Price: subTotalPrice + Math.round(subTotalPrice * 0.14),
+                  Order_Date: dayjs(new Date()).format("YYYY/MM/DD"),
+
+                }
+              }}
+              className="text-White text-center p-2 outlinebody">
               Processed to CheckOut
             </p>
           </button>

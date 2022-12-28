@@ -27,6 +27,8 @@ app.use("/", require("./routes/order"));
 app.use("/", require("./routes/customer"));
 app.use("/", require("./routes/branch"));
 app.use("/", require("./routes/provider"));
+app.use("/", require("./routes/review"));
+
 // get domain.com/posts => get all posts
 //  
 // get :  put : update  delete : delete  post : create 

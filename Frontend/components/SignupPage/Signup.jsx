@@ -71,14 +71,14 @@ const SignupPage = () => {
               className="w-full py-2 px-4 rounded-lg p text-Body border border-Body placeholder:text-Small outline-none"
               placeholder="First Name"
               ref={firstNameRef}
-            ></input>
+            />
             <input
               type="text"
               id="Name"
               className="w-full py-2 px-4 rounded-lg p text-Body border border-Body placeholder:text-Small outline-none"
               placeholder="Last Name"
               ref={lastNameRef}
-            ></input>
+            />
           </div>
           <label htmlFor="name-group" className={`${error.nameError !== "" ? "visible" : "invisible"} small text-RedPrimary`}>{error.nameError}</label>
         </div>
@@ -90,7 +90,7 @@ const SignupPage = () => {
             className="w-full py-2 px-4 rounded-lg p text-Body border border-Body placeholder:text-Small outline-none"
             placeholder="Enter your Email Address"
             ref={emailRef}
-          ></input>
+          />
           <label htmlFor="Email" className={`${error.emailError !== "" ? "visible" : "invisible"} small text-RedPrimary`}>{error.emailError}</label>
         </div>
 
@@ -101,7 +101,7 @@ const SignupPage = () => {
             className="w-full py-2 px-4 rounded-lg p text-Body border border-Body placeholder:text-Small outline-none"
             placeholder="Enter your Password"
             ref={passwordRef}
-          ></input>
+          />
           <label htmlFor="Password" className={`${error.passwordError !== "" ? "visible" : "invisible"} small text-RedPrimary`}>{error.passwordError}</label>
         </div>
 
@@ -112,14 +112,14 @@ const SignupPage = () => {
             className="w-full py-2 px-4 rounded-lg p text-Body border border-Body placeholder:text-Small outline-none"
             placeholder="How much money do you want?"
             ref={walletRef}
-          ></input>
+          />
           <label htmlFor="Wallet" className={`${error.walletError !== "" ? "visible" : "invisible"} small text-RedPrimary`}>{error.walletError}</label>
         </div>
         <input
           type="submit"
           className="rounded-lg bg-RedPrimary w-full p-4 outlinebody text-White cursor-pointer"
           value="Sign Up"
-        ></input>
+        />
       </form>
     </div>
   );

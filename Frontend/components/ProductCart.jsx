@@ -4,9 +4,9 @@ import { cartContext } from "../src/App";
 import { getPath } from "../util/routerFunctions";
 import StarsRating from "./atoms/StarsRating";
 
-const ProductInfo = ({ item, Rating }) => {
-  const path = getPath();
+const ProductInfo = ({ item, rating }) => {
   const { addItem } = useContext(cartContext);
+  const path = getPath();
   const decrease = () => {
     addItem(item, item.qty - 1);
   }
@@ -21,33 +21,36 @@ const ProductInfo = ({ item, Rating }) => {
         <div className=" flex-col flex gap-2 pl-16 py-16">
           <h1 className="h1 text-White">{item.item_name}</h1>
           <p className="p  text-White">{item.item_desc} </p>
-          <StarsRating Rating={Rating} />
+          <StarsRating Rating={rating} />
         </div>
 
         <div className="flex flex-col items-center gap-2 pr-16 py-10">
-          <p className="p text-White text-center">{parseFloat(item.item_price.slice(1)) * item.qty} EGP</p>
-          <div className="flex items-center justify-center">
-            <button
-              onClick={() => decrease()}
-              className="border border-r-0 rounded-l-lg border-White   "
-            >
-              <p className="text-White text-center p px-2 py-1 ">-</p>
-            </button>
+          <p className="p text-White text-center">{(parseFloat(item.item_price) * item.qty) || item.item_price} EGP</p>
+          {path === "cart" &&
+            <div className="flex items-center justify-center">
+              <button
+                onClick={() => decrease()}
+                className="border border-r-0 rounded-l-lg border-White   "
+              >
+                <p className="text-White text-center p px-2 py-1 ">-</p>
+              </button>
 
-            <button className="border  border-White">
-              <p className="text-White text-center p px-2 py-1 ">{item.qty}</p>
-            </button>
+              <button className="border  border-White">
+                <p className="text-White text-center p px-2 py-1 ">{item.qty || 0}</p>
+              </button>
 
-            <button
-              onClick={() => increase()}
-              className="border border-l-0 rounded-r-lg border-White"
-            >
-              <p className="text-White text-center p px-2 py-1 ">+</p>
-            </button>
-          </div>
+              <button
+                onClick={() => increase()}
+                className="border border-l-0 rounded-r-lg border-White"
+              >
+                <p className="text-White text-center p px-2 py-1 ">+</p>
+              </button>
+            </div>}
 
-          {path !== "cart" && <button className="border rounded-lg border-White ">
-            <p className="text-White text-center p-2">Add to Cart</p>
+          {path !== "cart" && <button
+            onClick={() => addItem(item)}
+            className="border rounded-lg border-White w-fit">
+            <p className="text-White text-center p-2 whitespace-nowrap">Add to Cart</p>
           </button>}
         </div>
       </div>
