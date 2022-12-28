@@ -10,7 +10,7 @@ const Provider = () => {
         try {
             // get the the routes for Branches
             const res = await axios.get(
-                "http://localhost:3000/branch/GetBranches"
+                "http://localhost:3000/branch"
             );
             console.log(res.data);
             setBranches(res.data);

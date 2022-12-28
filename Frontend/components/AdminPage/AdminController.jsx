@@ -58,9 +58,6 @@ const AdminController = () => {
 
   /////////////////////////////////////////////////////////////////////////////////////////
 
-  useEffect(() => {
-    console.log(items, employees);
-  }, [items, employees])
   const getItem = async () => {
     const response = await axios.get("http://localhost:3000/item");
     const items = await response.data;

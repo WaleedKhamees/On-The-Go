@@ -99,32 +99,24 @@ export const validateEmployeeForm = (employee) => {
         email: "",
         password: ""
     }
-    /* 
-     {
-        email: form.Email.value,
-        password: form.Password.value,
-        first_name: form.FName.value,
-        last_name: form.LName.value,
-        StartTime: form.Stime.value,
-        EndTime: form.Etime.value,
-        TypeofEmployee: form.Typeofemployee.value,
-        Supervise_ID: form.SupervisorID.value ?? null,
-        Branch_ID: form.BranchID.value,
-        salary: form.Salary.value,
-     }
-    */
     let error = false;
-    if (!validateName(employee.first_name) || !validateName(employee.last_name)) {
-        error = 1;
-        res.name = "please enter a valid Name";
-    }
-    if (!validateName(employee.StartTime) || !validateName(employee.EndTime)) {
-        error = 1;
-        res.times = "please enter valid times";
-    }
-    if (!validateNumber(Supervise_ID)) {
-        error = 1;
-        res.supervise_ID = "please enter a valid supervisor ID";
-    }
-    // to be completed 
+    const nameValidation = !validateName(employee.first_name) || !validateName(employee.last_name);
+    const emailValidation = !validateEmail(employee.email);
+    const timesValidation = !validateString(employee.StartTime) || !validateString(employee.EndTime);
+    const salaryValidation = !validateNumber(employee.salary);
+    const passwordValidation = !validateName(employee.password);
+    if (nameValidation || emailValidation || timesValidation || salaryValidation || passwordValidation)
+        error = true;
+    if (nameValidation)
+        res.name = "Please enter a valid Name";
+    if (emailValidation)
+        res.email = "Please enter a valid email";
+    if (timesValidation)
+        res.times = "Please enter valid times";
+    if (salaryValidation)
+        res.salary = "Please enter a valid salary (non negative number)";
+    if (passwordValidation)
+        res.password = "Please enter a valid password";
+
+    return { error, res };
 }

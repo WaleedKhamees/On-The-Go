@@ -1,17 +1,26 @@
 import axios from "axios";
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
+import { validateEmployeeForm } from "../../util/validations";
 
 const AddEmployeeForm = ({ setInitFunc }) => {
     const typeOfEmployeeRef = useRef();
+    const branchRef = useRef();
+    const [branches, setBranches] = useState([]);
     const [error, setError] = useState({
         name: "",
         times: "",
-        supervise_ID: "",
-        branch_ID: "",
         salary: "",
         email: "",
         password: ""
     });
+    const getBranches = async () => {
+        const branches = await axios.get("http://localhost:3000/branch");
+        console.log(branches.data);
+        setBranches(branches.data);
+    }
+    useEffect(() => {
+        getBranches();
+    }, [])
     return (
         <form className="w-full bg-White flex flex-col items-center gap-4"
             onSubmit={async (e) => {
@@ -25,14 +34,26 @@ const AddEmployeeForm = ({ setInitFunc }) => {
                     last_name: form.LName.value,
                     StartTime: form.Stime.value,
                     EndTime: form.Etime.value,
-                    TypeofEmployee: form.Typeofemployee.value,
+                    TypeofEmployee: typeOfEmployeeRef.current.value,
                     Supervise_ID: Number.parseInt(form.SupervisorID.value) === NaN ? null : Number.parseInt(form.SupervisorID.value),
-                    Branch_ID: form.BranchID.value,
-                    salary: form.Salary.value,
+                    Branch_ID: Number.parseInt(branchRef.current.value),
+                    salary: Number.parseInt(form.Salary.value),
                 }
-                const validate =
+                const validate = validateEmployeeForm(employee);
+                console.log(validate.res);
+                if (validate.error)
+                    setError(validate.res);
+                else {
+                    setError({
+                        name: "",
+                        times: "",
+                        salary: "",
+                        email: "",
+                        password: ""
+                    })
                     await axios.post("http://localhost:3000/employee/insert", employee);
-                setInitFunc("Access Employees")
+                    setInitFunc("Access Employees")
+                }
             }}
 
         >
@@ -55,12 +76,12 @@ const AddEmployeeForm = ({ setInitFunc }) => {
                         className="w-full py-2 px-4 rounded-lg p text-Body border border-Body placeholder:text-Small outline-none"
                         placeholder="Last Name"
                     />
-                    <label
-                        className={`${error.name ? "block" : "hidden"} text-RedPrimary small`}
-                        htmlFor="EmployeeName">
-                        {error.name}
-                    </label>
                 </div>
+                <label
+                    className={`${error.name ? "block" : "hidden"} text-RedPrimary small`}
+                    htmlFor="EmployeeName">
+                    {error.name}
+                </label>
             </div>
             <div className="flex flex-col gap-1">
                 <input
@@ -88,29 +109,24 @@ const AddEmployeeForm = ({ setInitFunc }) => {
                     {error.password}
                 </label>
             </div>
-            <div>
-                <input
-                    type="text"
-                    id="BranchID"
-                    className="py-2 px-4 rounded-lg p text-Body border border-Body placeholder:text-Small outline-none w-[350px]"
-                    placeholder="Enter Branch's ID"
-                />
-                <label
-                    className={`${error.branch_ID ? "block" : "hidden"} text-RedPrimary small`}
-                    htmlFor="BranchID">
-                    {error.branch_ID}
-                </label>
-            </div>
+            <select
+                ref={branchRef}
+                className="flex max-w-[350px] justify-between items-center cursor-pointer px-4 py-2 border border-Body w-full rounded-lg appearance-none select"
+                defaultChecked="Select Branch">
+                <option value="Select Branch" disabled>Select Branch</option>
+                {branches &&
+                    branches.map(branch => <option key={branch.loaction} value={branch.branch_id}>{branch.loaction}</option>)}
+            </select >
             <select
                 className="flex max-w-[350px] justify-between items-center cursor-pointer px-4 py-2 border border-Body w-full rounded-lg appearance-none select"
                 ref={typeOfEmployeeRef}
                 defaultChecked="Select Type of Employee">
                 <option value="Select Type of Employee" disabled>Select Type of Employee</option>
-                <option value="chief">chief</option>
+                <option value="chef">chef</option>
                 <option value="delivery">delivery</option>
                 <option value="waiter">waiter</option>
             </select>
-            <div>
+            <div className="flex flex-col gap-1">
                 <input
                     type="text"
                     id="SupervisorID"
@@ -158,7 +174,7 @@ const AddEmployeeForm = ({ setInitFunc }) => {
                 </label>
             </div>
             <input type="submit" value="Add Employee" className="cursor-pointer btn max-w-[350px]" />
-        </form>
+        </form >
     )
 }
 export default AddEmployeeForm;
