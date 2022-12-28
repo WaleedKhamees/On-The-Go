@@ -12,7 +12,7 @@ function Profile(props) {
         <div className="flex flex-col w-full">
           <label
             htmlFor="first_name"
-            class="block mb-2 small text-Small dark:text-white"
+            className="block mb-2 small text-Small dark:text-white"
           >
             Email
           </label>
@@ -21,12 +21,12 @@ function Profile(props) {
             id="Email"
             className="placeholder:text-Small text-body px-4 py-2 border border-Body rounded-lg outline-none"
             placeholder="Enter your Email Address"
-          ></input>
+          />
         </div>
         <div className="flex flex-col w-full">
           <label
             htmlFor="first_name"
-            class="block mb-2 small text-Small dark:text-white"
+            className="block mb-2 small text-Small dark:text-white"
           >
             Old Password
           </label>
@@ -35,13 +35,13 @@ function Profile(props) {
             id="Password"
             className="placeholder:text-Small text-body px-4 py-2 border border-Body rounded-lg outline-none"
             placeholder="Enter your old Password"
-          ></input>
+          />
         </div>
 
         <div className="flex flex-col w-full">
           <label
             htmlFor="first_name"
-            class="block mb-2 small text-Small dark:text-white"
+            className="block mb-2 small text-Small dark:text-white"
           >
             New Password
           </label>
@@ -50,13 +50,13 @@ function Profile(props) {
             id="Password"
             className="placeholder:text-Small text-body px-4 py-2 border border-Body rounded-lg outline-none"
             placeholder="Enter your New Password"
-          ></input>
+          />
         </div>
 
         <div className="flex flex-col w-full">
           <label
             htmlFor="first_name"
-            class="block mb-2 small text-Small dark:text-white"
+            className="block mb-2 small text-Small dark:text-white"
           >
             Confirm New Password
           </label>
@@ -65,7 +65,7 @@ function Profile(props) {
             id="Password"
             className="placeholder:text-Small text-body px-4 py-2 border border-Body rounded-lg outline-none"
             placeholder="Enter you new password"
-          ></input>
+          />
         </div>
 
         <button className="rounded-lg pr-2 pl-2 bg-RedPrimary w-full ">

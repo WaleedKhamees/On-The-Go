@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import AddEmployeeForm from "./AddEmployeeForm"
+import AddProductForm from "./AddProductForm";
 import Table from "./Table";
 
 const EMPLOYEE_EDITABLE = {
@@ -28,7 +29,7 @@ const AdminController = () => {
   // const [funcActive, setFuncActive] = useState(false);
   // const [funcHasChose, setFuncHasChose] = useState(false);
   // const [func, setfunc] = useState("What do you want to do?");
-  const initFuncOptions = ["Access Employees", "Access Menu"];
+  const initFuncOptions = ["Access Employees", "Access Products"];
 
   const [initFunc, setInitFunc] = useState("");
   const selectInitFunc = async (func) => {
@@ -36,7 +37,7 @@ const AdminController = () => {
       case "Access Employees":
         getEmployees();
         break;
-      case "Access Menu":
+      case "Access Products":
         getItem();
         break;
     }
@@ -95,7 +96,7 @@ const AdminController = () => {
         }
 
         {
-          items && initFunc === "Access Menu" && items.length &&
+          items && initFunc === "Access Products" && items.length &&
           <Table
             data={items}
             itemEditable={ITEM_EDITABLE}
@@ -111,7 +112,24 @@ const AdminController = () => {
         &&
         <AddEmployeeForm setInitFunc={setInitFunc} />
       }
-      {initFunc === "Access Employees" && <button className="btn max-w-[350px]" onClick={() => { setInitFunc("Add Employee") }}>Add Employee</button>}
+      {
+        initFunc === "Add Product"
+        &&
+        <AddProductForm setInitFunc={setInitFunc} />
+      }
+      {
+        initFunc === "Access Employees"
+        &&
+        <button hidden={initFunc !== "Access Employees"} className="btn max-w-[350px]" onClick={() => { setInitFunc("Add Employee") }}>
+          Add Employee
+        </button>
+      }
+      {
+        initFunc === "Access Products" &&
+        <button className="btn max-w-[350px]" hidden={initFunc !== "Access Products"} onClick={() => { setInitFunc("Add Product") }}>
+          Add Product
+        </button>
+      }
     </div >
   );
 };

@@ -51,6 +51,8 @@ const App = () => {
   };
 
   const clearUser = () => {
+    setCart([]);
+    localStorage.removeItem("cart");
     localStorage.removeItem("user");
     setUser(null);
   };

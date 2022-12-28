@@ -33,8 +33,8 @@ export const itemController = {
     insertItem: async (req: Request, res: Response) => {
         try {
             const newitem = { item_name: req.body.item_name, item_desc: req.body.item_desc, item_price: req.body.item_price, img_url: req.body.img_url, discount_id: req.body.discount_id, category: req.body.category };
-            await client.query(`
-            insert into item (item_name,item_desc,item_price,img_url,discount_id,category) values ('${newitem.item_name}','${newitem.item_desc}', ${newitem.item_price}, '${newitem.img_url}', ${newitem.discount_id}, '${newitem.category}');`);
+            await client.query(
+            `insert into item (item_name,item_desc,item_price,img_url,discount_id,category) values ('${newitem.item_name}','${newitem.item_desc}', ${newitem.item_price}, '${newitem.img_url}', ${newitem.discount_id}, '${newitem.category}');`);
             res.status(201).json({ message: "Inserterd successfully" });
         }
         catch (err) {

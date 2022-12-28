@@ -42,7 +42,7 @@ const AdminPage = () => {
       navigate("/employee");
     else if (user.kind === 'c')
       navigate("/home");
-  }, [])
+  }, [user])
   return (
     <div className="flex flex-col gap-16 py-16">
       <div className="flex flex-col gap-4 items-center">

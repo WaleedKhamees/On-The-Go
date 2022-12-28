@@ -1,5 +1,6 @@
 import { client } from "../index"
 import { Request, Response } from 'express';
+import * as bcrypt from 'bcrypt';
 
 
 export const employeeController = {
@@ -36,11 +37,14 @@ export const employeeController = {
     },
     insertEmployee: async (req: Request, res: Response) => {
         try {
-            const user = { email: req.body.email, password: req.body.password, first_name: req.body.first_name, last_name: req.body.last_name, StartTime: req.body.StartTime, EndTime: req.body.EndTime, TypeofEmployee: req.body.TypeofEmployee, Supervise_ID: req.body.Supervise_ID, Branch_ID: req.body.Branch_ID, salary: req.body.salary };
+            const hasedPassword = await bcrypt.hash(req.body.password, 10);
+            const user = { email: req.body.email, password: hasedPassword, first_name: req.body.first_name, last_name: req.body.last_name, StartTime: req.body.StartTime, EndTime: req.body.EndTime, TypeofEmployee: req.body.TypeofEmployee, Supervise_ID: req.body.Supervise_ID, Branch_ID: req.body.Branch_ID, salary: req.body.salary };
             await client.query(`
-            insert into userx (email, password,Kind) values ('${user.email}', '${user.password}','e');`);
-            await client.query(`
-            insert into Employee (Employee_ID,first_name, last_name,TypeofEmployee,Supervise_ID,Branch_ID, StartTime,EndTime,salary) values ((select userx_id from userx as u where u.email = '${user.email}'),'${user.first_name}', '${user.last_name}', '${user.TypeofEmployee}', ${user.Supervise_ID}, ${user.Branch_ID}, '${user.StartTime}', '${user.EndTime}', ${user.salary});`);
+            insert into userx (email,password,Kind) values ('${user.email}', '${user.password}','e');`);
+            await client.query(user.Supervise_ID ?
+                `insert into Employee (Employee_ID,first_name,last_name,TypeofEmployee,Supervise_ID,Branch_ID, StartTime,EndTime,salary) values ((select userx_id from userx as u where u.email = '${user.email}'),'${user.first_name}', '${user.last_name}', '${user.TypeofEmployee}', ${user.Supervise_ID}, ${user.Branch_ID}, '${user.StartTime}', '${user.EndTime}', ${user.salary});`
+                :
+                `insert into Employee (Employee_ID,first_name,last_name,TypeofEmployee,Branch_ID, StartTime,EndTime,salary) values ((select userx_id from userx as u where u.email = '${user.email}'),'${user.first_name}', '${user.last_name}', '${user.TypeofEmployee}', ${user.Branch_ID}, '${user.StartTime}', '${user.EndTime}', ${user.salary});`);
             res.status(201).json({ message: "Inserterd successfully" });
         }
         catch (err) {

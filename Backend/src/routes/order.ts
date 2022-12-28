@@ -3,7 +3,7 @@ import { orderController } from "../controllers/orderCotroller";
 const router = Router();
 
 
-router.post("/order/insertorder", orderController.insertOrder);
+router.post("/order/insert", orderController.insertOrder);
 router.patch("/order/updateorder", orderController.updateState);
 router.get("/order/getAllOrders", orderController.getAllOrders);
 router.get("/order/getAllOrders/:id", orderController.getAllOrderforempolyee);

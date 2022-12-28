@@ -31,7 +31,7 @@ const ProductsPage = (props) => {
   );
 
   return (
-    <div className="py-4 px-4 flex flex-col">
+    <div className="py-4 mx-auto">
       <div className="flex justify-center gap-8 py-8">
         <FilterBtn Category="Eastern" />
         <FilterBtn Category="Western" />
@@ -39,7 +39,7 @@ const ProductsPage = (props) => {
       </div>
 
       {data && Categories.Eastern && (
-        <div className="grid grid-cols-4 gap-4 px-4">
+        <div className="grid grid-cols-4 gap-4 px-4 mx-auto">
           {data
             .filter((item) => item.category === "Eastern")
             .map((item) => (
@@ -51,7 +51,7 @@ const ProductsPage = (props) => {
       )}
 
       {data && Categories.Western && (
-        <div className="grid md:grid-cols-1 grid-cols-4 gap-4 px-4">
+        <div className="grid md:grid-cols-1 grid-cols-4 gap-4 px-4 mx-auto">
           {data
             .filter((item) => item.category === "Western")
             .map((item) => (
@@ -63,7 +63,7 @@ const ProductsPage = (props) => {
       )}
 
       {data && Categories.Drinks && (
-        <div className="grid grid-cols-4 gap-4 px-4">
+        <div className="grid grid-cols-4 gap-4 px-4 mx-auto">
           {data
             .filter((item) => item.category === "Drinks")
             .map((item) => (
