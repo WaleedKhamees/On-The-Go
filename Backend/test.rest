@@ -312,3 +312,42 @@ Content-Type: application/json
 ###
 
 DELETE  http://localhost:3000/discount/delete/4 HTTP/1.1
+GET http://localhost:3000/table/getTables HTTP/1.1
+
+
+###
+
+GET http://localhost:3000/table/getTableforbranch/2 HTTP/1.1
+
+
+
+###
+PATCH  http://localhost:3000/table/updatetable HTTP/1.1
+Content-Type: application/json
+
+{
+  "table_num":1,
+   "branch_id":1,
+   "cardinality":10
+}
+       
+###
+POST  http://localhost:3000/table/inserttable HTTP/1.1
+Content-Type: application/json
+
+{
+  "table_num":1,
+   "branch_id":1,
+   "cardinality":1
+}
+      
+
+###
+DELETE  http://localhost:3000/table/deletetable HTTP/1.1
+Content-Type: application/json
+
+{
+  "table_num":2,
+   "branch_id":1
+}
+      

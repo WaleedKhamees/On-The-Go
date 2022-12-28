@@ -30,6 +30,7 @@ app.use("/", require("./routes/provider"));
 app.use("/", require("./routes/review"));
 app.use("/", require("./routes/discount"));
 
+app.use("/", require("./routes/table"));
 // get domain.com/posts => get all posts
 //  
 // get :  put : update  delete : delete  post : create 
