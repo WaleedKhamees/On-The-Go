@@ -119,9 +119,7 @@ const AddEmployeeForm = ({ setInitFunc }) => {
             </select >
             <select
                 className="flex max-w-[350px] justify-between items-center cursor-pointer px-4 py-2 border border-Body w-full rounded-lg appearance-none select"
-                ref={typeOfEmployeeRef}
-                defaultChecked="Select Type of Employee">
-                <option value="Select Type of Employee" disabled>Select Type of Employee</option>
+                ref={typeOfEmployeeRef}>
                 <option value="chef">chef</option>
                 <option value="delivery">delivery</option>
                 <option value="waiter">waiter</option>

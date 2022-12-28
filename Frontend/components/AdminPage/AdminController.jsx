@@ -111,12 +111,7 @@ const AdminController = () => {
         className="flex max-w-[350px] justify-between items-center cursor-pointer px-4 py-2 border border-Body w-full rounded-lg appearance-none select"
         onChange={(e) => {
           selectInitFunc(e.target.value);
-        }}
-        defaultValue={"Select an option"}
-      >
-        <option value="Select an option" disabled>
-          Select an option
-        </option>
+        }}>
         {initFuncOptions.map((func) => (
           <option key={func} value={func}>
             {func}

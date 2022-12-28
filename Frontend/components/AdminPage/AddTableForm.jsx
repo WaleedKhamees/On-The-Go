@@ -13,7 +13,6 @@ const AddTableForm = ({ setInitFunc }) => {
 
   const getBranches = async () => {
     const branches = await axios.get("http://localhost:3000/branch");
-    console.log(branches.data);
     setBranches(branches.data);
   };
   useEffect(() => {
@@ -33,22 +32,23 @@ const AddTableForm = ({ setInitFunc }) => {
           branch_id: Number.parseInt(branchRef.current.value),
         };
 
-        var x = 1;
         try {
           const res = await axios.post(
             "http://localhost:3000/table/inserttable",
             table
           );
+          setInitFunc("Access Tables");
         } catch {
           setError({
             tablenum: "Table Number is already exist in This Branch",
           });
-          x = 0;
         }
-
-        if (x === 1) setInitFunc("Access Tables");
       }}
     >
+      <span className="material-symbols-outlined ml-auto mr-4 cursor-pointer"
+        onClick={() => { setInitFunc("Access Tables") }}>
+        close
+      </span>
       <div className="flex flex-col gap-1">
         <input
           id="Table_Number"
@@ -57,9 +57,8 @@ const AddTableForm = ({ setInitFunc }) => {
           placeholder="Enter Table Number"
         />
         <label
-          className={`${
-            error.tablenum ? "block" : "hidden"
-          } text-RedPrimary small`}
+          className={`${error.tablenum ? "block" : "hidden"
+            } text-RedPrimary small`}
         >
           {error.tablenum}
         </label>
@@ -68,12 +67,7 @@ const AddTableForm = ({ setInitFunc }) => {
       <select
         ref={CardinalityRef}
         className="flex max-w-[350px] justify-between items-center cursor-pointer px-4 py-2 border border-Body w-full rounded-lg appearance-none select"
-        defaultChecked="Select Cardinality"
       >
-        <option value="Select Cardinality" disabled>
-          Select Cardinality
-        </option>
-
         {options.map((key) => (
           <option key={key} value={key}>
             {key}
@@ -84,11 +78,7 @@ const AddTableForm = ({ setInitFunc }) => {
       <select
         ref={branchRef}
         className="flex max-w-[350px] justify-between items-center cursor-pointer px-4 py-2 border border-Body w-full rounded-lg appearance-none select"
-        defaultChecked="Select Branch"
       >
-        <option value="Select Branch" disabled>
-          Select Branch
-        </option>
         {branches &&
           branches.map((branch) => (
             <option key={branch.loaction} value={branch.branch_id}>
@@ -102,7 +92,7 @@ const AddTableForm = ({ setInitFunc }) => {
         value="Add Table"
         className="cursor-pointer btn max-w-[350px]"
       />
-    </form>
+    </form >
   );
 };
 export default AddTableForm;
