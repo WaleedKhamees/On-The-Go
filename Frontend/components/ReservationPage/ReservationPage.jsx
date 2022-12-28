@@ -7,6 +7,7 @@ import BranchNum from "./BranchNumber";
 import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
+import { useEffect } from "react";
 export const ReserveContext = createContext({});
 const Reservation = () => {
   const [error, setError] = useState("");
@@ -14,12 +15,14 @@ const Reservation = () => {
   const [reservation, setReservation] = useState({});
 
   const navigate = useNavigate();
-
+  useEffect(() => {
+    console.log(reservation);
+  }, [reservation])
   const handleSubmit = async (e) => {
     e.preventDefault();
     const reservationObj = {
       Cardinality: reservation.How,
-      Reservation_Date: dayjs(reservation.CheckinDate).format("YYYY-MM-DD"),
+      Reservation_Date: dayjs(reservation.CheckinDate).format("YYYY/MM/DD"),
       Reservation_Time: reservation.When,
       email: JSON.parse(localStorage.getItem("user")).email,
       Branch_ID: reservation.BranchNumber,
@@ -57,15 +60,14 @@ const Reservation = () => {
           <BranchNum />
         </ReserveContext.Provider>
         <span
-          className={`small text-RedPrimary p-1 ${
-            error === "" ? "hidden" : "visible"
-          }`}
+          className={`small text-RedPrimary p-1 ${error === "" ? "hidden" : "visible"
+            }`}
         >
           {error}
         </span>
         <button
           type="submit"
-          className="rounded-lg bg-RedPrimary flex-grow p-4 max-w-fit min-w-[360px]"
+          className="rounded-lg bg-RedPrimary flex-grow p-4 max-w-fit min-w-[350px]"
         >
           <p className="outlinebody text-White">Reserve</p>
         </button>

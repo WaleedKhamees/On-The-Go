@@ -1,8 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { BiChevronDown } from "react-icons/bi";
 import { AiOutlineBranches } from "react-icons/ai";
 
 import { ReserveContext } from "./ReservationPage";
+import axios from "axios";
 
 const BranchNum = () => {
   const { reservation, setReservation } = useContext(ReserveContext);
@@ -10,18 +11,32 @@ const BranchNum = () => {
   const [isActive, setIsActive] = useState(false);
   const [hasChose, setHasChose] = useState(false);
   const [BranchNum, setBranchNum] = useState("Duration?");
-  const options = ["1", "2", "3", "4"];
+  const [branches, setBranches] = useState([]);
 
-  const handleClick = (event, key) => {
+
+  const getBranches = async () => {
+    try {
+      const res = (await axios.get("http://localhost:3000/branch")).data;
+      console.log(res);
+      setBranches(res);
+    }
+    catch (error) {
+      console.log(error);
+    }
+  }
+  const handleClick = (event, id, loaction) => {
     setHasChose(true);
     setIsActive(false);
-    setBranchNum(key);
-    setReservation({ ...reservation, BranchNumber: key });
+    setBranchNum(loaction);
+    setReservation({ ...reservation, BranchNumber: id });
     console.log(reservation);
   };
+  useEffect(() => {
+    getBranches();
+  }, [])
 
   return (
-    <div className="max-w-fit min-w-[360px]">
+    <div className="relative w-[350px]">
       <div
         className="flex justify-between items-center cursor-pointer px-4 py-2 border border-Body w-full rounded-lg"
         onClick={(e) => setIsActive(!isActive)}
@@ -40,15 +55,15 @@ const BranchNum = () => {
           }`}
         onMouseLeave={(e) => setIsActive(false)}
       >
-        {options.map((option) => (
+        {branches.map((branch) => (
           <li
-            key={option}
+            key={branch.branch_id}
             className="flex items-center gap-4 px-4 py-2 bg-White hover:bg-Small hover:text-White w-full fill-Body hover:fill-White text-Body z-50"
-            onClick={(event) => handleClick(event, option)}
+            onClick={(event) => handleClick(event, branch.branch_id, branch.loaction)}
           >
             <div className="flex gap-4 items-center">
               <AiOutlineBranches size={16} />
-              {option}
+              {branch.loaction}
             </div>
           </li>
         ))}

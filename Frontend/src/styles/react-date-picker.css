@@ -258,20 +258,32 @@
   width: var(--rdp-cell-size);
   max-width: var(--rdp-cell-size);
   height: var(--rdp-cell-size);
-  color: var(--rdp-text-color);
   margin: 0;
   border: 2px solid transparent;
   border-radius: 100%;
 }
-.rdp-day:hover {
-  background: var(--rdp-background-color-hover);
+
+.rdp-day_today:not(.rdp-day_outside) {
+  font-weight: bold;
 }
 
 .rdp-day_selected {
-  color: #fefefe;
-  background-color: var(--rdp-accent-color) !important;
+  color: white;
   opacity: 1;
+  background-color: var(--rdp-accent-color) !important;
 }
+
+.rdp-day_outside {
+  opacity: 0.5;
+}
+
+.rdp-day_selected:focus-visible {
+  /* Since the background is the same use again the outline */
+  outline: var(--rdp-outline);
+  outline-offset: 2px;
+  z-index: 1;
+}
+
 .rdp:not([dir="rtl"]) .rdp-day_range_start:not(.rdp-day_range_end) {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;

@@ -10,21 +10,18 @@ const CheckinDate = () => {
   dayjs.extend(advancedFormat);
   let footer = <p className="text-center">Please pick a day.</p>;
   useEffect(() => {
-    footer = (
-      <div className="flex justify-center mt-2">
-        <p>You've picked {dayjs(selected).format("MMM Do, YYYY")}.</p>
-      </div>
-    );
-    setReservation({ ...reservation, CheckinDate: selected });
-    console.log(reservation);
-  }, [selected]);
+    footer = <div className="flex justify-center mt-2">
+      <p>You've picked {dayjs(selected).format("MMM Do, YYYY")}.</p>
+    </div>
+    setReservation({ ...reservation, CheckinDate: selected })
+  }, [selected])
   return (
     <DayPicker
       mode="single"
       selected={selected}
       onSelect={setSelected}
-      footer={footer}
-      defaultMonth={new Date("2022")}
+      defaultMonth={(new Date())}
+      fromDate={(new Date())}
     />
   );
 };

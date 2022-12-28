@@ -22,7 +22,7 @@ const How = () => {
   };
 
   return (
-    <div className="max-w-fit min-w-[360px]">
+    <div className="w-[350px] relative">
       <div
         className="flex cursor-pointer justify-between items-center px-4 py-2 border border-Body w-full rounded-lg"
         onClick={(e) => setIsActive(!isActive)}
