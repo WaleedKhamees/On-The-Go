@@ -10,11 +10,11 @@ import ProductsPage from "../components/ProductPage/ProductPage";
 import Cart_Page from "../components/Cart_Page";
 import ProductInfoPage from "../components/ProductInfoPage"
 import Employee from "../components/Employees/Employee";
+import Provider from "../components/ProviderPage/Provider";
+
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { createContext } from "react";
 import { useState } from "react";
-import Employee from "../components/Employees/Employee";
-import Provider from "../components/ProviderPage/Provider";
 export const userContext = createContext({});
 export const cartContext = createContext([]);
 
@@ -78,6 +78,7 @@ const App = () => {
               <Route path="/reservations" element={<Reservation />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/employee" element={<Employee />} />
+              <Route path="/provider" element={<Provider />} />
             </Routes>
             <Footer />
           </userContext.Provider>

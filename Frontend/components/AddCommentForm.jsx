@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useContext } from "react";
 import { useState } from "react";
-import ReactStarRating from "react-star-ratings-component";
+// import ReactStarRating from "react-star-ratings-component";
 import { userContext } from "../src/App";
 
 
@@ -51,7 +51,7 @@ const AddCommetForm = ({ id }) => {
                     placeholder="Type Your Review"
                 ></textarea>
                 <div className="flex ml-1">
-                    <ReactStarRating
+                    {/* <ReactStarRating
                         numberOfStar={5}
                         numberOfSelectedStar={5}
                         colorFilledStar="#FFD800"
@@ -63,7 +63,7 @@ const AddCommetForm = ({ id }) => {
                             setRating(val);
                             console.log(val);
                         }}
-                    />
+                    /> */}
                 </div>
                 <button className="rounded-lg bg-RedPrimary w-full p-4"
                     type="submit">
