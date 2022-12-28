@@ -23,7 +23,6 @@ const App = () => {
   const [cart, setCart] = useState(
     JSON.parse(localStorage.getItem("cart")) ?? []
   );
-
   const addItem = (item, qty = undefined) => {
     const cart = JSON.parse(localStorage.getItem("cart")) ?? [];
     let flag = 0;
@@ -45,6 +44,10 @@ const App = () => {
     if (!flag) cart.push({ ...item, qty: 1 });
     storeCart(cart);
   };
+  const clearCart = () => {
+    setCart([]);
+    localStorage.removeItem("cart");
+  }
   const storeCart = (cart) => {
     const cartString = JSON.stringify(cart);
     localStorage.setItem("cart", cartString);
@@ -52,10 +55,9 @@ const App = () => {
   };
 
   const clearUser = () => {
-    setCart([]);
-    localStorage.removeItem("cart");
     localStorage.removeItem("user");
     setUser(null);
+    clearCart();
   };
   const logUser = (user) => {
     localStorage.setItem("user", JSON.stringify(user));
@@ -64,7 +66,7 @@ const App = () => {
   return (
     <Router>
       <div className="min-h-screen relative flex flex-col">
-        <cartContext.Provider value={{ cart, addItem }}>
+        <cartContext.Provider value={{ cart, addItem, clearCart }}>
           <userContext.Provider value={{ user, clearUser, logUser }}>
             <NavBar />
             <Routes>

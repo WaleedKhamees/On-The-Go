@@ -114,14 +114,14 @@ DELETE  http://localhost:3000/item/delete/5 HTTP/1.1
 
 ###
 
-POST http://localhost:3000/order/insertorder HTTP/1.1
+POST http://localhost:3000/order/insert HTTP/1.1
 Content-Type: application/json
 
 {
-  "Order_State":"cooking",
-  "Order_Price":90,
-  "Order_Date" :"2020-09-18",
-  "Employee_ID":61  
+  "order_id":"12",
+  "order_price":90,
+  "order_state" :"2020-09-18",
+  "email": "walid@gmail.com"
 }
  
 ###
@@ -270,9 +270,11 @@ GET http://localhost:3000/order/getordersforcutomer/mostafa.elsayed.2002@gmail.c
 
 ###
 GET http://localhost:3000/order/getitemsfororder/2 HTTP/1.1
+
+###
 GET http://localhost:3000/review HTTP/1.1
 
 
-###
+/###
 GET http://localhost:3000/review/1 HTTP/1.1
 

@@ -5,34 +5,30 @@ export const orderController = {
     insertOrder: async (req: Request, res: Response) => {
 
         const order = {
-            Order_State: req.body.Order_State, Order_Price: req.body.Order_Price,
-            Order_Date: req.body.Order_Date,
-            items: req.body.items, qty: req.body.qty, email: req.body.email
+            id: req.body.order_id,
+            state: req.body.order_state,
+            price: req.body.order_price,
+            items: req.body.items,
+            email: req.body.email,
         };
-        console.log(req.body);
         try {
 
-            const Customer_ID = (
-                await client.query(
-                    `select userx_id from UserX where email='${order.email}';`
-                )
-            ).rows[0];
-
-
-
+            const { userx_id: customerID, wallet } =
+                (await client.query
+                    (`SELECT * from userx,customer where email = '${order.email}' and userx_id = customer_id;`))
+                    .rows[0];
             let itemsQuery = `insert into contains values `;
-            for (let item in order.items) {
-                itemsQuery += `(${order.items.item_id}, ${Customer_ID.userx_id}  ,order,${order.qty},`
+            for (let i in order.items) {
+                itemsQuery += `(${order.items[i].item_id}, ${customerID}, '${order.id}', ${order.items[i].qty})`;
+                itemsQuery += ","
             }
-            itemsQuery = itemsQuery.slice(0, itemsQuery.length - 2);
+            itemsQuery = itemsQuery.slice(0, itemsQuery.length - 1);
+            itemsQuery += ";";
 
-            /* await client.query(
-                `insert into OrderX (Order_State, Order_Price,Order_Date) values ('${order.Order_State}', ${order.Order_Price},'${order.Order_Date}');`);
-            await client.query(
-                itemsQuery
-            ) */
-
-            res.status(201).json({ itemsQuery, });
+            await client.query(`insert into orderx (order_id, order_state, order_price) values ('${order.id}', '${order.state}', ${order.price});`);
+            await client.query(itemsQuery);
+            await client.query(`update customer set wallet=${wallet - order.price} where customer_id=${customerID};`);
+            res.status(201).json({ message: "ordered placed successfully" });
         }
         catch (err) {
             console.log(err);
@@ -40,12 +36,12 @@ export const orderController = {
         }
     },
     updateState: async (req: Request, res: Response) => {
-       
-        
-        const order = {Order_State: req.body.Order_State, Order_ID: req.body.Order_ID  }; 
-     
-            try {            
-         
+
+
+        const order = { Order_State: req.body.Order_State, Order_ID: req.body.Order_ID };
+
+        try {
+
             const item = await client.query(`update OrderX set Order_State='${order.Order_State}' where Order_ID = '${order.Order_ID}'`);
             res.status(201).json({ message: "Updated successfully" });
 
@@ -92,99 +88,99 @@ export const orderController = {
         LEFT JOIN contains on OrderX.Order_ID=contains.Order_ID
         LEFT JOIN Item     on Item.Item_iD=contains.Item_iD
         where Customer_ID=${Customer_ID.rows[0].userx_id};`);
-          
-        res.status(200).json(order.rows);
-       }
-    catch (err) {
-        console.log(err);
-        res.status(400).json();
-     }    
-  
-},
-getAllPendingOrders: async (req: Request, res: Response) => {
 
-    try {            
-        const order = await client.query(`select * from Orderx where Order_State='pending'`);
-        res.status(200).json(order.rows);
-  
-}
-catch (err) {
-    console.log(err);
-    res.status(400).json();
-}
-},
-getAllBeingDeliveredOrders: async (req: Request, res: Response) => {
+            res.status(200).json(order.rows);
+        }
+        catch (err) {
+            console.log(err);
+            res.status(400).json();
+        }
 
-    try {            
-        const order = await client.query(`select * from Orderx where Order_State='being_delivered'`);
-        res.status(200).json(order.rows);
-  
-}
-catch (err) {
-    console.log(err);
-    res.status(400).json();
-}
-},
+    },
+    getAllPendingOrders: async (req: Request, res: Response) => {
 
-getAllCookedOrders: async (req: Request, res: Response) => {
+        try {
+            const order = await client.query(`select * from Orderx where Order_State='pending'`);
+            res.status(200).json(order.rows);
 
-    try {            
-        const order = await client.query(`select * from Orderx where Order_State='cooked'`);
-        res.status(200).json(order.rows);
-  
-}
-catch (err) {
-    console.log(err);
-    res.status(400).json();
-}
-},
+        }
+        catch (err) {
+            console.log(err);
+            res.status(400).json();
+        }
+    },
+    getAllBeingDeliveredOrders: async (req: Request, res: Response) => {
+
+        try {
+            const order = await client.query(`select * from Orderx where Order_State='being_delivered'`);
+            res.status(200).json(order.rows);
+
+        }
+        catch (err) {
+            console.log(err);
+            res.status(400).json();
+        }
+    },
+
+    getAllCookedOrders: async (req: Request, res: Response) => {
+
+        try {
+            const order = await client.query(`select * from Orderx where Order_State='cooked'`);
+            res.status(200).json(order.rows);
+
+        }
+        catch (err) {
+            console.log(err);
+            res.status(400).json();
+        }
+    },
 
 
 
-updateidofcheif: async (req: Request, res: Response) => {
-    const data = { Employee_id: req.body.Employee_id,Order_ID:req.body.Order_ID}
-    try {
-        const Employee = await client.query(`update OrderX set  chef_id=${data.Employee_id}  where order_id='${data.Order_ID}'`);
-     
-        res.status(201).json({ message: "Updated successfully" });
+    updateidofcheif: async (req: Request, res: Response) => {
+        const data = { Employee_id: req.body.Employee_id, Order_ID: req.body.Order_ID }
+        try {
+            const Employee = await client.query(`update OrderX set  chef_id=${data.Employee_id}  where order_id='${data.Order_ID}'`);
+
+            res.status(201).json({ message: "Updated successfully" });
+        }
+        catch (err) {
+            console.log(err);
+            res.status(400).json();
+        }
     }
-    catch (err) {
-        console.log(err);
-        res.status(400).json();
-    }
-}
-,
+    ,
 
 
-updateidofwaiter: async (req: Request, res: Response) => {
-    const data = { Employee_id: req.body.Employee_id,Order_ID:req.body.Order_ID}
-    try {
-        const Employee = await client.query(`update OrderX set  waiter_id=${data.Employee_id}  where order_id='${data.Order_ID}'`);
-     
-        res.status(201).json({ message: "Updated successfully" });
-    }
-    catch (err) {
-        console.log(err);
-        res.status(400).json();
-    }
-},
+    updateidofwaiter: async (req: Request, res: Response) => {
+        const data = { Employee_id: req.body.Employee_id, Order_ID: req.body.Order_ID }
+        try {
+            const Employee = await client.query(`update OrderX set  waiter_id=${data.Employee_id}  where order_id='${data.Order_ID}'`);
+
+            res.status(201).json({ message: "Updated successfully" });
+        }
+        catch (err) {
+            console.log(err);
+            res.status(400).json();
+        }
+    },
 
 
 
 
 
-updateidofdeliveryman: async (req: Request, res: Response) => {
-    const data = { Employee_id: req.body.Employee_id,Order_ID:req.body.Order_ID}
-    try {
-        const Employee = await client.query(`update OrderX set  deliveryman_id=${data.Employee_id}  where order_id='${data.Order_ID}'`);
-     
-        res.status(201).json({ message: "Updated successfully" });
-    }
-    catch (err) {
-        console.log(err);
-        res.status(400).json();
-    }
-},
+    updateidofdeliveryman: async (req: Request, res: Response) => {
+        const data = { Employee_id: req.body.Employee_id, Order_ID: req.body.Order_ID }
+        try {
+            const Employee = await client.query(`update OrderX set  deliveryman_id=${data.Employee_id}  where order_id='${data.Order_ID}'`);
+
+            res.status(201).json({ message: "Updated successfully" });
+        }
+        catch (err) {
+            console.log(err);
+            res.status(400).json();
+        }
+    },
 
 
 
@@ -193,38 +189,38 @@ updateidofdeliveryman: async (req: Request, res: Response) => {
 
 
 
-getordersforcutomer: async (req: Request, res: Response) => {
+    getordersforcutomer: async (req: Request, res: Response) => {
 
-    try {  
-        const Customer_ID = await client.query(`select UserX_ID from UserX where Email='${req.params.email}';`);
-        const order = await client.query(`select distinct OrderX.Order_ID,Order_State,Order_Price from Orderx ,contains where contains.Order_ID=OrderX.Order_ID and  Customer_ID=${Customer_ID.rows[0].userx_id};`);
+        try {
+            const Customer_ID = await client.query(`select UserX_ID from UserX where Email='${req.params.email}';`);
+            const order = await client.query(`select distinct OrderX.Order_ID,Order_State,Order_Price from Orderx ,contains where contains.Order_ID=OrderX.Order_ID and  Customer_ID=${Customer_ID.rows[0].userx_id};`);
 
-        res.status(200).json(order.rows);
-}
-catch (err) {
-    console.log(err);
-    res.status(400).json();
-}
-},
-
-
+            res.status(200).json(order.rows);
+        }
+        catch (err) {
+            console.log(err);
+            res.status(400).json();
+        }
+    },
 
 
 
-getitemsfororder: async (req: Request, res: Response) => {
 
-    try {            
-        const items = await client.query(`select item.Item_iD,Quantity,Item_Name,Item_Desc,Item_Price,Img_url from 
+
+    getitemsfororder: async (req: Request, res: Response) => {
+
+        try {
+            const items = await client.query(`select item.Item_iD,Quantity,Item_Name,Item_Desc,Item_Price,Img_url from 
         item ,contains 
         where order_id='${req.params.order_id}' and item.Item_iD=contains.Item_iD ;`);
-        res.status(200).json(items.rows);
-}
-catch (err) {
-    console.log(err);
-    res.status(400).json();
-}
+            res.status(200).json(items.rows);
+        }
+        catch (err) {
+            console.log(err);
+            res.status(400).json();
+        }
 
-}
+    }
 
 
 

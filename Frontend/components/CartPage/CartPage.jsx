@@ -1,14 +1,15 @@
-import dayjs from "dayjs";
+import axios from "axios";
 import { useEffect, useState, useContext } from "react";
-import { cartContext } from "../../src/App";
+import { cartContext, userContext } from "../../src/App";
 import ProductCart from "../atoms/ProductCart";
 
 function Cart_Page(props) {
-  const { cart } = useContext(cartContext);
+  const { cart, clearCart } = useContext(cartContext);
+  const { user, logUser } = useContext(userContext);
+  const [message, setMessage] = useState("");
   const [subTotalPrice, setSubTotalPrice] = useState(0);
   useEffect(() => {
     let res = 0;
-    // get discount; 
     for (let i in cart) {
       res += cart[i].qty * parseFloat(cart[i].item_price);
     }
@@ -41,22 +42,42 @@ function Cart_Page(props) {
             </div>
           </div>
         </div>
-        <div className="space-y-8 ">
+        <div className="flex flex-col gap-4 w-fit">
           <div className="flex justify-between ">
             <h2 className="h2">Total:</h2>
-            <h2 className="h2 text-RedPrimary">
-              {subTotalPrice + Math.round(subTotalPrice * 0.14) + 30}{" "}
+            <h2 className="h2 text-RedPrimary" id="total">
+              {cart.length ? (subTotalPrice + Math.round(subTotalPrice * 0.14) + 30) : 0}{" "}
               EGP
             </h2>
           </div>
-          <button className="rounded-lg pr-2 pl-2 bg-RedPrimary w-full h-[50px]">
+          <label htmlFor="total" className="small text-RedPrimary m-0">{message}</label>
+          <button className="rounded-lg px-4 bg-RedPrimary w-full h-[50px]">
             <p
               onClick={async () => {
-                const order = {
-                  Order_State: "pending",
-                  Order_Price: subTotalPrice + Math.round(subTotalPrice * 0.14),
-                  Order_Date: dayjs(new Date()).format("YYYY/MM/DD"),
-
+                if (cart.length) {
+                  const order = {
+                    order_id: JSON.stringify((new Date()).getTime()),
+                    order_state: "pending",
+                    order_price: (subTotalPrice + Math.round(subTotalPrice * 0.14) + 30),
+                    items: cart,
+                    email: user.email
+                  }
+                  if (user.wallet >= order.order_price) {
+                    try {
+                      clearCart();
+                      const res = (await axios.post("http://localhost:3000/order/insert", order)).data;
+                      setMessage(res.message);
+                    }
+                    catch {
+                      console.log("an error occurred");
+                    }
+                  }
+                  else {
+                    setMessage("You lack the balance to make this purchase");
+                  }
+                }
+                else {
+                  setMessage("Please Order some Items from Menu")
                 }
               }}
               className="text-White text-center p-2 outlinebody">
