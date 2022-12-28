@@ -35,7 +35,7 @@ const AddEmployeeForm = ({ setInitFunc }) => {
                     StartTime: form.Stime.value,
                     EndTime: form.Etime.value,
                     TypeofEmployee: typeOfEmployeeRef.current.value,
-                    Supervise_ID: Number.parseInt(form.SupervisorID.value) === NaN ? null : Number.parseInt(form.SupervisorID.value),
+                    Supervise_ID: Number.parseInt(form.SupervisorID.value) == NaN ? null : Number.parseInt(form.SupervisorID.value),
                     Branch_ID: Number.parseInt(branchRef.current.value),
                     salary: Number.parseInt(form.Salary.value),
                 }

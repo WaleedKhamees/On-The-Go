@@ -1,17 +1,18 @@
 import axios from "axios";
 import dayjs from "dayjs";
-import { useContext } from "react";
-import { useState } from "react";
-// import ReactStarRating from "react-star-ratings-component";
-import { userContext } from "../../src/App";
-
+import { useContext, useState } from "react";
+import { userContext } from "../../src/App"
+import StarRatings from 'react-star-ratings';
 
 const AddCommetForm = ({ id }) => {
     const [rating, setRating] = useState(5);
     const { user } = useContext(userContext);
+    const changeRating = (newRating, name) => {
+        setRating(newRating)
+    };
     return (
         <>
-            <form className="flex flex-col gap-2"
+            <form className="flex flex-col gap-4"
                 onSubmit={async (e) => {
                     e.preventDefault();
                     const form = e.currentTarget;
@@ -40,7 +41,7 @@ const AddCommetForm = ({ id }) => {
                     }
                     comm.value = "";
                 }}>
-                <h2 className="h2 mx-8">Your Opinion Matters</h2>
+                <h2 className="h2 mx-auto">Your Opinion Matters</h2>
                 <textarea
                     id="comm"
                     rows="4"
@@ -49,20 +50,17 @@ const AddCommetForm = ({ id }) => {
                     className="w-full py-2 px-4 rounded-lg p text-Body border border-Body placeholder:text-Small outline-none resize-none "
                     placeholder="Type Your Review"
                 ></textarea>
-                <div className="flex ml-1">
-                    {/* <ReactStarRating
-                        numberOfStar={5}
-                        numberOfSelectedStar={5}
-                        colorFilledStar="#FFD800"
-                        colorEmptyStar="#989898"
-                        starSize="30px"
-                        spaceBetweenStar="30px"
-                        disableOnSelect={false}
-                        onSelectStar={val => {
-                            setRating(val);
-                            console.log(val);
-                        }}
-                    /> */}
+                <div className="flex justify-center" >
+                    <StarRatings
+                        rating={rating}
+                        starRatedColor="#FFD800"
+                        numberOfStars={5}
+                        starDimension="24px"
+                        name='rating'
+                        changeRating={changeRating}
+                        starHoverColor="#FFD800"
+                        starSpacing="4px"
+                    />
                 </div>
                 <button className="rounded-lg bg-RedPrimary w-full p-4"
                     type="submit">
