@@ -41,12 +41,13 @@ export const orderController = {
         }
     },
     updateState: async (req: Request, res: Response) => {
+       
         
         const order = {Order_State: req.body.Order_State, Order_ID: req.body.Order_ID  }; 
      
             try {            
          
-            const item = await client.query(`update OrderX set Order_State='${order.Order_State}' where Order_ID = ${order.Order_ID}`);
+            const item = await client.query(`update OrderX set Order_State='${order.Order_State}' where Order_ID = '${order.Order_ID}'`);
             res.status(201).json({ message: "Updated successfully" });
        
         }
@@ -113,6 +114,18 @@ catch (err) {
     res.status(400).json();
 }
 },
+getAllBeingDeliveredOrders: async (req: Request, res: Response) => {
+
+    try {            
+        const order = await client.query(`select * from Orderx where Order_State='being_delivered'`);
+        res.status(200).json(order.rows);
+  
+}
+catch (err) {
+    console.log(err);
+    res.status(400).json();
+}
+},
 
 getAllCookedOrders: async (req: Request, res: Response) => {
 
@@ -125,7 +138,96 @@ catch (err) {
     console.log(err);
     res.status(400).json();
 }
+},
+
+
+
+updateidofcheif: async (req: Request, res: Response) => {
+    const data = { Employee_id: req.body.Employee_id,Order_ID:req.body.Order_ID}
+    try {
+        const Employee = await client.query(`update OrderX set  chef_id=${data.Employee_id}  where order_id='${data.Order_ID}'`);
+     
+        res.status(201).json({ message: "Updated successfully" });
+    }
+    catch (err) {
+        console.log(err);
+        res.status(400).json();
+    }
 }
+,
+
+
+updateidofwaiter: async (req: Request, res: Response) => {
+    const data = { Employee_id: req.body.Employee_id,Order_ID:req.body.Order_ID}
+    try {
+        const Employee = await client.query(`update OrderX set  waiter_id=${data.Employee_id}  where order_id='${data.Order_ID}'`);
+     
+        res.status(201).json({ message: "Updated successfully" });
+    }
+    catch (err) {
+        console.log(err);
+        res.status(400).json();
+    }
+},
+
+
+
+
+
+updateidofdeliveryman: async (req: Request, res: Response) => {
+    const data = { Employee_id: req.body.Employee_id,Order_ID:req.body.Order_ID}
+    try {
+        const Employee = await client.query(`update OrderX set  deliveryman_id=${data.Employee_id}  where order_id='${data.Order_ID}'`);
+     
+        res.status(201).json({ message: "Updated successfully" });
+    }
+    catch (err) {
+        console.log(err);
+        res.status(400).json();
+    }
+},
+
+
+
+
+
+
+
+
+getordersforcutomer: async (req: Request, res: Response) => {
+
+    try {  
+        const Customer_ID = await client.query(`select UserX_ID from UserX where Email='${req.params.email}';`);
+        const order = await client.query(`select distinct OrderX.Order_ID,Order_State,Order_Price from Orderx ,contains where contains.Order_ID=OrderX.Order_ID and  Customer_ID=${Customer_ID.rows[0].userx_id};`);
+
+        res.status(200).json(order.rows);
+}
+catch (err) {
+    console.log(err);
+    res.status(400).json();
+}
+},
+
+
+
+
+
+getitemsfororder: async (req: Request, res: Response) => {
+
+    try {            
+        const items = await client.query(`select item.Item_iD,Quantity,Item_Name,Item_Desc,Item_Price,Img_url from 
+        item ,contains 
+        where order_id='${req.params.order_id}' and item.Item_iD=contains.Item_iD ;`);
+        res.status(200).json(items.rows);
+}
+catch (err) {
+    console.log(err);
+    res.status(400).json();
+}
+
+}
+
+
 
 
 

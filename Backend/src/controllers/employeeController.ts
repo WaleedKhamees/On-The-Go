@@ -48,7 +48,44 @@ export const employeeController = {
             res.status(400).json();
         }
 
+    },
+
+    getTypeByEmail: async (req: Request, res: Response) => {
+
+        try {            
+        
+
+            
+            const employee_id = await (await client.query(`select Userx_ID from Userx where email='${req.params.email}'`)).rows;
+            const type = await (await client.query(`select TypeofEmployee from Employee where Employee_ID =${employee_id[0].userx_id}`)).rows;
+        
+            res.status(200).json(type[0].typeofemployee);
+      
+            
+           }
+    catch (err) {
+        console.log(err);
+        res.status(400).json();
     }
+    },
+    getEmployeeByEmail: async (req: Request, res: Response) => {
+
+        try {            
+              
+            const employee_id = await (await client.query(`select Userx_ID from Userx where email='${req.params.email}'`)).rows;
+               
+            res.status(200).json(employee_id[0].userx_id);
+        
+           }
+    catch (err) {
+        console.log(err);
+        res.status(400).json();
+    }
+    }
+
+
+
+
 
 };
 
