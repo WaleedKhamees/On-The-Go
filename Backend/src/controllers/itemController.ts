@@ -1,8 +1,12 @@
 import { client } from "../index"
 import { Request, Response } from 'express';
 export const itemController = {
+  
     getItems: async (req: Request, res: Response) => {
-        const items = await client.query(`select * from item`);
+        const items = await client.query(`select item_id ,item_name, item_desc,item_price, img_url,category,discount_percent 
+         from item,discount
+         where item.discount_id = discount.discount_id
+         `);
         res.status(200).json(items.rows);
     },
     getItem: async (req: Request, res: Response) => {
@@ -45,3 +49,8 @@ export const itemController = {
     }
 
 };
+
+
+
+
+
