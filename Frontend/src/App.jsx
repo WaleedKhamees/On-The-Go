@@ -65,61 +65,63 @@ const App = () => {
     setUser(user);
   };
   return (
-    <Router>
-      <div className="min-h-screen relative flex flex-col">
-        <cartContext.Provider value={{ cart, addItem, clearCart }}>
-          <userContext.Provider value={{ user, clearUser, logUser }}>
-            <NavBar />
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/admin" element={
-                <Protected isSignedIn={user && user.kind === 'a'}>
-                  <AdminPage />
-                </Protected>
-              } />
-              <Route path="/menu/:id" element={
-                <Protected isSignedIn={!user || user.kind === 'c'}>
-                  <ProductsPage />
-                </Protected>
-              } />
-              <Route path="/product/:id" element={
-                <Protected isSignedIn={!user || user.kind === 'c'}>
-                  <ProductPage />
-                </Protected>
-              } />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/signup" element={<SignupPage />} />
-              <Route path="/cart" element={
-                <Protected isSignedIn={user && user.kind === 'c'}>
-                  <Cart_Page />
-                </Protected>
-              } />
-              <Route path="/reservations" element={
-                <Protected isSignedIn={user && user.kind === 'c'}>
-                  <Reservation />
-                </Protected>
-              } />
-              <Route path="/profile" element={
-                <Protected isSignedIn={user && user.kind === 'c'}>
-                  <Profile />
-                </Protected>
-              } />
-              <Route path="/employee" element={
-                <Protected isSignedIn={user && user.kind === 'e'}>
-                  <Employee />
-                </Protected>
-              } />
-              <Route path="/provider" element={
-                <Protected isSignedIn={user && user.kind === 'p'}>
-                  <Provider />
-                </Protected>
-              } />
-            </Routes>
-            <Footer />
-          </userContext.Provider>
-        </cartContext.Provider>
-      </div>
-    </Router>
+    <div className="min-h-screen relative flex flex-col">
+      <cartContext.Provider value={{ cart, addItem, clearCart }}>
+        <userContext.Provider value={{ user, clearUser, logUser }}>
+          <NavBar />
+          <Routes>
+            <Route path="/" element={
+              <Protected isSignedIn={!user || user && user.kind === 'c'}>
+                <HomePage />
+              </Protected>
+            } />
+            <Route path="/admin" element={
+              <Protected isSignedIn={user && user.kind === 'a'}>
+                <AdminPage />
+              </Protected>
+            } />
+            <Route path="/menu/:id" element={
+              <Protected isSignedIn={!user || user.kind === 'c'}>
+                <ProductsPage />
+              </Protected>
+            } />
+            <Route path="/product/:id" element={
+              <Protected isSignedIn={!user || user.kind === 'c'}>
+                <ProductPage />
+              </Protected>
+            } />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/cart" element={
+              <Protected isSignedIn={user && user.kind === 'c'}>
+                <Cart_Page />
+              </Protected>
+            } />
+            <Route path="/reservations" element={
+              <Protected isSignedIn={user && user.kind === 'c'}>
+                <Reservation />
+              </Protected>
+            } />
+            <Route path="/profile" element={
+              <Protected isSignedIn={user && user.kind === 'c'}>
+                <Profile />
+              </Protected>
+            } />
+            <Route path="/employee" element={
+              <Protected isSignedIn={user && user.kind === 'e'}>
+                <Employee />
+              </Protected>
+            } />
+            <Route path="/provider" element={
+              <Protected isSignedIn={user && user.kind === 'p'}>
+                <Provider />
+              </Protected>
+            } />
+          </Routes>
+          <Footer />
+        </userContext.Provider>
+      </cartContext.Provider>
+    </div>
   );
 };
 
