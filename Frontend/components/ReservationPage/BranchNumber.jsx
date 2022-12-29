@@ -16,7 +16,7 @@ const BranchNum = () => {
 
   const getBranches = async () => {
     try {
-      const res = (await axios.get("http://localhost:3000/branch")).data;
+      const res = (await axios.get("https://dbproject-zbiu.onrender.com/branch")).data;
       console.log(res);
       setBranches(res);
     }

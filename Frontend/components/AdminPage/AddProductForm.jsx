@@ -29,7 +29,7 @@ const AddProductForm = ({ setInitFunc }) => {
                     setError(validate.res);
                 else {
                     setError({ description: "", imgUrl: "", itemPrice: "", name: "" })
-                    const req = await axios.post("http://localhost:3000/item/insert", product);
+                    const req = await axios.post("https://dbproject-zbiu.onrender.com/item/insert", product);
                     console.log(req);
                     location.reload();
                 }

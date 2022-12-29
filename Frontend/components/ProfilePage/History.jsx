@@ -10,7 +10,7 @@ const History = () => {
   const getOrders = async (e) => {
     try {
       const res = await axios.get(
-        `http://localhost:3000/order/getordersforcutomer/${user.email}`
+        `https://dbproject-zbiu.onrender.com/order/getordersforcutomer/${user.email}`
       );
       setOrders(res.data.orders);
     } catch (err) {

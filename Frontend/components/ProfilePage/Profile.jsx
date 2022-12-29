@@ -27,7 +27,7 @@ const Profile = () => {
                 new_password: form.NewPassword.value
               };
               try {
-                const res = await axios.patch("http://localhost:3000/user/update", newUser);
+                const res = await axios.patch("https://dbproject-zbiu.onrender.com/user/update", newUser);
                 setMessage(res.data.message);
                 logUser({ ...user, password: newUser.new_password });
               }

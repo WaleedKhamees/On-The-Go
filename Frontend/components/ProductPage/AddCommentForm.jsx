@@ -27,7 +27,7 @@ const AddCommetForm = ({ id }) => {
                     console.log(review);
                     try {
                         const res = await axios.post(
-                            "http://localhost:3000/review/insert", review
+                            "https://dbproject-zbiu.onrender.com/review/insert", review
                         );
 
                         setError(res.data.message);

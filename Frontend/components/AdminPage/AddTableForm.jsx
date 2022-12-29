@@ -12,7 +12,7 @@ const AddTableForm = ({ setInitFunc }) => {
   });
 
   const getBranches = async () => {
-    const branches = await axios.get("http://localhost:3000/branch");
+    const branches = await axios.get("https://dbproject-zbiu.onrender.com/branch");
     setBranches(branches.data);
   };
   useEffect(() => {
@@ -34,7 +34,7 @@ const AddTableForm = ({ setInitFunc }) => {
 
         try {
           const res = await axios.post(
-            "http://localhost:3000/table/inserttable",
+            "https://dbproject-zbiu.onrender.com/table/inserttable",
             table
           );
           location.reload();

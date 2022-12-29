@@ -41,7 +41,7 @@ const SignupPage = () => {
     }
     else {
       try {
-        const res = await axios.post("http://localhost:3000/signup", user);
+        const res = await axios.post("https://dbproject-zbiu.onrender.com/signup", user);
         logUser(user);
         if (isProvider)
           navigate("/provider");

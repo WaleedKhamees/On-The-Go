@@ -31,7 +31,7 @@ const Reservation = () => {
     try {
       console.log(reservationObj);
       const res = await axios.post(
-        "http://localhost:3000/reserve",
+        "https://dbproject-zbiu.onrender.com/reserve",
         reservationObj
       );
 

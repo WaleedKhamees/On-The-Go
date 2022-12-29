@@ -44,7 +44,7 @@ const LoginPage = () => {
 
     let res, customer;
     try {
-      res = (await axios.post("http://localhost:3000/login", loginInfo)).data;
+      res = (await axios.post("https://dbproject-zbiu.onrender.com/login", loginInfo)).data;
       if (res.kind === 'a') {
         const user = { ...loginInfo, kind: res.kind };
         logUser(user);
@@ -62,7 +62,7 @@ const LoginPage = () => {
         navigate("/provider")
       }
       else {
-        customer = (await axios.get(`http://localhost:3000/customer/getcustomerfromemail/${res.email}`)).data;
+        customer = (await axios.get(`https://dbproject-zbiu.onrender.com/customer/getcustomerfromemail/${res.email}`)).data;
         const user = { ...loginInfo, ...customer, kind: res.kind };
         logUser(user);
         navigate("/")

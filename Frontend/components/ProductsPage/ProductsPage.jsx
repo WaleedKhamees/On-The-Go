@@ -10,7 +10,7 @@ const ProductsPage = (props) => {
     Drinks: category === "drinks",
   });
   const { isLoading, error, data } = useQuery("repoData", () =>
-    fetch("http://localhost:3000/item").then((res) => res.json())
+    fetch("https://dbproject-zbiu.onrender.com/item").then((res) => res.json())
   );
   const FilterBtn = ({ Category }) => (
     <Link to={`/menu/${Category.toLowerCase()}`}>

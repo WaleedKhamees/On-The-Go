@@ -11,7 +11,7 @@ const Provider = () => {
         try {
             // get the the routes for Branches
             const res = await axios.get(
-                "http://localhost:3000/branch"
+                "https://dbproject-zbiu.onrender.com/branch"
             );
             console.log(res.data);
             setBranches(res.data);
@@ -37,7 +37,7 @@ const Provider = () => {
             else {
                 seterrorspan(false);
                 const res = await axios.post(
-                    "http://localhost:3000/provider/AddDonations", Donationsobj
+                    "https://dbproject-zbiu.onrender.com/provider/AddDonations", Donationsobj
                 );
                 // hide the error span
             }

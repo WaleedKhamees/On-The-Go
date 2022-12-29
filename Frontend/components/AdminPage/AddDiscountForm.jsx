@@ -32,7 +32,7 @@ const AddDiscountForm = ({ setInitFunc }) => {
                         setError(validate.res);
                     else {
                         setError({ description: "", imgUrl: "", itemPrice: "", name: "" })
-                        const req = await axios.post("http://localhost:3000/discount/insert", Discount);
+                        const req = await axios.post("https://dbproject-zbiu.onrender.com/discount/insert", Discount);
                         console.log(req);
                         location.reload();
                     }

@@ -14,7 +14,7 @@ const AddEmployeeForm = ({ setInitFunc }) => {
         password: ""
     });
     const getBranches = async () => {
-        const branches = await axios.get("http://localhost:3000/branch");
+        const branches = await axios.get("https://dbproject-zbiu.onrender.com/branch");
         console.log(branches.data);
         setBranches(branches.data);
     }
@@ -51,7 +51,7 @@ const AddEmployeeForm = ({ setInitFunc }) => {
                         email: "",
                         password: ""
                     })
-                    await axios.post("http://localhost:3000/employee/insert", employee);
+                    await axios.post("https://dbproject-zbiu.onrender.com/employee/insert", employee);
                     setInitFunc("Access Employees");
                     location.reload();
                 }
