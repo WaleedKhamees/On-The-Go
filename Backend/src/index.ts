@@ -34,10 +34,10 @@ app.use("/", require("./routes/table"));
 //  
 // get :  put : update  delete : delete  post : create 
 // routes
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
 
 
 
 
-    
+
 }); 

@@ -58,6 +58,6 @@ app.use("/", require("./routes/table"));
 //  
 // get :  put : update  delete : delete  post : create 
 // routes
-app.listen(3000, function () {
+app.listen(process.env.PORT || 3000, function () {
 });
 //# sourceMappingURL=index.js.map
