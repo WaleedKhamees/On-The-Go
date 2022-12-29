@@ -53,10 +53,15 @@ const AdminPage = () => {
     const es = (await axios.get(`${BACKEND}/stats/eastern`)).data;
     const ws = (await axios.get(`${BACKEND}/stats/western`)).data;
     const ds = (await axios.get(`${BACKEND}/stats/drinks`)).data;
-    setEasternStat(es);
-    setWesternStat(ws);
-    setDrinksStat(ds);
-    console.log(es, ws, ds);
+    const esPercentage = Math.floor(((Number.parseInt(es.thisMonth ?? 0) - Number.parseInt(es.lastMonth ?? 0)) / (Number.parseInt(es.thisMonth ?? 0) + Number.parseInt(es.lastMonth ?? 0))) * 100);
+    const wsPercentage = Math.floor(((Number.parseInt(ws.thisMonth ?? 0) - Number.parseInt(ws.lastMonth ?? 0)) / (Number.parseInt(ws.thisMonth ?? 0) + Number.parseInt(ws.lastMonth ?? 0))) * 100);
+    const dsPercentage = Math.floor(((Number.parseInt(ds.thisMonth ?? 0) - Number.parseInt(ds.lastMonth ?? 0)) / (Number.parseInt(ds.thisMonth ?? 0) + Number.parseInt(ds.lastMonth ?? 0))) * 100);
+    const esProfits = (Number.parseInt(es.thisMonth ?? 0) - Number.parseInt(es.lastMonth ?? 0));
+    const wsProfits = (Number.parseInt(ws.thisMonth ?? 0) - Number.parseInt(ws.lastMonth ?? 0));
+    const dsProfits = (Number.parseInt(ds.thisMonth ?? 0) - Number.parseInt(ds.lastMonth ?? 0));
+    setEasternStat({ esPercentage, esProfits });
+    setWesternStat({ wsPercentage, wsProfits });
+    setDrinksStat({ dsPercentage, dsProfits });
   }
   useEffect(() => {
     getStats();
@@ -71,14 +76,14 @@ const AdminPage = () => {
         <h1 className="h1 ">Statistics</h1>
         <div className="flex gap-8 p-4">
           <Stat category="Eastern"
-            percentage={Math.floor((((easternStat.thisMonth ?? 0) - (easternStat.lastMonth ?? 0)) / (easternStat.thisMonth ?? 0) + (easternStat.lastMonth ?? 0)) * 100)}
-            earning={(easternStat.thisMonth ?? 0) - (easternStat.lastMonth ?? 0)} />
+            percentage={easternStat.esPercentage ?? 0}
+            earning={easternStat.esProfits ?? 0} />
           <Stat category="Western"
-            percentage={Math.floor((((westernStat.thisMonth ?? 0) - (westernStat.lastMonth ?? 0)) / (westernStat.thisMonth ?? 0) + (westernStat.lastMonth ?? 0)) * 100)}
-            earning={(westernStat.thisMonth ?? 0) - (westernStat.lastMonth ?? 0)} />
+            percentage={westernStat.wsPercentage ?? 0}
+            earning={westernStat.wsProfits ?? 0} />
           <Stat category="Drinks"
-            percentage={Math.floor((((drinksStat.thisMonth ?? 0) - (drinksStat.lastMonth ?? 0)) / (drinksStat.thisMonth ?? 0) + (drinksStat.lastMonth ?? 0)) * 100)}
-            earning={(drinksStat.thisMonth ?? 0) - (drinksStat.lastMonth ?? 0)} />
+            percentage={drinksStat.dsPercentage ?? 0}
+            earning={drinksStat.dsProfits ?? 0} />
         </div>
       </div>
       <form
