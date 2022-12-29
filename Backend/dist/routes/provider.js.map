@@ -1,0 +1,1 @@
+{"version":3,"file":"provider.js","sourceRoot":"","sources":["../../src/routes/provider.ts"],"names":[],"mappings":";;AAAA,0EAAyE;AACzE,mCAAiC;AACjC,IAAM,MAAM,GAAG,IAAA,gBAAM,GAAE,CAAC;AACxB,MAAM,CAAC,GAAG,CAAC,yCAAyC,EAAE,uCAAkB,CAAC,iBAAiB,CAAC,CAAC;AAC5F,MAAM,CAAC,IAAI,CAAC,wBAAwB,EAAE,uCAAkB,CAAC,YAAY,CAAC,CAAC;AAEvE,MAAM,CAAC,OAAO,GAAG,MAAM,CAAC"}
