@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useRef, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom"
-import { userContext } from "../../src/App";
+import { BACKEND, userContext } from "../../src/App";
 import { validateLogin } from "../../util/validations";
 
 const LoginPage = () => {
@@ -44,7 +44,7 @@ const LoginPage = () => {
 
     let res, customer;
     try {
-      res = (await axios.post("https://dbproject-zbiu.onrender.com/login", loginInfo)).data;
+      res = (await axios.post(`${BACKEND}/login`, loginInfo)).data;
       if (res.kind === 'a') {
         const user = { ...loginInfo, kind: res.kind };
         logUser(user);
@@ -62,7 +62,7 @@ const LoginPage = () => {
         navigate("/provider")
       }
       else {
-        customer = (await axios.get(`https://dbproject-zbiu.onrender.com/customer/getcustomerfromemail/${res.email}`)).data;
+        customer = (await axios.get(`${BACKEND}/customer/getcustomerfromemail/${res.email}`)).data;
         const user = { ...loginInfo, ...customer, kind: res.kind };
         logUser(user);
         navigate("/")

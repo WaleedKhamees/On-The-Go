@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import AddCommetForm from "./AddCommentForm";
+import { BACKEND } from "../../src/App";
 
 
 
@@ -12,12 +13,12 @@ const ProductPage = () => {
     const [product, setProduct] = useState();
     const [reviews, setReviews] = useState();
     const getData = async () => {
-        const data = await axios.get(`https://dbproject-zbiu.onrender.com/item/${id}`);
+        const data = await axios.get(`${BACKEND}/item/${id}`);
         console.log(data.data[0]);
         setProduct(data.data[0]);
     };
     const getReviews = async () => {
-        const data = await axios.get(`https://dbproject-zbiu.onrender.com/review/${id}`);
+        const data = await axios.get(`${BACKEND}/review/${id}`);
         setReviews(data.data);
     };
     useEffect(() => {

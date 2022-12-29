@@ -2,7 +2,7 @@ import CheckinDate from "./CheckinDate";
 import How from "./How";
 import When from "./When";
 import axios from "axios";
-import { userContext } from "../../src/App";
+import { BACKEND, userContext } from "../../src/App";
 import BranchNum from "./BranchNumber";
 import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -31,7 +31,7 @@ const Reservation = () => {
     try {
       console.log(reservationObj);
       const res = await axios.post(
-        "https://dbproject-zbiu.onrender.com/reserve",
+        `${BACKEND}/reserve`,
         reservationObj
       );
 

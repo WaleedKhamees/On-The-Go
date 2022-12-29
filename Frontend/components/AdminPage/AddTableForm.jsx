@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect, useRef } from "react";
+import { BACKEND } from "../../src/App";
 
 const AddTableForm = ({ setInitFunc }) => {
   const branchRef = useRef();
@@ -12,7 +13,7 @@ const AddTableForm = ({ setInitFunc }) => {
   });
 
   const getBranches = async () => {
-    const branches = await axios.get("https://dbproject-zbiu.onrender.com/branch");
+    const branches = await axios.get(`${BACKEND}/branch`);
     setBranches(branches.data);
   };
   useEffect(() => {
@@ -34,7 +35,7 @@ const AddTableForm = ({ setInitFunc }) => {
 
         try {
           const res = await axios.post(
-            "https://dbproject-zbiu.onrender.com/table/inserttable",
+            `${BACKEND}/table/inserttable`,
             table
           );
           location.reload();

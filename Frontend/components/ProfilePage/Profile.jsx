@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { userContext } from "../../src/App";
+import { BACKEND, userContext } from "../../src/App";
 import History from "./History";
 
 const Profile = () => {
@@ -27,7 +27,7 @@ const Profile = () => {
                 new_password: form.NewPassword.value
               };
               try {
-                const res = await axios.patch("https://dbproject-zbiu.onrender.com/user/update", newUser);
+                const res = await axios.patch(`${BACKEND}/user/update`, newUser);
                 setMessage(res.data.message);
                 logUser({ ...user, password: newUser.new_password });
               }

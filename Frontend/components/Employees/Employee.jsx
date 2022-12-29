@@ -3,6 +3,7 @@ import axios from "axios";
 import dayjs from "dayjs";
 import { useContext } from "react";
 import { userContext } from "../../src/App";
+import { BACKEND } from "../../src/App";
 const Employee = () => {
   const { user } = useContext(userContext);
   console.log(user);
@@ -14,7 +15,7 @@ const Employee = () => {
   const handleSubmit = async (e) => {
     try {
       const res = await axios.get(
-        "https://dbproject-zbiu.onrender.com/order/getAllPendingOrders"
+        `${BACKEND}/order/getAllPendingOrders`
       );
       setarr(res.data);
     } catch (err) {
@@ -26,7 +27,7 @@ const Employee = () => {
   const GetCookedOrders = async (e) => {
     try {
       const res = await axios.get(
-        "https://dbproject-zbiu.onrender.com/order/getAllCookedOrders"
+        `${BACKEND}/order/getAllCookedOrders`
       );
       setcookedOrders(res.data);
     } catch (err) {
@@ -38,7 +39,7 @@ const Employee = () => {
   const BeingDeliveredOrdersfun = async (e) => {
     try {
       const res = await axios.get(
-        " https://dbproject-zbiu.onrender.com/order/getAllBeingDeliveredOrders"
+        `${BACKEND}/order/getAllBeingDeliveredOrders`
       );
       setBeingDeliveredOrders(res.data);
     } catch (err) {
@@ -51,7 +52,7 @@ const Employee = () => {
   const gettype = async (e) => {
     try {
       const res = await axios.get(
-        `https://dbproject-zbiu.onrender.com/employee/getTypeByEmail/${JSON.parse(localStorage.getItem("user")).email
+        `${BACKEND}/employee/getTypeByEmail/${JSON.parse(localStorage.getItem("user")).email
         }`
       );
 
@@ -94,7 +95,7 @@ const Employee = () => {
                   <button
                     onClick={async () => {
                       const id = await axios.get(
-                        `https://dbproject-zbiu.onrender.com/employee/getEmployeeByEmail/${JSON.parse(localStorage.getItem("user")).email
+                        `${BACKEND}/employee/getEmployeeByEmail/${JSON.parse(localStorage.getItem("user")).email
                         }`
                       );
 
@@ -104,7 +105,7 @@ const Employee = () => {
                       };
 
                       const update = axios.patch(
-                        "https://dbproject-zbiu.onrender.com/order/updateidofcheif",
+                        `${BACKEND}/order/updateidofcheif`,
                         obj2
                       );
 
@@ -114,7 +115,7 @@ const Employee = () => {
                       };
 
                       const re = axios.patch(
-                        "https://dbproject-zbiu.onrender.com/order/updateorder",
+                        `${BACKEND}/order/updateorder`,
                         obj
                       );
 
@@ -156,7 +157,7 @@ const Employee = () => {
                   <button
                     onClick={async () => {
                       const id = await axios.get(
-                        `https://dbproject-zbiu.onrender.com/employee/getEmployeeByEmail/${JSON.parse(localStorage.getItem("user")).email
+                        `${BACKEND}/employee/getEmployeeByEmail/${JSON.parse(localStorage.getItem("user")).email
                         }`
                       );
 
@@ -166,7 +167,7 @@ const Employee = () => {
                       };
 
                       const update = axios.patch(
-                        "https://dbproject-zbiu.onrender.com/order/updateidofwaiter",
+                        `${BACKEND}/order/updateidofwaiter`,
                         obj2
                       );
 
@@ -176,7 +177,7 @@ const Employee = () => {
                       };
 
                       const re = axios.patch(
-                        "https://dbproject-zbiu.onrender.com/order/updateorder",
+                        `${BACKEND}/order/updateorder`,
                         obj
                       );
 
@@ -219,7 +220,7 @@ const Employee = () => {
                   <button
                     onClick={async () => {
                       const id = await axios.get(
-                        `https://dbproject-zbiu.onrender.com/employee/getEmployeeByEmail/${JSON.parse(localStorage.getItem("user")).email
+                        `${BACKEND}/employee/getEmployeeByEmail/${JSON.parse(localStorage.getItem("user")).email
                         }`
                       );
 
@@ -229,7 +230,7 @@ const Employee = () => {
                       };
 
                       const update = axios.patch(
-                        "https://dbproject-zbiu.onrender.com/order/updateidofdeliveryman",
+                        `${BACKEND}/order/updateidofdeliveryman`,
                         obj2
                       );
 
@@ -239,7 +240,7 @@ const Employee = () => {
                       };
 
                       const re = axios.patch(
-                        "https://dbproject-zbiu.onrender.com/order/updateorder",
+                        `${BACKEND}/order/updateorder`,
                         obj
                       );
 

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useRef } from "react";
+import { BACKEND } from "../../src/App";
 import { validateProductForm } from "../../util/validations";
 
 const AddProductForm = ({ setInitFunc }) => {
@@ -29,7 +30,7 @@ const AddProductForm = ({ setInitFunc }) => {
                     setError(validate.res);
                 else {
                     setError({ description: "", imgUrl: "", itemPrice: "", name: "" })
-                    const req = await axios.post("https://dbproject-zbiu.onrender.com/item/insert", product);
+                    const req = await axios.post(`${BACKEND}/item/insert`, product);
                     console.log(req);
                     location.reload();
                 }

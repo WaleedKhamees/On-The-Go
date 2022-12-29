@@ -5,6 +5,7 @@ import AddProductForm from "./AddProductForm";
 import AddDiscountForm from "./AddDiscountForm";
 import AddTableForm from "./AddTableForm";
 import Table from "../atoms/Table";
+import { BACKEND } from "../../src/App";
 
 const EMPLOYEE_EDITABLE = {
   employee_id: false,
@@ -72,7 +73,7 @@ const AdminController = () => {
   const [Tables, setTables] = useState([]);
 
   const getEmployees = async () => {
-    const response = await axios.get("https://dbproject-zbiu.onrender.com/employee");
+    const response = await axios.get(`${BACKEND}/employee`);
     const employees = await response.data;
     setEmployees(employees);
   };
@@ -80,7 +81,7 @@ const AdminController = () => {
   /////////////////////////////////////////////////////////////////////////////////////////
 
   const getItem = async () => {
-    const response = await axios.get("https://dbproject-zbiu.onrender.com/item/admin");
+    const response = await axios.get(`${BACKEND}/item/admin`);
     const items = await response.data;
     setItems(items);
   };
@@ -88,7 +89,7 @@ const AdminController = () => {
   /////////////////////////////////////////////////////////////////////////////////////////
 
   const getDiscounts = async () => {
-    const response = await axios.get("https://dbproject-zbiu.onrender.com/discount");
+    const response = await axios.get(`${BACKEND}/discount`);
     const discounts = await response.data;
     setDiscounts(discounts);
   };
@@ -96,7 +97,7 @@ const AdminController = () => {
   //////////////////////////////////getTabeles/////////////////////////////////////////////
 
   const getTables = async () => {
-    const response = await axios.get(" https://dbproject-zbiu.onrender.com/table/getTables");
+    const response = await axios.get(`${BACKEND}/table/getTables`);
     const Tables = await response.data;
     setTables(Tables);
   };
@@ -126,8 +127,8 @@ const AdminController = () => {
           <Table
             data={employees}
             itemEditable={EMPLOYEE_EDITABLE}
-            apiUpdate="https://dbproject-zbiu.onrender.com/employee/update"
-            apiDelete="https://dbproject-zbiu.onrender.com/employee/delete"
+            apiUpdate={`${BACKEND}/employee/update`}
+            apiDelete={`${BACKEND}/employee/delete`}
             tableID="employee_id"
           />
         )}
@@ -152,8 +153,8 @@ const AdminController = () => {
           <Table
             data={items}
             itemEditable={ITEM_EDITABLE}
-            apiUpdate="https://dbproject-zbiu.onrender.com/item/update"
-            apiDelete="https://dbproject-zbiu.onrender.com/item/delete"
+            apiUpdate={`${BACKEND}/item/update`}
+            apiDelete={`${BACKEND}/item/delete`}
             tableID="item_id"
           />)
         }
@@ -180,8 +181,8 @@ const AdminController = () => {
           <Table
             data={discounts}
             itemEditable={DISCOUNT_EDITABLE}
-            apiUpdate="https://dbproject-zbiu.onrender.com/discount/update"
-            apiDelete="https://dbproject-zbiu.onrender.com/discount/delete"
+            apiUpdate={`${BACKEND}/discount/update`}
+            apiDelete={`${BACKEND}/discount/delete`}
             tableID="discount_id"
           />
         }
@@ -202,10 +203,10 @@ const AdminController = () => {
             <Table
               data={Tables}
               itemEditable={TABLE_EDITABLE}
-              apiUpdate="https://dbproject-zbiu.onrender.com/table/updatetable"
+              apiUpdate={`${BACKEND}/table/updatetable`}
               deleteItemFunc={async (branch_id, table_num) => {
                 const x = { table_num: table_num, branch_id: branch_id };
-                await axios.post("https://dbproject-zbiu.onrender.com/table/deletetable", x);
+                await axios.post(`${BACKEND}/table/deletetable`, x);
               }}
               tableID="branch_id"
             />

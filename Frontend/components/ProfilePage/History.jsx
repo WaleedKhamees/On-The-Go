@@ -1,7 +1,7 @@
 import HistoryProductCard from "./HistoryProductCard";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { userContext } from "../../src/App";
+import { BACKEND, userContext } from "../../src/App";
 import dayjs from "dayjs";
 const History = () => {
   const [orders, setOrders] = useState([]);
@@ -10,7 +10,7 @@ const History = () => {
   const getOrders = async (e) => {
     try {
       const res = await axios.get(
-        `https://dbproject-zbiu.onrender.com/order/getordersforcutomer/${user.email}`
+        `${BACKEND}/order/getordersforcutomer/${user.email}`
       );
       setOrders(res.data.orders);
     } catch (err) {

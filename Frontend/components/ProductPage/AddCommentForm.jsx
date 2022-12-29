@@ -1,7 +1,7 @@
 import axios from "axios";
 import dayjs from "dayjs";
 import { useContext, useState } from "react";
-import { userContext } from "../../src/App"
+import { BACKEND, userContext } from "../../src/App"
 import StarRatings from 'react-star-ratings';
 
 const AddCommetForm = ({ id }) => {
@@ -27,7 +27,7 @@ const AddCommetForm = ({ id }) => {
                     console.log(review);
                     try {
                         const res = await axios.post(
-                            "https://dbproject-zbiu.onrender.com/review/insert", review
+                            `${BACKEND}/review/insert`, review
                         );
 
                         setError(res.data.message);

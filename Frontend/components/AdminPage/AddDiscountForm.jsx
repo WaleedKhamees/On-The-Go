@@ -4,6 +4,7 @@ import { validateDiscountForm } from "../../util/validations";
 import dayjs from "dayjs";
 import { DayPicker } from "react-day-picker";
 import "../../src/styles/react-date-picker.css";
+import { BACKEND } from "../../src/App";
 
 const AddDiscountForm = ({ setInitFunc }) => {
     const [selectedStartDate, setSelectedStartDate] = useState(new Date())
@@ -32,7 +33,7 @@ const AddDiscountForm = ({ setInitFunc }) => {
                         setError(validate.res);
                     else {
                         setError({ description: "", imgUrl: "", itemPrice: "", name: "" })
-                        const req = await axios.post("https://dbproject-zbiu.onrender.com/discount/insert", Discount);
+                        const req = await axios.post(`${BACKEND}/discount/insert`, Discount);
                         console.log(req);
                         location.reload();
                     }

@@ -16,6 +16,7 @@ import { useState } from "react";
 import ProductsPage from "../components/ProductsPage/ProductsPage";
 import ProductPage from "../components/ProductPage/ProductPage";
 import Protected from "../components/atoms/ProtectedRoute";
+export const BACKEND = "http://localhost:3000";
 export const userContext = createContext({});
 export const cartContext = createContext([]);
 

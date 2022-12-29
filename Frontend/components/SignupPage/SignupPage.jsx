@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { validateSignup } from "../../util/validations";
-import { userContext } from "../../src/App";
+import { BACKEND, userContext } from "../../src/App";
 
 const SignupPage = () => {
   const { user, logUser } = useContext(userContext)
@@ -41,7 +41,7 @@ const SignupPage = () => {
     }
     else {
       try {
-        const res = await axios.post("https://dbproject-zbiu.onrender.com/signup", user);
+        const res = await axios.post(`${BACKEND}/signup`, user);
         logUser(user);
         if (isProvider)
           navigate("/provider");

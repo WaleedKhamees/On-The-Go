@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState, useContext } from "react";
-import { cartContext, userContext } from "../../src/App";
+import { BACKEND, cartContext, userContext } from "../../src/App";
 import ProductCart from "../atoms/ProductCart";
 
 function Cart_Page(props) {
@@ -67,7 +67,7 @@ function Cart_Page(props) {
                     try {
                       logUser({ ...user, wallet: user.wallet - order.order_price });
                       clearCart();
-                      const res = (await axios.post("https://dbproject-zbiu.onrender.com/order/insert", order)).data;
+                      const res = (await axios.post(`${BACKEND}/order/insert`, order)).data;
                       setMessage(res.message);
                     }
                     catch {

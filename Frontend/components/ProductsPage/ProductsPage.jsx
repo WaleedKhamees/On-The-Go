@@ -2,6 +2,7 @@ import ProductCard from "./ProductCard";
 import { useState } from "react";
 import { useQuery } from "react-query";
 import { useParams, Link } from "react-router-dom";
+import { BACKEND } from "../../src/App";
 const ProductsPage = (props) => {
   const category = useParams().id;
   const [Categories, setCategories] = useState({
@@ -10,7 +11,7 @@ const ProductsPage = (props) => {
     Drinks: category === "drinks",
   });
   const { isLoading, error, data } = useQuery("repoData", () =>
-    fetch("https://dbproject-zbiu.onrender.com/item").then((res) => res.json())
+    fetch(`${BACKEND}/item`).then((res) => res.json())
   );
   const FilterBtn = ({ Category }) => (
     <Link to={`/menu/${Category.toLowerCase()}`}>

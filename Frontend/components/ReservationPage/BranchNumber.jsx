@@ -4,6 +4,7 @@ import { AiOutlineBranches } from "react-icons/ai";
 
 import { ReserveContext } from "./ReservationPage";
 import axios from "axios";
+import { BACKEND } from "../../src/App";
 
 const BranchNum = () => {
   const { reservation, setReservation } = useContext(ReserveContext);
@@ -16,7 +17,7 @@ const BranchNum = () => {
 
   const getBranches = async () => {
     try {
-      const res = (await axios.get("https://dbproject-zbiu.onrender.com/branch")).data;
+      const res = (await axios.get(`${BACKEND}/branch`)).data;
       console.log(res);
       setBranches(res);
     }

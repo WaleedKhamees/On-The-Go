@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect, useRef } from "react";
+import { BACKEND } from "../../src/App";
 import { validateEmployeeForm } from "../../util/validations";
 
 const AddEmployeeForm = ({ setInitFunc }) => {
@@ -14,7 +15,7 @@ const AddEmployeeForm = ({ setInitFunc }) => {
         password: ""
     });
     const getBranches = async () => {
-        const branches = await axios.get("https://dbproject-zbiu.onrender.com/branch");
+        const branches = await axios.get(`${BACKEND}/branch`);
         console.log(branches.data);
         setBranches(branches.data);
     }
@@ -51,7 +52,7 @@ const AddEmployeeForm = ({ setInitFunc }) => {
                         email: "",
                         password: ""
                     })
-                    await axios.post("https://dbproject-zbiu.onrender.com/employee/insert", employee);
+                    await axios.post(`${BACKEND}/employee/insert`, employee);
                     setInitFunc("Access Employees");
                     location.reload();
                 }

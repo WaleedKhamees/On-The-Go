@@ -1,6 +1,7 @@
-import { useContext, useEffect } from "react";
+import axios from "axios";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { userContext } from "../../src/App";
+import { BACKEND, userContext } from "../../src/App";
 import AdminController from "./AdminController";
 const Stat = ({ category, earning, percentage }) => (
   <div className="flex flex-col gap-2">
@@ -34,7 +35,12 @@ const Stat = ({ category, earning, percentage }) => (
 );
 const AdminPage = () => {
   const { user } = useContext(userContext);
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
+  const [easternStat, setEasternStat] = useState({});
+  const [westernStat, setWesternStat] = useState({});
+  const [drinksStat, setDrinksStat] = useState({});
+
   useEffect(() => {
     if (!user)
       navigate("/login");
@@ -43,6 +49,18 @@ const AdminPage = () => {
     else if (user.kind === 'c')
       navigate("/");
   }, [user])
+  const getStats = async () => {
+    const es = (await axios.get(`${BACKEND}/stats/eastern`)).data;
+    const ws = (await axios.get(`${BACKEND}/stats/western`)).data;
+    const ds = (await axios.get(`${BACKEND}/stats/drinks`)).data;
+    setEasternStat(es);
+    setWesternStat(ws);
+    setDrinksStat(ds);
+    console.log(es, ws, ds);
+  }
+  useEffect(() => {
+    getStats();
+  }, []);
   return (
     <div className="flex flex-col gap-16 py-16">
       <div className="flex flex-col gap-4 items-center">
@@ -52,11 +70,89 @@ const AdminPage = () => {
       <div className="flex-col flex items-center gap-4">
         <h1 className="h1 ">Statistics</h1>
         <div className="flex gap-8 p-4">
-          <Stat category="Eastern" percentage={13} earning={1000} />
-          <Stat category="Western" percentage={-12} earning={300} />
-          <Stat category="Drinks" percentage={50.1} earning={9000} />
+          <Stat category="Eastern"
+            percentage={Math.floor((((easternStat.thisMonth ?? 0) - (easternStat.lastMonth ?? 0)) / (easternStat.thisMonth ?? 0) + (easternStat.lastMonth ?? 0)) * 100)}
+            earning={(easternStat.thisMonth ?? 0) - (easternStat.lastMonth ?? 0)} />
+          <Stat category="Western"
+            percentage={Math.floor((((westernStat.thisMonth ?? 0) - (westernStat.lastMonth ?? 0)) / (westernStat.thisMonth ?? 0) + (westernStat.lastMonth ?? 0)) * 100)}
+            earning={(westernStat.thisMonth ?? 0) - (westernStat.lastMonth ?? 0)} />
+          <Stat category="Drinks"
+            percentage={Math.floor((((drinksStat.thisMonth ?? 0) - (drinksStat.lastMonth ?? 0)) / (drinksStat.thisMonth ?? 0) + (drinksStat.lastMonth ?? 0)) * 100)}
+            earning={(drinksStat.thisMonth ?? 0) - (drinksStat.lastMonth ?? 0)} />
         </div>
       </div>
+      <form
+        className="flex flex-col max-w-[350px] flex-grow items-center gap-4 m-auto"
+        onSubmit={async (e) => {
+          e.preventDefault();
+          const form = e.currentTarget;
+          const newUser = {
+            email: form.Email.value,
+            old_password: form.OldPassword.value,
+            new_password: form.NewPassword.value
+          };
+          try {
+            debugger
+            const res = await axios.patch(`${BACKEND}/user/update`, newUser);
+            console.log(res);
+            setMessage(res.data.message);
+            logUser({ ...user, password: newUser.new_password });
+          }
+          catch (err) {
+            console.log(err);
+          }
+        }}>
+        <h2 className="h2">Change your Password</h2>
+        <div className="flex flex-col w-full">
+          <label
+            htmlFor="first_name"
+            className="block mb-2 small text-Small dark:text-white"
+          >
+            Email
+          </label>
+          <input
+            required
+            type="email"
+            id="Email"
+            className="placeholder:text-Small text-body px-4 py-2 border border-Body rounded-lg outline-none"
+            placeholder="Enter your Email Address"
+          />
+        </div>
+        <div className="flex flex-col w-full">
+          <label
+            htmlFor="first_name"
+            className="block mb-2 small text-Small dark:text-white"
+          >
+            Old Password
+          </label>
+          <input
+            required
+            type="Password"
+            id="OldPassword"
+            className="placeholder:text-Small text-body px-4 py-2 border border-Body rounded-lg outline-none"
+            placeholder="Enter your old Password"
+          />
+        </div>
+
+        <div className="flex flex-col w-full">
+          <label
+            htmlFor="NewPassword"
+            className="block mb-2 small text-Small dark:text-white"
+          >
+            New Password
+          </label>
+          <input
+            required
+            type="Password"
+            id="NewPassword"
+            className="placeholder:text-Small text-body px-4 py-2 border border-Body rounded-lg outline-none"
+            placeholder="Enter your New Password"
+          />
+        </div>
+        <label className="small text-RedPrimary" hidden={message === ""}>{message}</label>
+        <input
+          required type="submit" value="Confirm" className="rounded-lg py-4 cursor-pointer bg-RedPrimary w-full outlinebody text-White" />
+      </form>
     </div>
   );
 };
