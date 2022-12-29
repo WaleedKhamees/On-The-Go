@@ -80,7 +80,7 @@ const AdminController = () => {
   /////////////////////////////////////////////////////////////////////////////////////////
 
   const getItem = async () => {
-    const response = await axios.get("http://localhost:3000/item");
+    const response = await axios.get("http://localhost:3000/item/admin");
     const items = await response.data;
     setItems(items);
   };

@@ -1,7 +1,10 @@
 import { client } from "../index"
 import { Request, Response } from 'express';
 export const itemController = {
-
+    getItemAdmin: async (req: Request, res: Response) => {
+        const items = await client.query(`select * from item`);
+        res.status(200).json(items.rows);
+    },
     getItems: async (req: Request, res: Response) => {
         const items = await client.query(`select item_id ,item_name, item_desc,item_price, img_url,category,discount_percent 
          from item,discount

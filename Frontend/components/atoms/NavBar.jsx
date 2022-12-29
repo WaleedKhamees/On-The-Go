@@ -8,7 +8,7 @@ const NavBar = () => {
     <nav className="flex items-center justify-between px-8 py-4">
       <div className="flex items-center gap-8">
         <Link to="/">
-          <h3 className="h3">خلصنا معلم</h3>
+          <h3 className="h3">عالطاير</h3>
         </Link>
         <ul className="flex items-center gap-4">
           <li className="outlinebody">
@@ -16,9 +16,6 @@ const NavBar = () => {
           </li>
           <li className="outlinebody">
             <Link to="/reservations">Reservation</Link>
-          </li>
-          <li className="outlinebody">
-            <Link to="/discounts">Discounts</Link>
           </li>
         </ul>
       </div>
@@ -60,6 +57,8 @@ const NavBar = () => {
         </Link>
         {user && user.kind === 'a' && <Link to="/admin"><BsGearWide size={21} /></Link>}
         {user && user.kind === 'c' && <Link to="/profile"><BsPersonCircle size={21} /></Link>}
+        {user && user.kind === 'e' && <Link to="/profile"><BsGearWide size={21} /></Link>}
+
       </div>
     </nav>
   );

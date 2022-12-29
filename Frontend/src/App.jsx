@@ -15,6 +15,7 @@ import { createContext } from "react";
 import { useState } from "react";
 import ProductsPage from "../components/ProductsPage/ProductsPage";
 import ProductPage from "../components/ProductPage/ProductPage";
+import Protected from "../components/atoms/ProtectedRoute";
 export const userContext = createContext({});
 export const cartContext = createContext([]);
 
@@ -71,16 +72,48 @@ const App = () => {
             <NavBar />
             <Routes>
               <Route path="/" element={<HomePage />} />
-              <Route path="/admin" element={<AdminPage />} />
-              <Route path="/menu/:id" element={<ProductsPage />} />
-              <Route path="/product/:id" element={<ProductPage />} />
+              <Route path="/admin" element={
+                <Protected isSignedIn={user && user.kind === 'a'}>
+                  <AdminPage />
+                </Protected>
+              } />
+              <Route path="/menu/:id" element={
+                <Protected isSignedIn={!user || user.kind === 'c'}>
+                  <ProductsPage />
+                </Protected>
+              } />
+              <Route path="/product/:id" element={
+                <Protected isSignedIn={!user || user.kind === 'c'}>
+                  <ProductPage />
+                </Protected>
+              } />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignupPage />} />
-              <Route path="/cart" element={<Cart_Page />} />
-              <Route path="/reservations" element={<Reservation />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/employee" element={<Employee />} />
-              <Route path="/provider" element={<Provider />} />
+              <Route path="/cart" element={
+                <Protected isSignedIn={user && user.kind === 'c'}>
+                  <Cart_Page />
+                </Protected>
+              } />
+              <Route path="/reservations" element={
+                <Protected isSignedIn={user && user.kind === 'c'}>
+                  <Reservation />
+                </Protected>
+              } />
+              <Route path="/profile" element={
+                <Protected isSignedIn={user && user.kind === 'c'}>
+                  <Profile />
+                </Protected>
+              } />
+              <Route path="/employee" element={
+                <Protected isSignedIn={user && user.kind === 'e'}>
+                  <Employee />
+                </Protected>
+              } />
+              <Route path="/provider" element={
+                <Protected isSignedIn={user && user.kind === 'p'}>
+                  <Provider />
+                </Protected>
+              } />
             </Routes>
             <Footer />
           </userContext.Provider>

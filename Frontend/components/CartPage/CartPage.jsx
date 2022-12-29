@@ -65,6 +65,7 @@ function Cart_Page(props) {
                   }
                   if (user.wallet >= order.order_price) {
                     try {
+                      logUser({ ...user, wallet: user.wallet - order.order_price });
                       clearCart();
                       const res = (await axios.post("http://localhost:3000/order/insert", order)).data;
                       setMessage(res.message);
