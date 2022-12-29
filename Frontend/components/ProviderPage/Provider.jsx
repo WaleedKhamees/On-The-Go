@@ -32,7 +32,7 @@ const Provider = () => {
             const res = await axios.post(
                 "http://localhost:3000/provider/AddDonations", Donationsobj
             );
-            console.log(res);
+            console.log(res.data);
         } catch (err) {
             console.log(err);
             console.log("error yastaaaaa");
