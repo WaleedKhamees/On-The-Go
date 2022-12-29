@@ -5,6 +5,7 @@ const Provider = () => {
     const donationRef = useRef()
     const [Branches, setBranches] = useState([]);
     const [selectedLocationBranch, setselectedLocationBranch] = useState("");
+    const [errorspan, seterrorspan] = useState(false);
     const [Donations, setDonations] = useState(0);
     const GetBranches = async (e) => {
         try {
@@ -21,21 +22,30 @@ const Provider = () => {
     };
     const CheckOutToProvide = async (e) => {
         // proceed to check out
-        setselectedLocationBranch(e.target.value);
-        setDonations(Number(donationRef.current.value));
+        // setselectedLocationBranch(e.target.value);
+        // setDonations(Number(donationRef.current.value));
         const Donationsobj = {
             branchlocation: selectedLocationBranch,
             email: JSON.parse(localStorage.getItem("user")).email,
             amount: Donations,
         };
         try {
-            const res = await axios.post(
-                "http://localhost:3000/provider/AddDonations", Donationsobj
-            );
-            console.log(res.data);
+            if (Donationsobj.amount <= 0) {
+                // show the error span
+                seterrorspan(true);
+            }
+            else {
+                seterrorspan(false);
+                const res = await axios.post(
+                    "http://localhost:3000/provider/AddDonations", Donationsobj
+                );
+                // hide the error span
+            }
+            // console.log(Donationsobj);
+            // console.log(res.data);
         } catch (err) {
+            // console.log(Donationsobj);
             console.log(err);
-            console.log("error yastaaaaa");
         }
     }
     useEffect(() => {
@@ -59,7 +69,12 @@ const Provider = () => {
                     Money
                 </label>
                 <input ref={donationRef}
+                    onChange={(e) => {
+                        setDonations(Number(e.target.value));
+                    }}
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="number" placeholder="Enter Amount of Money" />
+
+                {(errorspan && <span className="text-RedPrimary m-auto my-1">the money mount is not valid</span>)}
             </div>
             <button onClick={CheckOutToProvide} className="btn">Proceed to provide the branch</button>
         </div>
