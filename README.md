@@ -57,10 +57,10 @@ A solution is needed to address these limitations and create a seamless restaura
 ![sample-login](https://github.com/Walid-Kh/RestaurantDB/blob/main/Assets/website/Login.png)
 
 ### Products 
-![Products-Page](https://github.com/Walid-Kh/RestaurantDB/blob/main/Assets/website/Products%20Page.png)
+![Products-Page](https://github.com/Walid-Kh/RestaurantDB/blob/main/Assets/website/Products%20page.png)
 
 ### Product 
-![Product-page](https://github.com/Walid-Kh/RestaurantDB/blob/main/Assets/website/Product%20Page.png)
+![Product-page](https://github.com/Walid-Kh/RestaurantDB/blob/main/Assets/website/Product%20page.png)
 
 ### Profile
 ![Profile-Page](https://github.com/Walid-Kh/RestaurantDB/blob/main/Assets/website/Profile%20Page.png)
