@@ -7,7 +7,7 @@ export const userController = {
 
         const user = (await client.query(`select email,password,kind from userx where email = '${reqUser.email}'`)).rows;
         console.log(user);
-        if (!user) {
+        if (!user.length) {
             res.status(404).send({ message: "User not found" });
             return
         }
@@ -50,8 +50,11 @@ export const userController = {
         const user = { email: req.body.email, old_password: req.body.old_password, new_password: req.body.new_password };
         try {
             const userDatabase = (await client.query(`select userx_id,email,password from userx where email = '${user.email}'`)).rows[0];
-            console.log(userDatabase);
-            if (await bcrypt.compare(user.old_password, userDatabase.password) && userDatabase.email === user.email) {
+            if (!userDatabase.length) {
+                res.status(404).json({ message: "User not found" });
+                return
+            }
+            else if (await bcrypt.compare(user.old_password, userDatabase.password) && userDatabase.email === user.email) {
                 const hasedPassword = await bcrypt.hash(user.new_password, 10);
                 await client.query(`update userx set password = '${hasedPassword}' where userx_id = ${userDatabase.userx_id};`);
                 res.status(200).json({ message: "Updated Successfully" });
