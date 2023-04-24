@@ -123,7 +123,7 @@ const AdminController = () => {
       </select>
 
       <div className="px-8" hidden={initFunc !== "Access Employees"}>
-        {employees && initFunc === "Access Employees" && employees.length && (
+        {employees && initFunc === "Access Employees" && employees.length ? (
           <Table
             data={employees}
             itemEditable={EMPLOYEE_EDITABLE}
@@ -131,9 +131,9 @@ const AdminController = () => {
             apiDelete={`${BACKEND}/employee/delete`}
             tableID="employee_id"
           />
-        )}
+        ) : null}
       </div>
-      {initFunc === "Access Employees" && (
+      {initFunc === "Access Employees" ? (
         <button
           hidden={initFunc !== "Access Employees"}
           className="btn max-w-[350px]"
@@ -143,23 +143,23 @@ const AdminController = () => {
         >
           Add Employee
         </button>
-      )}
-      {initFunc === "Add Employee" && (
+      ) : null}
+      {initFunc === "Add Employee" ? (
         <AddEmployeeForm setInitFunc={setInitFunc} />
-      )}
+      ) : null}
 
       <div className="px-8" hidden={initFunc !== "Access Items"}>
-        {items && initFunc === "Access Items" && items.length && (
+        {items && initFunc === "Access Items" && items.length ? (
           <Table
             data={items}
             itemEditable={ITEM_EDITABLE}
             apiUpdate={`${BACKEND}/item/update`}
             apiDelete={`${BACKEND}/item/delete`}
             tableID="item_id"
-          />)
+          />) : null
         }
       </div>
-      {initFunc === "Access Items" && (
+      {initFunc === "Access Items" ? (
         <button
           className="btn max-w-[350px]"
           hidden={initFunc !== "Access Items"}
@@ -169,37 +169,37 @@ const AdminController = () => {
         >
           Add Item
         </button>
-      )}
-      {initFunc === "Add Item" && (
-        <AddProductForm setInitFunc={setInitFunc} />
-      )}
+      ) : null}
+      {initFunc === "Add Item" ? (
+        <AddProductForm setInitFunc={setInitFunc} /> 
+      ): null}
 
 
       <div hidden={initFunc !== "Access Discounts"} className="px-8">
         {
-          discounts && initFunc === "Access Discounts" && discounts.length &&
+          discounts && initFunc === "Access Discounts" && discounts.length ?
           <Table
             data={discounts}
             itemEditable={DISCOUNT_EDITABLE}
             apiUpdate={`${BACKEND}/discount/update`}
             apiDelete={`${BACKEND}/discount/delete`}
             tableID="discount_id"
-          />
+          /> : null
         }
       </div>
-      {initFunc === "Access Discounts" && (
+      {initFunc === "Access Discounts" ? (
 
         <button className="btn max-w-[350px]" hidden={initFunc !== "Access Discounts"} onClick={() => { setInitFunc("Add Discount") }}>
           Add Discount
         </button>
-      )}
+      ) : null}
       {initFunc === "Add Discount" && (
         <AddDiscountForm setInitFunc={setInitFunc} />
       )}
 
       <div hidden={initFunc !== "Access Tables"} className="px-8">
         {
-          Tables && initFunc === "Access Tables" && Tables.length && (
+          Tables && initFunc === "Access Tables" && Tables.length ? (
             <Table
               data={Tables}
               itemEditable={TABLE_EDITABLE}
@@ -210,10 +210,10 @@ const AdminController = () => {
               }}
               tableID="branch_id"
             />
-          )
+          ) : null
         }
       </div>
-      {initFunc === "Access Tables" && (
+      {initFunc === "Access Tables" ? (
         <button
           className="btn max-w-[350px]"
           hidden={initFunc !== "Access Tables"}
@@ -223,8 +223,8 @@ const AdminController = () => {
         >
           Add Table
         </button>
-      )}
-      {initFunc === "Add Table" && <AddTableForm setInitFunc={setInitFunc} />}
+      ) : null}
+      {initFunc === "Add Table" ? <AddTableForm setInitFunc={setInitFunc} /> : null}
 
 
     </div>

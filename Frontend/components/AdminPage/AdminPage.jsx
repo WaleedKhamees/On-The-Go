@@ -53,12 +53,12 @@ const AdminPage = () => {
     const es = (await axios.get(`${BACKEND}/stats/eastern`)).data;
     const ws = (await axios.get(`${BACKEND}/stats/western`)).data;
     const ds = (await axios.get(`${BACKEND}/stats/drinks`)).data;
-    const esPercentage = Math.floor(((Number.parseInt(es.thisMonth ?? 0) - Number.parseInt(es.lastMonth ?? 0)) / (Number.parseInt(es.thisMonth ?? 0) + Number.parseInt(es.lastMonth ?? 0))) * 100);
-    const wsPercentage = Math.floor(((Number.parseInt(ws.thisMonth ?? 0) - Number.parseInt(ws.lastMonth ?? 0)) / (Number.parseInt(ws.thisMonth ?? 0) + Number.parseInt(ws.lastMonth ?? 0))) * 100);
-    const dsPercentage = Math.floor(((Number.parseInt(ds.thisMonth ?? 0) - Number.parseInt(ds.lastMonth ?? 0)) / (Number.parseInt(ds.thisMonth ?? 0) + Number.parseInt(ds.lastMonth ?? 0))) * 100);
-    const esProfits = (Number.parseInt(es.thisMonth ?? 0) - Number.parseInt(es.lastMonth ?? 0));
-    const wsProfits = (Number.parseInt(ws.thisMonth ?? 0) - Number.parseInt(ws.lastMonth ?? 0));
-    const dsProfits = (Number.parseInt(ds.thisMonth ?? 0) - Number.parseInt(ds.lastMonth ?? 0));
+    const esPercentage = Math.floor(((Number.parseInt(es.thisMonth ?? 0) - Number.parseInt(es.lastMonth ?? 0)) / (Number.parseInt(es.thisMonth ?? 0) + Number.parseInt(es.lastMonth ?? 0))) * 100) || 0;
+    const wsPercentage = Math.floor(((Number.parseInt(ws.thisMonth ?? 0) - Number.parseInt(ws.lastMonth ?? 0)) / (Number.parseInt(ws.thisMonth ?? 0) + Number.parseInt(ws.lastMonth ?? 0))) * 100) || 0;
+    const dsPercentage = Math.floor(((Number.parseInt(ds.thisMonth ?? 0) - Number.parseInt(ds.lastMonth ?? 0)) / (Number.parseInt(ds.thisMonth ?? 0) + Number.parseInt(ds.lastMonth ?? 0))) * 100) || 0;
+    const esProfits = (Number.parseInt(es.thisMonth ?? 0) - Number.parseInt(es.lastMonth ?? 0)) || 0;
+    const wsProfits = (Number.parseInt(ws.thisMonth ?? 0) - Number.parseInt(ws.lastMonth ?? 0)) || 0;
+    const dsProfits = (Number.parseInt(ds.thisMonth ?? 0) - Number.parseInt(ds.lastMonth ?? 0)) || 0;
     setEasternStat({ esPercentage, esProfits });
     setWesternStat({ wsPercentage, wsProfits });
     setDrinksStat({ dsPercentage, dsProfits });
@@ -97,7 +97,6 @@ const AdminPage = () => {
             new_password: form.NewPassword.value
           };
           try {
-            debugger
             const res = await axios.patch(`${BACKEND}/user/update`, newUser);
             console.log(res);
             setMessage(res.data.message);

@@ -6,10 +6,10 @@ const HomePageCard = (props) => {
         props.Reversed ? "flex-row-reverse" : ""
       } max-h-[400px]`}
     >
-      <div className="flex w-1/2">
+      <div className="flex flex-1">
         <img src={props.Img} className="w-full"></img>
       </div>
-      <div className="flex flex-col items-center  bg-RedPrimary text-center w-1/2 gap-4 py-28 ">
+      <div className="flex flex-col flex-1 items-center  bg-RedPrimary text-center w-1/2 gap-4 py-28 ">
         <h1 className="h1 text-White text-center"> {props.Header} </h1>
 
         <h3 className="h3 text-White text-center"> {props.Description} </h3>
